@@ -40,7 +40,7 @@ const Services = () => {
     {
       id: 'web-development',
       category: 'Software & Web Development',
-      description: 'We create cutting-edge digital solutions that help businesses thrive in today's online landscape.',
+      description: "We create cutting-edge digital solutions that help businesses thrive in today's online landscape.",
       items: [
         {
           icon: <Globe size={36} />,
