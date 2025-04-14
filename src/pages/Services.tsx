@@ -16,7 +16,8 @@ const Services = () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate-slide-up');
-          entry.target.style.opacity = '1';
+          // Cast to HTMLElement to access style property
+          (entry.target as HTMLElement).style.opacity = '1';
         }
       });
     }, {
@@ -24,12 +25,14 @@ const Services = () => {
     });
     
     document.querySelectorAll('.service-card').forEach(card => {
-      card.style.opacity = '0';
+      // Cast to HTMLElement to access style property
+      (card as HTMLElement).style.opacity = '0';
       observer.observe(card);
     });
     
     document.querySelectorAll('.section-title').forEach(title => {
-      title.style.opacity = '0';
+      // Cast to HTMLElement to access style property
+      (title as HTMLElement).style.opacity = '0';
       observer.observe(title);
     });
     
