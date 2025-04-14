@@ -40,14 +40,14 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-3">
-            <div className="h-12 w-12">
+            <div className="h-12 w-12 relative overflow-visible">
               <img 
-                src="/lovable-uploads/4492b5df-ae0f-4613-a457-4c4edf6181a8.png" 
+                src="/lovable-uploads/a1df16a1-4018-4eb8-aa66-69f97e2772df.png" 
                 alt="AuraByt Logo" 
-                className="h-full w-full object-contain" 
+                className="h-full w-full object-contain absolute" 
               />
             </div>
-            <span className="font-bold text-xl text-aurabyt-navy">AuraByt</span>
+            <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue">AuraByt</span>
           </Link>
 
           {/* Desktop Navigation */}
