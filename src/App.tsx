@@ -11,6 +11,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Directly import the Index page for faster initial load
 import Index from "./pages/Index";
+import ThankYou from './pages/ThankYou';
 
 // Lazy load secondary pages
 const Services = lazy(() => import("./pages/Services"));
@@ -101,6 +102,7 @@ const App = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<NotFound />} />
+                <Route path="/thank-you" element={<ThankYou />} />
               </Routes>
             </Suspense>
           </main>

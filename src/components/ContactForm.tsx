@@ -2,9 +2,11 @@
 import React, { useState, useCallback, memo } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useForm, ValidationError } from '@formspree/react';
+import { useNavigate } from 'react-router-dom';
 
 const ContactForm = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [state, handleSubmit] = useForm("xeoadaga");
   const [formData, setFormData] = useState({
     name: '',
@@ -24,10 +26,14 @@ const ContactForm = () => {
   if (state.succeeded) {
     toast({
       title: "Message sent!",
-      description: "We'll get back to you shortly.",
-      duration: 5000,
+      description: "Redirecting...",
+      duration: 3000,
     });
-  }
+  
+    setTimeout(() => {
+      navigate("/thank-you");
+    }, 1500);
+  }   
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
