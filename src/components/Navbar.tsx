@@ -2,6 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,38 +45,68 @@ const Navbar = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md backdrop-blur-sm' : 'bg-white/90'}`}>
-      <div className="container mx-auto px-4 py-3">
+    <header className={`fixed w-full z-50 transition-all duration-500 ${
+      scrolled 
+        ? 'bg-white/90 shadow-md backdrop-blur-md py-3' 
+        : 'bg-transparent py-4'
+    }`}>
+      <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="h-12 w-12 relative overflow-visible">
+          <Link 
+            to="/" 
+            className="flex items-center space-x-3 group"
+          >
+            <div className="h-12 w-12 relative overflow-visible transition-all duration-300 group-hover:scale-105">
+              <div className="absolute -inset-1 bg-gradient-to-r from-aurabyt-purple/30 to-aurabyt-blue/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <img 
                 src="/lovable-uploads/a1df16a1-4018-4eb8-aa66-69f97e2772df.png" 
                 alt="AuraByt Logo" 
-                className="h-full w-full object-contain absolute" 
+                className="h-full w-full object-contain relative z-10" 
               />
             </div>
-            <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue">AuraByt</span>
+            <span className="font-bold text-xl relative">
+              <span className={`bg-clip-text text-transparent bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue transition-all duration-300 ${
+                scrolled ? 'opacity-100' : 'opacity-100'
+              }`}>
+                AuraByt
+              </span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue group-hover:w-full transition-all duration-300"></span>
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`font-medium text-base transition-colors duration-300 hover:text-primary ${location.pathname === link.path ? 'text-primary font-semibold' : 'text-foreground'}`}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <Link
-              to="/contact"
-              className="btn-primary ml-2"
-            >
-              Get Started
-            </Link>
-          </nav>
+          <div className="hidden md:block">
+            <NavigationMenu>
+              <NavigationMenuList>
+                {navLinks.map((link) => (
+                  <NavigationMenuItem key={link.name}>
+                    <Link 
+                      to={link.path}
+                      className={cn(
+                        "group inline-flex h-10 w-max items-center justify-center px-4 py-2 text-sm font-medium transition-colors focus:outline-none relative",
+                        location.pathname === link.path 
+                          ? "text-primary font-semibold" 
+                          : "text-foreground hover:text-primary"
+                      )}
+                    >
+                      {link.name}
+                      <span className="absolute bottom-1 left-2 w-0 h-0.5 bg-primary group-hover:w-[calc(100%-16px)] transition-all duration-300"></span>
+                    </Link>
+                  </NavigationMenuItem>
+                ))}
+                <NavigationMenuItem>
+                  <Link
+                    to="/contact"
+                    className="relative px-6 py-3 text-white font-medium rounded-lg overflow-hidden group"
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue"></span>
+                    <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-indigo to-aurabyt-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <span className="relative">Get Started</span>
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -80,22 +119,29 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden mt-4 py-4 bg-white">
-            <nav className="flex flex-col space-y-4">
+          <div className="md:hidden mt-4 py-4 bg-white/95 backdrop-blur-md rounded-lg shadow-lg">
+            <nav className="flex flex-col space-y-4 px-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-medium py-2 transition-colors duration-300 hover:text-primary ${location.pathname === link.path ? 'text-primary font-semibold' : 'text-foreground'}`}
+                  className={`font-medium py-2 transition-colors duration-300 hover:text-primary relative group ${
+                    location.pathname === link.path 
+                      ? 'text-primary font-semibold' 
+                      : 'text-foreground'
+                  }`}
                 >
                   {link.name}
+                  <span className="absolute bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                 </Link>
               ))}
               <Link
                 to="/contact"
-                className="btn-primary w-full text-center"
+                className="relative px-6 py-3 text-white font-medium rounded-lg overflow-hidden group mt-2"
               >
-                Get Started
+                <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue"></span>
+                <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-indigo to-aurabyt-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                <span className="relative text-center block">Get Started</span>
               </Link>
             </nav>
           </div>
