@@ -8,8 +8,8 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center py-20 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-primary/10 blur-3xl animate-pulse-slow"></div>
-        <div className="absolute bottom-20 right-10 w-72 h-72 rounded-full bg-accent/10 blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-primary/10 blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-72 h-72 rounded-full bg-accent/10 blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 z-10">
@@ -17,22 +17,22 @@ const Hero = () => {
           {/* Logo image - increased size */}
           <div className="flex justify-center mb-6">
             <img 
-              src="/lovable-uploads/ec4309c7-d899-4183-a36b-c7c5bf0211a6.png" 
+              src="/lovable-uploads/4492b5df-ae0f-4613-a457-4c4edf6181a8.png" 
               alt="AuraByt Logo" 
-              className="h-32 md:h-40 animate-fade-in"
+              className="h-40 md:h-48" 
             />
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Transforming Ideas into <span className="gradient-text">Digital Reality</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-gray-700 mb-8 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          <p className="text-lg md:text-xl text-gray-700 mb-8">
             AuraByt is a Toronto-based IT consultancy specializing in web development, 
             digital marketing, and IT support. We help businesses innovate and grow in the digital landscape.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/services" 
               className="btn-primary flex items-center justify-center"

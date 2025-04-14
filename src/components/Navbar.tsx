@@ -36,28 +36,31 @@ const Navbar = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 shadow-md backdrop-blur-sm' : 'bg-transparent'}`}>
-      <div className="container mx-auto px-4 py-4">
+    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md backdrop-blur-sm' : 'bg-white/90'}`}>
+      <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            {/* Increased logo size */}
-            <img src="/lovable-uploads/ec4309c7-d899-4183-a36b-c7c5bf0211a6.png" alt="AuraByt Logo" className="h-10 md:h-12" />
+            <img 
+              src="/lovable-uploads/4492b5df-ae0f-4613-a457-4c4edf6181a8.png" 
+              alt="AuraByt Logo" 
+              className="h-14 md:h-16" 
+            />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`font-medium transition-colors duration-300 hover:text-primary ${location.pathname === link.path ? 'text-primary' : 'text-foreground'}`}
+                className={`font-medium text-base transition-colors duration-300 hover:text-primary ${location.pathname === link.path ? 'text-primary font-semibold' : 'text-foreground'}`}
               >
                 {link.name}
               </Link>
             ))}
             <Link
               to="/contact"
-              className="btn-primary"
+              className="btn-primary ml-2"
             >
               Get Started
             </Link>
@@ -74,13 +77,13 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden mt-4 py-4 animate-fade-in">
+          <div className="md:hidden mt-4 py-4 bg-white">
             <nav className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-medium py-2 transition-colors duration-300 hover:text-primary ${location.pathname === link.path ? 'text-primary' : 'text-foreground'}`}
+                  className={`font-medium py-2 transition-colors duration-300 hover:text-primary ${location.pathname === link.path ? 'text-primary font-semibold' : 'text-foreground'}`}
                 >
                   {link.name}
                 </Link>
