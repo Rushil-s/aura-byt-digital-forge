@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import AnimationInitializer from "./components/AnimationInitializer";
 
 // Directly import the Index page for faster initial load
 import Index from "./pages/Index";
@@ -16,20 +17,29 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Create a loading component for Suspense
+// Enhanced loading component with tech animations
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-pulse flex space-x-4">
-      <div className="h-12 w-12 bg-primary/20 rounded-full"></div>
-      <div className="space-y-4">
-        <div className="h-4 w-32 bg-primary/20 rounded"></div>
-        <div className="h-4 w-24 bg-primary/20 rounded"></div>
+  <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    {/* Tech background elements */}
+    <div className="tech-grid"></div>
+    <div className="animated-bg animated-bg-1"></div>
+    <div className="animated-bg animated-bg-2"></div>
+
+    <div className="relative z-10">
+      <div className="loading-animation">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div className="mt-4 text-center">
+        <div className="h-4 w-32 bg-primary/20 rounded animate-pulse"></div>
       </div>
     </div>
   </div>
 );
 
-// Create a component for the ScrollToTop behavior
+// Scroll to top on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -40,33 +50,30 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Create a component for page transitions
+// Page transition animation logic
 const PageTransitions = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Add animations for page transitions
-    document.body.classList.add('page-transition');
-    
+    document.body.classList.add("page-transition");
+
     const timer = setTimeout(() => {
-      document.body.classList.remove('page-transition');
-      
-      // Ensure all sections are visible by default
+      document.body.classList.remove("page-transition");
+
+      // Reveal scroll-based animations
       requestAnimationFrame(() => {
-        const scrollAnimateElements = document.querySelectorAll('.scroll-animate');
-        scrollAnimateElements.forEach(el => {
-          el.classList.add('is-visible');
-        });
+        const scrollAnimateElements = document.querySelectorAll(".scroll-animate");
+        scrollAnimateElements.forEach((el) => el.classList.add("is-visible"));
       });
     }, 500);
-    
+
     return () => clearTimeout(timer);
   }, [pathname]);
 
   return null;
 };
 
-// Create a persistent query client
+// React Query Client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -82,7 +89,13 @@ const App = () => {
       <BrowserRouter>
         <ScrollToTop />
         <PageTransitions />
-        <div className="min-h-screen flex flex-col">
+        <AnimationInitializer /> {/* Adds global effects like mouse follower, tech lines */}
+        <div className="min-h-screen flex flex-col relative">
+          {/* Global background tech effects */}
+          <div className="fixed inset-0 pointer-events-none">
+            <div className="tech-grid opacity-30"></div>
+          </div>
+
           <Navbar />
           <main className="flex-grow pt-20">
             <Suspense fallback={<PageLoader />}>
