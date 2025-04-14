@@ -83,6 +83,11 @@
     @apply opacity-100 transform translate-y-0;
   }
 
+  /* Typewriter text effect */
+  .typewriter-text {
+    @apply relative inline-block after:absolute after:right-0 after:top-0 after:h-full after:w-0 after:animate-typewriter after:bg-background;
+  }
+
   .text-gradient-start {
     @apply text-aurabyt-purple;
   }
@@ -191,6 +196,20 @@
   .text-reveal-delay-3 {
     animation-delay: 0.3s;
   }
+
+  /* Typewriter animation */
+  @keyframes typewriter {
+    0% { width: 100%; }
+    25% { width: 0; }
+    50% { width: 0; }
+    75% { width: 100%; }
+    100% { width: 100%; }
+  }
+
+  @keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: currentColor; }
+  }
 }
 
 /* Animation delay classes */
@@ -268,34 +287,6 @@
   opacity: 0.05;
 }
 
-/* Text reveal animation */
-@keyframes text-reveal {
-  0% { 
-    clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
-    opacity: 0;
-  }
-  100% { 
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    opacity: 1;
-  }
-}
-
-.text-reveal {
-  animation: text-reveal 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-}
-
-.text-reveal-delay-1 {
-  animation-delay: 0.1s;
-}
-
-.text-reveal-delay-2 {
-  animation-delay: 0.2s;
-}
-
-.text-reveal-delay-3 {
-  animation-delay: 0.3s;
-}
-
 /* Additional animations */
 @keyframes hover-glow {
   0%, 100% {
@@ -308,18 +299,6 @@
 
 .hover-glow {
   animation: hover-glow 3s infinite ease-in-out;
-}
-
-/* Text typing animation */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-.typing-animation {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 3.5s steps(40, end);
 }
 
 /* Floating elements animation */

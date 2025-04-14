@@ -1,11 +1,13 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
   const textRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const businessTexts = ['business', 'presence', 'vision', 'growth', 'brand'];
 
   useEffect(() => {
     // Text animation effect
@@ -17,6 +19,11 @@ const Hero = () => {
         }, 100 * i);
       });
     }
+
+    // Text rotation effect
+    const rotationInterval = setInterval(() => {
+      setCurrentTextIndex(prevIndex => (prevIndex + 1) % businessTexts.length);
+    }, 2000);
 
     // Add mouse move parallax effect
     const handleMouseMove = (e: MouseEvent) => {
@@ -61,8 +68,9 @@ const Hero = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', animateOnScroll);
+      clearInterval(rotationInterval);
     };
-  }, []);
+  }, [businessTexts.length]);
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center py-20 overflow-hidden">
@@ -117,16 +125,16 @@ const Hero = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold relative z-10">
               <div ref={textRef} className="text-animation-container">
                 <span className="char-container inline-block">
-                  <span className="char">A</span>
+                  <span className="char animated-gradient-text">A</span>
                 </span>
                 <span className="char-container inline-block">
-                  <span className="char">u</span>
+                  <span className="char animated-gradient-text">u</span>
                 </span>
                 <span className="char-container inline-block">
-                  <span className="char">r</span>
+                  <span className="char animated-gradient-text">r</span>
                 </span>
                 <span className="char-container inline-block">
-                  <span className="char">a</span>
+                  <span className="char animated-gradient-text">a</span>
                 </span>
                 <span className="char-container inline-block">
                   <span className="char animated-gradient-text">B</span>
@@ -140,12 +148,12 @@ const Hero = () => {
               </div>
             </h1>
             <p className="text-xl md:text-2xl animate-fade-in animation-delay-500 mt-2">
-              Transforming Ideas into <span className="animated-gradient-text font-medium">Digital Reality</span>
+              Empowering your <span className="animated-gradient-text font-medium typewriter-text">{businessTexts[currentTextIndex]}</span>
             </p>
           </div>
           
           <p className="text-lg md:text-xl text-gray-700 mb-8 animate-fade-in animation-delay-700 max-w-2xl mx-auto">
-            AuraByt is a Toronto-based IT consultancy specializing in web development, 
+            <span className="animated-gradient-text">AuraByt</span> is a Toronto-based IT consultancy specializing in web development, 
             digital marketing, and IT support. We help businesses innovate and grow in the digital landscape.
           </p>
           
