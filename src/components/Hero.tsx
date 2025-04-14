@@ -6,21 +6,25 @@ import { ChevronRight } from 'lucide-react';
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center py-20 overflow-hidden">
-      {/* Background elements */}
+      {/* Animated Background elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-primary/10 blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-72 h-72 rounded-full bg-accent/10 blur-3xl"></div>
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-primary/10 blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-20 right-10 w-72 h-72 rounded-full bg-accent/10 blur-3xl animate-float"></div>
+        <div className="absolute top-1/3 right-1/4 w-48 h-48 rounded-full bg-aurabyt-purple/10 blur-2xl animate-pulse-slow animation-delay-300"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-56 h-56 rounded-full bg-aurabyt-blue/10 blur-2xl animate-float animation-delay-700"></div>
       </div>
 
       <div className="container mx-auto px-4 z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Logo image - increased size */}
+          {/* Logo image */}
           <div className="flex justify-center mb-6">
-            <img 
-              src="/lovable-uploads/4492b5df-ae0f-4613-a457-4c4edf6181a8.png" 
-              alt="AuraByt Logo" 
-              className="h-40 md:h-48 w-auto" 
-            />
+            <div className="h-40 md:h-48 w-auto">
+              <img 
+                src="/lovable-uploads/4492b5df-ae0f-4613-a457-4c4edf6181a8.png" 
+                alt="AuraByt Logo" 
+                className="h-full w-full object-contain" 
+              />
+            </div>
           </div>
           
           <div className="mb-6">

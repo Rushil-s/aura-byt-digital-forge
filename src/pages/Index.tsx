@@ -2,6 +2,7 @@
 import React from 'react';
 import Hero from '@/components/Hero';
 import ServiceCard from '@/components/ServiceCard';
+import Portfolio from '@/components/Portfolio';
 import TestimonialSlider from '@/components/TestimonialSlider';
 import { Code, BarChart3, ServerCog, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -57,6 +58,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+      
+      {/* Portfolio Section - New */}
+      <Portfolio />
       
       {/* Features/Why Choose Us Section */}
       <section className="section-padding">

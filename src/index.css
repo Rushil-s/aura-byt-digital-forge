@@ -68,6 +68,14 @@
 }
 
 /* Animation delay classes */
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
 .animation-delay-300 {
   animation-delay: 300ms;
 }
@@ -82,4 +90,54 @@
 
 .animation-delay-900 {
   animation-delay: 900ms;
+}
+
+/* Background animation glow */
+.bg-glow {
+  position: relative;
+}
+
+.bg-glow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: 0 0 40px 5px rgba(139, 92, 246, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.bg-glow:hover::after {
+  opacity: 1;
+}
+
+/* Text reveal animation */
+@keyframes text-reveal {
+  0% { 
+    clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+    opacity: 0;
+  }
+  100% { 
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+  }
+}
+
+.text-reveal {
+  animation: text-reveal 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+.text-reveal-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.text-reveal-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.text-reveal-delay-3 {
+  animation-delay: 0.3s;
 }
