@@ -1,6 +1,6 @@
 # ⚡ AuraByt Digital Forge
 
-![AuraByt Logo](https://github.com/Rushil-s/aura-byt-digital-forge/raw/main/public/assets/AuraByteLogo.png)
+![AuraByt Logo](https://github.com/Rushil-s/aura-byt-digital-forge/raw/main/public/assests/aurabytlogo.png)
 
 Welcome to the **official codebase** of **AuraByt Digital Forge** — a modern, lightning-fast website built for our IT consultancy brand **AuraByt**, offering services in:
 
