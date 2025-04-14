@@ -35,9 +35,14 @@
     --radius: 0.75rem;
   }
 
-  * {
+  /* * {
+    @apply border border-border;
+  } 
+    Optional: Apply border only to components/cards/buttons if needed
+  .card, .btn, .section-box {
     @apply border border-border;
   }
+  */
 
   html {
     @apply font-inter scroll-smooth;
