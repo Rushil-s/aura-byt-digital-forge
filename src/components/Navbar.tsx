@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -57,7 +58,7 @@ const Navbar = () => {
             <div className="h-12 w-12 relative overflow-visible transition-all duration-300 group-hover:scale-105">
               <div className="absolute -inset-1 bg-gradient-to-r from-aurabyt-purple/30 to-aurabyt-blue/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <img 
-                src="/lovable-uploads/a1df16a1-4018-4eb8-aa66-69f97e2772df.png" 
+                src="/lovable-uploads/1b585414-d018-4ee5-ad0e-06daf6b9c009.png" 
                 alt="AuraByt Logo" 
                 className="h-full w-full object-contain relative z-10" 
               />
