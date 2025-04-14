@@ -158,13 +158,13 @@ const TestimonialSlider = () => {
         {/* Controls */}
         <div className="absolute inset-0 flex items-center justify-between pointer-events-none">
           <button 
-            className="ml-4 bg-white/80 rounded-full p-2 shadow-md pointer-events-auto hover:bg-white transition-colors transform hover:scale-110 transition-transform duration-300"
+            className="ml-4 bg-white/80 rounded-full p-2 shadow-md pointer-events-auto hover:bg-white transform hover:scale-110 transition-transform duration-300"
             onClick={prev}
           >
             <ChevronLeft size={24} className="text-primary" />
           </button>
           <button 
-            className="mr-4 bg-white/80 rounded-full p-2 shadow-md pointer-events-auto hover:bg-white transition-colors transform hover:scale-110 transition-transform duration-300"
+            className="mr-4 bg-white/80 rounded-full p-2 shadow-md pointer-events-auto hover:bg-white transform hover:scale-110 transition-transform duration-300"
             onClick={next}
           >
             <ChevronRight size={24} className="text-primary" />
