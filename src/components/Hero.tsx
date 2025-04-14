@@ -20,10 +20,10 @@ const Hero = () => {
       });
     }
 
-    // Text rotation effect
+    // Text rotation effect with longer delay
     const rotationInterval = setInterval(() => {
       setCurrentTextIndex(prevIndex => (prevIndex + 1) % businessTexts.length);
-    }, 2000);
+    }, 3000); // Increased from 2000 to 3000ms for better readability
 
     // Add mouse move parallax effect
     const handleMouseMove = (e: MouseEvent) => {
@@ -173,14 +173,6 @@ const Hero = () => {
             >
               Get In Touch <span className="ml-1 opacity-0 w-0 group-hover:opacity-100 group-hover:w-5 transition-all duration-300">→</span>
             </Link>
-          </div>
-          
-          {/* Enhanced scroll indicator */}
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce animation-delay-900">
-            <div className="w-6 h-10 rounded-full border-2 border-gray-400 flex justify-center pt-1">
-              <div className="w-1 h-3 bg-gray-400 rounded-full animate-pulse-slow"></div>
-            </div>
-            <span className="text-sm text-gray-500 mt-2">Scroll Down</span>
           </div>
         </div>
       </div>

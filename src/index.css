@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -199,20 +200,6 @@
   
   .text-reveal-delay-3 {
     animation-delay: 0.3s;
-  }
-
-  /* Typewriter animation */
-  @keyframes typewriter {
-    0% { width: 100%; }
-    25% { width: 0; }
-    50% { width: 0; }
-    75% { width: 100%; }
-    100% { width: 100%; }
-  }
-
-  @keyframes blink {
-    0%, 100% { border-color: transparent; }
-    50% { border-color: currentColor; }
   }
 }
 

@@ -10,10 +10,10 @@ const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    // Text rotation effect
+    // Text rotation effect with increased time
     const rotationInterval = setInterval(() => {
       setCurrentAttributeIndex(prevIndex => (prevIndex + 1) % attributes.length);
-    }, 2000);
+    }, 3000); // Increased from 2000 to 3000ms for better readability
 
     // Animation for elements when they come into view
     const observer = new IntersectionObserver((entries) => {
@@ -84,16 +84,6 @@ const About = () => {
             <p className="text-xl opacity-90 animate-fade-in text-center" style={{ animationDelay: '0.2s' }}>
               <span className="animated-gradient-text">AuraByt</span> is about <span className="animated-gradient-text typewriter-text">{attributes[currentAttributeIndex]}</span>
             </p>
-          </div>
-        </div>
-        
-        {/* Animated scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="flex flex-col items-center">
-            <div className="w-6 h-10 rounded-full border-2 border-white/50 flex justify-center pt-1">
-              <div className="w-1 h-3 bg-white/50 rounded-full animate-pulse-slow"></div>
-            </div>
-            <span className="text-sm text-white/70 mt-2">Scroll</span>
           </div>
         </div>
       </section>

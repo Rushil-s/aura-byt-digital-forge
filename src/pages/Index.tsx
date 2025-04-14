@@ -22,7 +22,8 @@ const Index = () => {
         }
       });
     }, {
-      threshold: 0.1
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px' // Trigger earlier for better UX
     });
     
     // Observe elements with scroll-animate class
@@ -209,17 +210,6 @@ const Index = () => {
               Get in Touch
               <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
-            
-            {/* Animated dots */}
-            <div className="mt-16 flex justify-center space-x-3">
-              {[0, 1, 2].map((i) => (
-                <div 
-                  key={i}
-                  className="w-2 h-2 bg-white/50 rounded-full animate-pulse-slow"
-                  style={{ animationDelay: `${i * 200}ms` }}
-                ></div>
-              ))}
-            </div>
           </div>
         </div>
       </section>

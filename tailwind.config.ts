@@ -98,9 +98,9 @@ export default {
         },
         'typewriter': {
           '0%': { width: '100%' },
-          '25%': { width: '0%' },
-          '50%': { width: '0%' },
-          '75%': { width: '100%' },
+          '20%': { width: '0%' },
+          '40%': { width: '0%' },
+          '80%': { width: '100%' },
           '100%': { width: '100%' }
         },
         'blink': {
@@ -131,4 +131,3 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-

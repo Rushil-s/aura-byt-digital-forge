@@ -28,22 +28,24 @@ const Navbar = () => {
   }, []);
   
   useEffect(() => {
+    // Close mobile menu when route changes
     setIsOpen(false);
   }, [location.pathname]);
   
-  const navLinks = [{
-    name: 'Home',
-    path: '/'
-  }, {
-    name: 'Services',
-    path: '/services'
-  }, {
-    name: 'About',
-    path: '/about'
-  }, {
-    name: 'Contact',
-    path: '/contact'
-  }];
+  const navLinks = [
+    {
+      name: 'Home',
+      path: '/'
+    }, 
+    {
+      name: 'Services',
+      path: '/services'
+    }, 
+    {
+      name: 'About',
+      path: '/about'
+    }
+  ];
   
   return (
     <header className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 shadow-md backdrop-blur-md py-3' : 'bg-white/80 backdrop-blur-sm py-4'}`}>
