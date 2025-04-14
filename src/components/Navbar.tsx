@@ -39,12 +39,13 @@ const Navbar = () => {
     <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md backdrop-blur-sm' : 'bg-white/90'}`}>
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-3">
             <img 
               src="/lovable-uploads/4492b5df-ae0f-4613-a457-4c4edf6181a8.png" 
               alt="AuraByt Logo" 
-              className="h-14 md:h-16" 
+              className="h-12 w-auto" 
             />
+            <span className="font-bold text-xl text-aurabyt-navy">AuraByt</span>
           </Link>
 
           {/* Desktop Navigation */}

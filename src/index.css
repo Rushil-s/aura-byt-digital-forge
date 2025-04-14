@@ -66,3 +66,20 @@
     @apply py-16 md:py-24;
   }
 }
+
+/* Animation delay classes */
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+.animation-delay-700 {
+  animation-delay: 700ms;
+}
+
+.animation-delay-900 {
+  animation-delay: 900ms;
+}

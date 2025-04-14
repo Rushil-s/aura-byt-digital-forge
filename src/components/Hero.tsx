@@ -19,20 +19,26 @@ const Hero = () => {
             <img 
               src="/lovable-uploads/4492b5df-ae0f-4613-a457-4c4edf6181a8.png" 
               alt="AuraByt Logo" 
-              className="h-40 md:h-48" 
+              className="h-40 md:h-48 w-auto" 
             />
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Transforming Ideas into <span className="gradient-text">Digital Reality</span>
-          </h1>
+          <div className="mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+              <div className="overflow-hidden">
+                <span className="inline-block animate-slide-up">Aura</span>
+                <span className="inline-block text-primary animate-slide-up animation-delay-300">Byt</span>
+              </div>
+            </h1>
+            <p className="text-xl md:text-2xl animate-slide-up animation-delay-500">Transforming Ideas into <span className="gradient-text">Digital Reality</span></p>
+          </div>
           
-          <p className="text-lg md:text-xl text-gray-700 mb-8">
+          <p className="text-lg md:text-xl text-gray-700 mb-8 animate-slide-up animation-delay-700">
             AuraByt is a Toronto-based IT consultancy specializing in web development, 
             digital marketing, and IT support. We help businesses innovate and grow in the digital landscape.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up animation-delay-900">
             <Link 
               to="/services" 
               className="btn-primary flex items-center justify-center"
