@@ -3,10 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -20,9 +22,11 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
+
   const navLinks = [{
     name: 'Home',
     path: '/'
@@ -36,17 +40,21 @@ const Navbar = () => {
     name: 'Contact',
     path: '/contact'
   }];
+
   return <header className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/90 shadow-md backdrop-blur-md py-3' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="h-12 w-12 relative overflow-visible transition-all duration-300 group-hover:scale-105">
               <div className="absolute -inset-1 bg-gradient-to-r from-aurabyt-purple/30 to-aurabyt-blue/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <img src="/lovable-uploads/1b585414-d018-4ee5-ad0e-06daf6b9c009.png" alt="AuraByt Logo" className="h-full w-full object-contain relative z-10" />
+              <img 
+                src="/lovable-uploads/eaf87533-e3ad-4c33-a3c3-01536c4d88e8.png" 
+                alt="AuraByt Logo" 
+                className="h-full w-full object-contain relative z-10" 
+              />
             </div>
-            <span className="font-bold text-xl">
-              
-              
+            <span className="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue">
+              AuraByt
             </span>
           </Link>
 
@@ -91,4 +99,5 @@ const Navbar = () => {
       </div>
     </header>;
 };
+
 export default Navbar;
