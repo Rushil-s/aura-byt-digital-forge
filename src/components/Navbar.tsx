@@ -44,11 +44,15 @@ const Navbar = () => {
     {
       name: 'About',
       path: '/about'
+    },
+    {
+      name: 'Contact',
+      path: '/contact'
     }
   ];
   
   return (
-    <header className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 shadow-md backdrop-blur-md py-3' : 'bg-white/80 backdrop-blur-sm py-4'}`}>
+    <header className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white shadow-md py-3' : 'bg-white/95 py-4'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-3 group">
@@ -84,16 +88,6 @@ const Navbar = () => {
                     </Link>
                   </NavigationMenuItem>
                 ))}
-                <NavigationMenuItem>
-                  <Link 
-                    to="/contact" 
-                    className="relative px-6 py-3 text-white font-medium rounded-lg overflow-hidden group btn-hover-shine"
-                  >
-                    <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue"></span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-indigo to-aurabyt-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                    <span className="relative">Get Started</span>
-                  </Link>
-                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </div>
@@ -108,7 +102,7 @@ const Navbar = () => {
         </div>
 
         {isOpen && (
-          <div className="md:hidden mt-4 py-4 bg-white/95 backdrop-blur-md rounded-lg shadow-lg">
+          <div className="md:hidden mt-4 py-4 bg-white/95 rounded-lg shadow-lg">
             <nav className="flex flex-col space-y-4 px-4">
               {navLinks.map(link => (
                 <Link 
@@ -120,14 +114,6 @@ const Navbar = () => {
                   <span className="absolute bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                 </Link>
               ))}
-              <Link 
-                to="/contact" 
-                className="relative px-6 py-3 text-white font-medium rounded-lg overflow-hidden group mt-2 btn-hover-shine"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue"></span>
-                <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-indigo to-aurabyt-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative text-center block">Get Started</span>
-              </Link>
             </nav>
           </div>
         )}

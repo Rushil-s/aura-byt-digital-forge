@@ -97,11 +97,10 @@ export default {
           '50%': { transform: 'translateY(-10px)' }
         },
         'typewriter': {
-          '0%': { width: '100%' },
-          '20%': { width: '0%' },
-          '40%': { width: '0%' },
+          '0%': { width: '0' },
+          '20%': { width: '100%' },
           '80%': { width: '100%' },
-          '100%': { width: '100%' }
+          '100%': { width: '0' }
         },
         'blink': {
           '0%, 100%': { borderColor: 'transparent' },

@@ -23,7 +23,7 @@ const Hero = () => {
     // Text rotation effect with longer delay
     const rotationInterval = setInterval(() => {
       setCurrentTextIndex(prevIndex => (prevIndex + 1) % businessTexts.length);
-    }, 3000); // Increased from 2000 to 3000ms for better readability
+    }, 4000); // Increased from 3000 to 4000ms for better readability
 
     // Add mouse move parallax effect
     const handleMouseMove = (e: MouseEvent) => {
