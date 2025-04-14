@@ -82,7 +82,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin size={20} className="mr-2 text-primary mt-1" />
-                <span className="text-gray-300">123 Tech Avenue, Toronto, Canada</span>
+                <span className="text-gray-300">Toronto, Canada</span>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="mr-2 text-primary" />
@@ -90,7 +90,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="mr-2 text-primary" />
-                <span className="text-gray-300">info@aurabyt.com</span>
+                <span className="text-gray-300">connect@aurabyt.com</span>
               </li>
             </ul>
           </div>
