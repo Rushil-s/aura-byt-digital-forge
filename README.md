@@ -1,73 +1,111 @@
-# Welcome to your Lovable project
+# ⚡ AuraByt Digital Forge
 
-## Project info
+![AuraByt Logo](https://github.com/Rushil-s/aura-byt-digital-forge/raw/main/public/assets/AuraByteLogo.png)
 
-**URL**: https://lovable.dev/projects/eedf50a6-83bd-4e4e-b414-fceb429fe963
+Welcome to the **official codebase** of **AuraByt Digital Forge** — a modern, lightning-fast website built for our IT consultancy brand **AuraByt**, offering services in:
 
-## How can I edit this code?
+- 🌐 Software & Web Development  
+- 📈 Digital Marketing  
+- 🛠️ IT Support & Infrastructure  
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## 📌 Live Demo
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/eedf50a6-83bd-4e4e-b414-fceb429fe963) and start prompting.
+Coming soon at **[aurabyt.com](https://aurabyt.com)**  
+(Stay tuned for deployment updates!)
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🚀 Tech Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+| Tech             | Description                          |
+|------------------|--------------------------------------|
+| **React**        | UI Library for building interfaces   |
+| **Vite**         | Lightning-fast bundler               |
+| **TypeScript**   | Strongly-typed JavaScript            |
+| **Tailwind CSS** | Utility-first styling                |
+| **shadcn/ui**    | Accessible, modern component library |
+| **Lucide Icons** | Beautiful, consistent icon set       |
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 🧑‍💻 Getting Started
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+To run the project locally:
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+```bash
+# Clone this repository
+git clone https://github.com/Rushil-s/aura-byt-digital-forge.git
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Navigate into the project folder
+cd aura-byt-digital-forge
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
-```
 
-**Edit a file directly in GitHub**
+    Ensure you have Node.js and npm installed. We recommend using nvm to manage Node versions.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+🌐 Deployment
 
-**Use GitHub Codespaces**
+You can deploy this project using any modern static hosting provider such as:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+    Vercel
 
-## What technologies are used for this project?
+    Netlify
 
-This project is built with:
+    Render
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+🔗 Steps:
 
-## How can I deploy this project?
+    Push your project to GitHub.
 
-Simply open [Lovable](https://lovable.dev/projects/eedf50a6-83bd-4e4e-b414-fceb429fe963) and click on Share -> Publish.
+    Connect your repo on the hosting platform.
 
-## Can I connect a custom domain to my Lovable project?
+    Set your build command as npm run build and output directory as dist.
 
-Yes, you can!
+    Optionally connect a custom domain.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+📁 Project Structure
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+├── public/              # Static files (logo, images, etc.)
+├── src/
+│   ├── assets/          # Design assets
+│   ├── components/      # Reusable UI components
+│   ├── hooks/           # Custom React hooks
+│   ├── pages/           # Page components
+│   ├── styles/          # Tailwind & custom styles
+│   └── utils/           # Helper functions
+├── index.html           # Main HTML template
+├── tailwind.config.ts   # Tailwind config
+├── vite.config.ts       # Vite config
+└── README.md            # Project overview
+
+🧠 Contributing
+
+We welcome contributions to improve this project.
+
+    If you have suggestions, bug reports, or want to propose features:
+
+    🛠️ Fork the repo
+
+    🔀 Create a new branch
+
+    💡 Commit your changes
+
+    🚀 Open a pull request
+
+📜 License
+
+This project is open source under the MIT License.
+📬 Contact
+
+Have questions or want to work with us?
+
+Email: connect@aurabyt.com
+Website: https://aurabyt.com
+
+Built with ❤️ by the AuraByt team.
