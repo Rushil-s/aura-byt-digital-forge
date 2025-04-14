@@ -440,24 +440,32 @@
   100% { transform: translateX(0); opacity: 1; }
 }
 
+.animate-fade-down,
+.animate-fade-left,
+.animate-fade-right {
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
 .animate-fade-down {
-  animation: fade-down 0.5s ease-out forwards;
+  animation-name: fade-down;
 }
 
 .animate-fade-left {
-  animation: fade-left 0.5s ease-out forwards;
+  animation-name: fade-left;
 }
 
 .animate-fade-right {
-  animation: fade-right 0.5s ease-out forwards;
+  animation-name: fade-right;
 }
 
 /* Prefer reduced motion */
 @media (prefers-reduced-motion) {
   *, ::before, ::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
   
@@ -472,9 +480,10 @@
 @media (prefers-reduced-motion: no-preference) {
   .animated-gradient-text {
     background-size: 200% 100%;
-    animation: gradient-shift 4s linear infinite;
+    animation: gradient-shift 8s ease infinite; /* Slower animation, less resource intensive */
     will-change: background-position;
   }
+}
   
   .animate-float {
     animation: floating 3s ease-in-out infinite;

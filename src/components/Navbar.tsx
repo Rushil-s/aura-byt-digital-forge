@@ -63,31 +63,37 @@ const Navbar = () => {
           </nav>
 
           <button 
-            className="md:hidden"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+  className="md:hidden"
+  onClick={() => setIsOpen(!isOpen)}
+  aria-label={isOpen ? "Close menu" : "Open menu"}
+  aria-expanded={isOpen}
+  aria-controls="mobile-menu"
+>
+  {isOpen ? <X size={24} /> : <Menu size={24} />}
+</button>
+</div>
 
-        {isOpen && (
-          <div className="md:hidden py-4 animate-fade-in">
-            <nav className="flex flex-col space-y-4">
-              {navLinks.map(link => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    location.pathname === link.path ? 'text-primary' : 'text-foreground'
-                  } animate-slide-up`}
-                  style={{ animationDelay: `${navLinks.indexOf(link) * 50}ms` }}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
+{isOpen && (
+  <div 
+    id="mobile-menu" 
+    className="md:hidden py-4 animate-fade-in"
+  >
+    <nav className="flex flex-col space-y-4">
+      {navLinks.map(link => (
+        <Link
+          key={link.name}
+          to={link.path}
+          className={`text-sm font-medium transition-colors hover:text-primary ${
+            location.pathname === link.path ? 'text-primary' : 'text-foreground'
+          } animate-slide-up`}
+          style={{ animationDelay: `${navLinks.indexOf(link) * 50}ms` }}
+        >
+          {link.name}
+        </Link>
+      ))}
+    </nav>
+  </div>
+)}
         )}
       </div>
     </header>
