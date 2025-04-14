@@ -7,8 +7,10 @@ import { lazy, Suspense, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-// Lazy load pages for better performance
-const Index = lazy(() => import("./pages/Index"));
+// Directly import the Index page for faster initial load
+import Index from "./pages/Index";
+
+// Lazy load secondary pages
 const Services = lazy(() => import("./pages/Services"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -49,7 +51,7 @@ const PageTransitions = () => {
     const timer = setTimeout(() => {
       document.body.classList.remove('page-transition');
       
-      // Ensure all sections are visible on page load with improved performance
+      // Ensure all sections are visible by default
       requestAnimationFrame(() => {
         const scrollAnimateElements = document.querySelectorAll('.scroll-animate');
         scrollAnimateElements.forEach(el => {
@@ -82,7 +84,7 @@ const App = () => {
         <PageTransitions />
         <div className="min-h-screen flex flex-col">
           <Navbar />
-          <main className="flex-grow pt-20 animate-fade-in">
+          <main className="flex-grow pt-20">
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Index />} />

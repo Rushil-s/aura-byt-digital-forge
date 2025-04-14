@@ -1,59 +1,18 @@
 // src/pages/Index.tsx
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect } from 'react';
 import Hero from '@/components/Hero';
 import ServiceCard from '@/components/ServiceCard';
 import TestimonialSlider from '@/components/TestimonialSlider';
 import { Code, BarChart3, ServerCog } from 'lucide-react';
 import SEO from '@/components/SEO';
 
-// Memoize service cards for better performance
-const MemoizedServiceCard = memo(ServiceCard);
-
 const Index = () => {
-  // Create refs for scroll animation
-  const servicesRef = useRef<HTMLElement>(null);
-
   useEffect(() => {
-    // Use requestAnimationFrame for better performance
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          requestAnimationFrame(() => {
-            entry.target.classList.add('is-visible');
-          });
-        }
-      });
-    };
-
-    // Initialize IntersectionObserver with a callback that adds the is-visible class
-    const observer = new IntersectionObserver(handleIntersection, { 
-      threshold: 0.1, 
-      rootMargin: '0px 0px -100px 0px' 
+    // Make all scroll-animate elements visible by default
+    const scrollAnimateElements = document.querySelectorAll('.scroll-animate');
+    scrollAnimateElements.forEach(el => {
+      el.classList.add('is-visible');
     });
-
-    // Observe the services section
-    if (servicesRef.current) {
-      observer.observe(servicesRef.current);
-    }
-
-    // Observe other scroll-animate elements
-    const animateElements = document.querySelectorAll('.scroll-animate:not(.is-visible)');
-    animateElements.forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => {
-      // Cleanup observer
-      if (servicesRef.current) {
-        observer.unobserve(servicesRef.current);
-      }
-      
-      animateElements.forEach((el) => {
-        observer.unobserve(el);
-      });
-      
-      observer.disconnect();
-    };
   }, []);
 
   const services = [
@@ -90,11 +49,8 @@ const Index = () => {
       {/* Hero Section */}
       <Hero />
       
-      {/* Services Section */}
-      <section 
-        ref={servicesRef}
-        className="section-padding bg-gray-50 scroll-animate opacity-0 translate-y-8 transition-all duration-700"
-      >
+      {/* Services Section - Made visible by default */}
+      <section className="section-padding bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our <span className="animated-gradient-text">Services</span></h2>
@@ -105,7 +61,7 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <MemoizedServiceCard 
+              <ServiceCard 
                 key={index}
                 title={service.title}
                 description={service.description}
@@ -118,8 +74,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Testimonials Section */}
-      <section className="section-padding bg-white relative scroll-animate opacity-0 translate-y-8 transition-all duration-700">
+      {/* Testimonials Section - Made visible by default */}
+      <section className="section-padding bg-white relative">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients <span className="animated-gradient-text">Say</span></h2>
