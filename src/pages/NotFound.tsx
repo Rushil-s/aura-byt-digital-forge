@@ -1,7 +1,8 @@
-
+// src/pages/NotFound.tsx
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Home } from "lucide-react";
+import SEO from "@/components/SEO";
 
 const NotFound = () => {
   const location = useLocation();
@@ -15,6 +16,12 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <SEO 
+        title="Page Not Found - AuraByt"
+        description="The page you were looking for could not be found. Navigate back to the AuraByt homepage."
+        keywords="404, page not found, AuraByt, error page"
+      />
+      
       <div className="max-w-md w-full text-center">
         <div className="mb-6">
           <div className="text-8xl font-bold bg-clip-text text-transparent bg-purple-gradient">404</div>

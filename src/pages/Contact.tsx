@@ -1,23 +1,20 @@
-
+// src/pages/Contact.tsx
 import React, { useEffect } from 'react';
 import ContactForm from '@/components/ContactForm';
 import { Mail, Phone, Clock } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const Contact = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const contactInfo = [
     {
       icon: <Phone size={24} />,
       title: 'Phone Number',
-      details: '(123) 456-7890'
+      details: '(437) 925-2744'
     },
     {
       icon: <Mail size={24} />,
       title: 'Email Address',
-      details: 'info@aurabyt.com'
+      details: 'connect@aurabyt.com'
     },
     {
       icon: <Clock size={24} />,
@@ -28,6 +25,12 @@ const Contact = () => {
 
   return (
     <div>
+      <SEO 
+        title="Contact AuraByt - Get In Touch With Our Team" 
+        description="Contact AuraByt for all your web development, digital marketing and IT support needs. Our team is ready to help your business grow."
+        keywords="Contact AuraByt, IT consultancy contact, Toronto tech company, web development services, digital marketing contact"
+      />
+      
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-aurabyt-navy text-white">
         <div className="container mx-auto px-4">
@@ -50,7 +53,7 @@ const Contact = () => {
               <ContactForm />
             </div>
 
-            {/* Contact Info - Removed Map and Address */}
+            {/* Contact Info - Optimized for mobile */}
             <div>
               <div className="bg-white rounded-xl shadow-lg p-8">
                 <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
@@ -98,7 +101,7 @@ const Contact = () => {
                   answer: "We take a data-driven approach to digital marketing, focusing on strategies that deliver measurable results. We start by understanding your business goals and target audience, then develop a customized strategy to reach and engage them effectively."
                 }
               ].map((faq, index) => (
-                <div key={index} className="bg-white rounded-lg shadow p-6">
+                <div key={index} className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
                   <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
                   <p className="text-gray-600">{faq.answer}</p>
                 </div>

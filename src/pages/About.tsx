@@ -1,22 +1,16 @@
-
-import React, { useEffect, useState } from 'react';
+// src/pages/About.tsx
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const About = () => {
   const [currentAttributeIndex, setCurrentAttributeIndex] = useState(0);
   const attributes = ['clarity', 'creativity', 'scalability', 'support', 'success'];
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    // Text rotation effect with increased time
-    const rotationInterval = setInterval(() => {
-      setCurrentAttributeIndex(prevIndex => (prevIndex + 1) % attributes.length);
-    }, 3000); // Increased from 2000 to 3000ms for better readability
-
-    // Animation for elements when they come into view
-    const observer = new IntersectionObserver((entries) => {
+  // Memoize observer creation to prevent recreation on each render
+  const createObserver = useCallback(() => {
+    return new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animate-slide-up');
@@ -24,56 +18,48 @@ const About = () => {
         }
       });
     }, {
-      threshold: 0.1
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
     });
+  }, []);
+
+  useEffect(() => {
+    // Text rotation effect with increased time
+    const rotationInterval = setInterval(() => {
+      setCurrentAttributeIndex(prevIndex => (prevIndex + 1) % attributes.length);
+    }, 3000);
     
-    document.querySelectorAll('.animate-on-scroll').forEach(item => {
-      (item as HTMLElement).style.opacity = '0';
-      observer.observe(item);
+    // Animation for elements when they come into view
+    const observer = createObserver();
+    
+    // Use requestAnimationFrame to avoid layout thrashing
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.animate-on-scroll').forEach(item => {
+        (item as HTMLElement).style.opacity = '0';
+        observer.observe(item);
+      });
     });
 
     return () => {
       clearInterval(rotationInterval);
       observer.disconnect();
     };
-  }, [attributes.length]);
-
-  const team = [
-    {
-      name: "Alex Thompson",
-      role: "Founder & CEO",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80",
-      bio: "With over 15 years of experience in the IT industry, Alex founded AuraByt with a vision to help businesses harness the power of technology."
-    },
-    {
-      name: "Samantha Chen",
-      role: "Head of Development",
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80",
-      bio: "Samantha leads our development team, bringing her expertise in web and mobile application development to create innovative solutions for our clients."
-    },
-    {
-      name: "Marcus Johnson",
-      role: "Digital Marketing Director",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80",
-      bio: "Marcus specializes in creating effective digital marketing strategies that drive brand awareness and customer engagement."
-    },
-    {
-      name: "Jessica Lee",
-      role: "IT Support Manager",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&q=80",
-      bio: "With her technical expertise and customer-focused approach, Jessica ensures our clients receive prompt and effective IT support."
-    }
-  ];
+  }, [attributes.length, createObserver]);
 
   return (
     <div>
+      <SEO 
+        title="About AuraByt - Digital Innovation Consultancy" 
+        description="AuraByt is a Toronto-based IT consultancy focused on delivering innovative digital solutions through clarity, creativity, scalability, support, and success."
+        keywords="IT consultancy, Toronto tech company, web development, digital marketing, IT support, business growth"
+      />
+      
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-aurabyt-navy text-white relative overflow-hidden">
-        {/* Background animations */}
+        {/* Background animations - reduced for better performance */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-aurabyt-purple/10 blur-3xl animate-pulse-slow"></div>
           <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-aurabyt-blue/10 blur-3xl animate-float animation-delay-300"></div>
-          <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-aurabyt-indigo/10 blur-3xl animate-float animation-delay-700"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -119,6 +105,9 @@ const About = () => {
                 <img 
                   src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1024&q=80" 
                   alt="AuraByt Team Collaboration" 
+                  loading="lazy"
+                  width="1024"
+                  height="683"
                   className="w-full h-auto"
                 />
               </div>
@@ -171,41 +160,9 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section - Commented out as requested 
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16 animate-on-scroll">
-            <h2 className="text-3xl font-bold mb-4">Our Team</h2>
-            <p className="text-gray-700">
-              Meet the experts behind <span className="animated-gradient-text">AuraByt's</span> success. Our diverse team brings together a wealth of experience and expertise.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="bg-white rounded-xl shadow overflow-hidden hover-card animate-on-scroll" style={{ transitionDelay: `${index * 100}ms` }}>
-                <div className="aspect-square overflow-hidden">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                  <p className="text-primary font-medium mb-4">{member.role}</p>
-                  <p className="text-gray-600 text-sm">{member.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      */}
-
       {/* Toronto Section */}
       <section className="py-20 bg-aurabyt-navy text-white relative">
-        {/* Background animations */}
+        {/* Background animations - optimized */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/4 w-1/2 h-1/3 bg-white/5 blur-3xl rounded-full animate-pulse-slow"></div>
           <div className="absolute bottom-0 right-1/3 w-1/3 h-1/2 bg-white/5 blur-3xl rounded-full animate-float animation-delay-300"></div>
@@ -233,6 +190,9 @@ const About = () => {
                 <img 
                   src="https://images.unsplash.com/photo-1517090504586-fde19ea6066f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1024&q=80" 
                   alt="Toronto Skyline" 
+                  loading="lazy"
+                  width="1024"
+                  height="683"
                   className="w-full h-auto"
                 />
               </div>

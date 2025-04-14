@@ -1,42 +1,142 @@
-
-import React, { useEffect, useRef } from 'react';
+// src/pages/Services.tsx
+import React, { useEffect, useRef, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck, Server, Headphones, Settings, Cpu, CheckCircle, Users, MonitorSmartphone, Coffee, Cloud, Share2, TrendingUp, LineChart, Youtube, Instagram, Palette, FileCode } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import SEO from '@/components/SEO';
+
+// Memoize service components for performance
+const ServiceCategory = memo(({ 
+  id, 
+  category, 
+  description, 
+  items, 
+  index 
+}: { 
+  id: string; 
+  category: string; 
+  description: string; 
+  items: any[]; 
+  index: number;
+}) => {
+  return (
+    <section 
+      id={id} 
+      className={`py-12 md:py-20 ${index % 2 === 1 ? 'bg-gray-50' : 'bg-white'} relative overflow-hidden`}
+    >
+      {/* Background elements - reduced for performance */}
+      {index % 2 === 0 && (
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-aurabyt-purple/5 to-transparent opacity-60 blur-2xl"></div>
+          <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-radial from-aurabyt-blue/5 to-transparent opacity-60 blur-2xl"></div>
+        </div>
+      )}
+      
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto mb-12 text-center section-title">
+          <h2 className="text-3xl font-bold mb-4">{category}</h2>
+          <div className="w-16 h-1 bg-primary mx-auto"></div>
+          <p className="mt-4 text-gray-600">{description}</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {items.map((service, i) => (
+            <ServiceItem 
+              key={i} 
+              service={service} 
+              index={i} 
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+});
+
+// Memoize service item component
+const ServiceItem = memo(({ service, index }: { service: any; index: number }) => {
+  return (
+    <div 
+      className="bg-white rounded-xl shadow-md p-6 md:p-8 hover-card relative service-card group" 
+      style={{ transitionDelay: `${index * 50}ms` }}
+    >
+      {/* Hover effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-aurabyt-purple/5 to-aurabyt-blue/5 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300"></div>
+      
+      <div className="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-4 md:mb-6 text-primary group-hover:scale-110 transition-transform">
+        {service.icon}
+      </div>
+      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 group-hover:text-primary transition-colors">{service.title}</h3>
+      <p className="text-gray-600 mb-4 md:mb-6">{service.description}</p>
+      
+      <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Key Benefits:</h4>
+      <ul className="space-y-1 md:space-y-2 mb-4 md:mb-6 text-sm md:text-base">
+        {service.benefits.slice(0, 4).map((benefit: string, j: number) => (
+          <li key={j} className="flex items-start">
+            <CheckCircle className="text-primary mr-2 h-4 w-4 md:h-5 md:w-5 mt-0.5 flex-shrink-0" />
+            <span>{benefit}</span>
+          </li>
+        ))}
+      </ul>
+      
+      {/* Technologies section */}
+      <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Technologies:</h4>
+      <div className="flex flex-wrap gap-1 md:gap-2">
+        {service.technologies.map((tech: string, k: number) => (
+          <span key={k} className="px-2 py-1 bg-gray-100 text-gray-700 rounded-md text-xs md:text-sm">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+});
 
 const Services = () => {
   const isMobile = useIsMobile();
   const servicesRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    window.scrollTo(0, 0);
-
-    // Animation for elements when they come into view
+    // Create an observer to handle animation of elements as they come into view
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-slide-up');
-          // Cast to HTMLElement to access style property
-          (entry.target as HTMLElement).style.opacity = '1';
+          // Use requestAnimationFrame for smoother animations
+          requestAnimationFrame(() => {
+            entry.target.classList.add('animate-slide-up');
+            // Cast to HTMLElement to access style property
+            (entry.target as HTMLElement).style.opacity = '1';
+          });
         }
       });
     }, {
-      threshold: 0.1
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
     });
     
-    document.querySelectorAll('.service-card').forEach(card => {
-      // Cast to HTMLElement to access style property
-      (card as HTMLElement).style.opacity = '0';
-      observer.observe(card);
-    });
+    // Observe elements in batches to improve performance
+    const observeElements = () => {
+      document.querySelectorAll('.service-card:not([style*="opacity: 1"])').forEach((card, index) => {
+        // Stagger the observations to prevent jank
+        setTimeout(() => {
+          (card as HTMLElement).style.opacity = '0';
+          observer.observe(card);
+        }, index % 10 * 50); // Batch in groups of 10
+      });
+      
+      document.querySelectorAll('.section-title:not([style*="opacity: 1"])').forEach(title => {
+        (title as HTMLElement).style.opacity = '0';
+        observer.observe(title);
+      });
+    };
     
-    document.querySelectorAll('.section-title').forEach(title => {
-      // Cast to HTMLElement to access style property
-      (title as HTMLElement).style.opacity = '0';
-      observer.observe(title);
-    });
+    // Execute after a short delay to ensure the DOM is ready
+    const timer = setTimeout(observeElements, 100);
     
-    return () => observer.disconnect();
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
   
   const services = [
@@ -200,13 +300,18 @@ const Services = () => {
 
   return (
     <div className="bg-gradient-to-b from-gray-50 to-white">
+      <SEO 
+        title="AuraByt Services - Web Development, Digital Marketing & IT Support"
+        description="Explore AuraByt's comprehensive services including web development, digital marketing and IT support solutions tailored for your business needs."
+        keywords="web development, digital marketing, IT support, software development, SEO, cloud solutions"
+      />
+      
       {/* Services Hero Section - Enhanced with animations */}
       <section className="pt-32 pb-16 md:pb-24 bg-aurabyt-navy text-white relative overflow-hidden">
-        {/* Background animations */}
+        {/* Background animations - reduced for better performance */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-aurabyt-purple/10 blur-3xl animate-pulse-slow"></div>
           <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-aurabyt-blue/10 blur-3xl animate-float animation-delay-300"></div>
-          <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-aurabyt-indigo/10 blur-3xl animate-float animation-delay-700"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -237,13 +342,6 @@ const Services = () => {
             </div>
           </div>
         </div>
-        
-        {/* Animated scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
-          <div className="w-8 h-12 rounded-full border-2 border-white/30 flex items-center justify-center">
-            <div className="w-1 h-3 bg-white/50 rounded-full animate-ping"></div>
-          </div>
-        </div>
       </section>
 
       {/* Services Tabs - Mobile-friendly navigation for smaller screens */}
@@ -267,76 +365,22 @@ const Services = () => {
       <div ref={servicesRef}>
         {/* Services Sections with enhanced animations and mobile optimization */}
         {services.map((serviceCategory, index) => (
-          <section 
-            key={serviceCategory.id} 
-            id={serviceCategory.id} 
-            className={`py-12 md:py-20 ${index % 2 === 1 ? 'bg-gray-50' : 'bg-white'} relative overflow-hidden`}
-          >
-            {/* Background elements */}
-            {index % 2 === 0 && (
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-aurabyt-purple/5 to-transparent opacity-60 blur-2xl"></div>
-                <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-radial from-aurabyt-blue/5 to-transparent opacity-60 blur-2xl"></div>
-                <div className="absolute inset-0 noise-bg"></div>
-              </div>
-            )}
-            
-            <div className="container mx-auto px-4">
-              <div className="max-w-3xl mx-auto mb-12 text-center section-title">
-                <h2 className="text-3xl font-bold mb-4">{serviceCategory.category}</h2>
-                <div className="w-16 h-1 bg-primary mx-auto"></div>
-                <p className="mt-4 text-gray-600">{serviceCategory.description}</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {serviceCategory.items.map((service, i) => (
-                  <div 
-                    key={i} 
-                    className="bg-white rounded-xl shadow-md p-6 md:p-8 hover-card relative service-card group" 
-                    style={{ transitionDelay: `${i * 100}ms` }}
-                  >
-                    {/* Hover effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-aurabyt-purple/5 to-aurabyt-blue/5 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300"></div>
-                    
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-4 md:mb-6 text-primary group-hover:scale-110 transition-transform">
-                      {service.icon}
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 group-hover:text-primary transition-colors">{service.title}</h3>
-                    <p className="text-gray-600 mb-4 md:mb-6">{service.description}</p>
-                    
-                    <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Key Benefits:</h4>
-                    <ul className="space-y-1 md:space-y-2 mb-4 md:mb-6 text-sm md:text-base">
-                      {service.benefits.map((benefit, j) => (
-                        <li key={j} className="flex items-start">
-                          <CheckCircle className="text-primary mr-2 h-4 w-4 md:h-5 md:w-5 mt-0.5 flex-shrink-0" />
-                          <span>{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    {/* Technologies section */}
-                    <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Technologies:</h4>
-                    <div className="flex flex-wrap gap-1 md:gap-2">
-                      {service.technologies.map((tech, k) => (
-                        <span key={k} className="px-2 py-1 bg-gray-100 text-gray-700 rounded-md text-xs md:text-sm">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+          <ServiceCategory 
+            key={serviceCategory.id}
+            id={serviceCategory.id}
+            category={serviceCategory.category}
+            description={serviceCategory.description}
+            items={serviceCategory.items}
+            index={index}
+          />
         ))}
       </div>
 
       {/* Enhanced CTA Section with better mobile support */}
       <section className="py-12 md:py-16 bg-purple-gradient text-white relative overflow-hidden">
-        {/* Background animation elements */}
+        {/* Background animation elements - reduced for performance */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/4 w-1/2 h-1/3 bg-white/5 blur-3xl rounded-full animate-pulse-slow"></div>
-          <div className="absolute bottom-0 right-1/3 w-1/3 h-1/2 bg-white/5 blur-3xl rounded-full animate-float animation-delay-300"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">

@@ -465,3 +465,106 @@
     animation: none !important;
   }
 }
+
+/* Optimized animation classes to be added to src/index.css */
+
+/* Performance optimized animations */
+@media (prefers-reduced-motion: no-preference) {
+  .animated-gradient-text {
+    background-size: 200% 100%;
+    animation: gradient-shift 4s linear infinite;
+    will-change: background-position;
+  }
+  
+  .animate-float {
+    animation: floating 3s ease-in-out infinite;
+    will-change: transform;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 3s infinite;
+    will-change: opacity, transform;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+    will-change: opacity, transform;
+  }
+  
+  .btn-hover-shine::after {
+    will-change: transform;
+  }
+  
+  .hover-card {
+    will-change: transform, box-shadow;
+  }
+  
+  .parallax-card-inner {
+    will-change: transform;
+  }
+}
+
+/* Reduce animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-float, 
+  .floating, 
+  .animate-pulse-slow,
+  .grain::before, 
+  .btn-hover-shine::after,
+  .animated-gradient-text,
+  .animate-fade-in,
+  .animate-slide-up,
+  .page-transition {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .parallax-card-inner {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Improve layout shift by setting explicit dimensions for animation containers */
+.logo-container {
+  width: 12rem;
+  height: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .logo-container {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+/* Optimize background animations to use GPU acceleration */
+.blur-3xl, 
+.bg-glow::after,
+.bg-gradient-radial {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Add optimized loading animations for lazy-loaded content */
+.content-loading {
+  background: linear-gradient(90deg, rgba(225,225,225,0.1), rgba(225,225,225,0.3), rgba(225,225,225,0.1));
+  background-size: 200% 100%;
+  animation: loading-shimmer 1.5s infinite;
+  will-change: background-position;
+}
+
+@keyframes loading-shimmer {
+  0% { background-position: -100% 0 }
+  100% { background-position: 200% 0 }
+}
