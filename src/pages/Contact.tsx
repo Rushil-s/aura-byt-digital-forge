@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import ContactForm from '@/components/ContactForm';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Mail, Phone, Clock } from 'lucide-react';
 
 const Contact = () => {
   useEffect(() => {
@@ -9,11 +9,6 @@ const Contact = () => {
   }, []);
 
   const contactInfo = [
-    {
-      icon: <MapPin size={24} />,
-      title: 'Our Location',
-      details: '123 Tech Avenue, Toronto, Ontario, Canada M5V 1J2'
-    },
     {
       icon: <Phone size={24} />,
       title: 'Phone Number',
@@ -55,9 +50,9 @@ const Contact = () => {
               <ContactForm />
             </div>
 
-            {/* Contact Info and Map */}
+            {/* Contact Info - Removed Map and Address */}
             <div>
-              <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+              <div className="bg-white rounded-xl shadow-lg p-8">
                 <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
                 <div className="space-y-6">
                   {contactInfo.map((item, index) => (
@@ -72,20 +67,6 @@ const Contact = () => {
                     </div>
                   ))}
                 </div>
-              </div>
-
-              {/* Map */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden h-[300px]">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d92443.59094562236!2d-79.48105566622053!3d43.70939847111788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cb90d7c63ba5%3A0x323555502ab4c477!2sToronto%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sus!4v1653492090442!5m2!1sen!2sus" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="AuraByt Toronto Location"
-                ></iframe>
               </div>
             </div>
           </div>

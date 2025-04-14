@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Hero from '@/components/Hero';
 import ServiceCard from '@/components/ServiceCard';
 import TestimonialSlider from '@/components/TestimonialSlider';
@@ -7,36 +7,6 @@ import { Code, BarChart3, ServerCog, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
-  // Refs for scroll animations
-  const servicesRef = useRef<HTMLDivElement>(null);
-  const featuresRef = useRef<HTMLDivElement>(null);
-  const testimonialRef = useRef<HTMLDivElement>(null);
-  
-  // Intersection Observer setup
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1,
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-slide-up');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    
-    // Observe elements
-    if (servicesRef.current) observer.observe(servicesRef.current);
-    if (featuresRef.current) observer.observe(featuresRef.current);
-    if (testimonialRef.current) observer.observe(testimonialRef.current);
-    
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <div>
       {/* Hero Section */}
@@ -44,10 +14,7 @@ const Index = () => {
       
       {/* Services Section */}
       <section className="section-padding bg-gray-50" id="services">
-        <div 
-          ref={servicesRef} 
-          className="container mx-auto px-4 opacity-0"
-        >
+        <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
             <p className="text-gray-600">
@@ -93,10 +60,7 @@ const Index = () => {
       
       {/* Features/Why Choose Us Section */}
       <section className="section-padding">
-        <div 
-          ref={featuresRef}
-          className="container mx-auto px-4 opacity-0"
-        >
+        <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose AuraByt</h2>
             <p className="text-gray-600">
@@ -140,10 +104,7 @@ const Index = () => {
       
       {/* Testimonials Section */}
       <section className="section-padding bg-gray-50">
-        <div 
-          ref={testimonialRef}
-          className="container mx-auto px-4 opacity-0"
-        >
+        <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
             <p className="text-gray-600">

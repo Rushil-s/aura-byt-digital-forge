@@ -14,12 +14,12 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Logo image */}
+          {/* Logo image - increased size */}
           <div className="flex justify-center mb-6">
             <img 
               src="/lovable-uploads/ec4309c7-d899-4183-a36b-c7c5bf0211a6.png" 
               alt="AuraByt Logo" 
-              className="h-24 md:h-32 animate-fade-in"
+              className="h-32 md:h-40 animate-fade-in"
             />
           </div>
           
