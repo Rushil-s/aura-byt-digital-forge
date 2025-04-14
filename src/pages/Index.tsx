@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Hero from '@/components/Hero';
 import ServiceCard from '@/components/ServiceCard';
 import Portfolio from '@/components/Portfolio';
@@ -7,13 +7,43 @@ import TestimonialSlider from '@/components/TestimonialSlider';
 import { Code, BarChart3, ServerCog } from 'lucide-react';
 
 const Index = () => {
+  // Create refs for scroll animation
+  const sectionRefs = useRef<HTMLElement[]>([]);
+
+  useEffect(() => {
+    // Initialize IntersectionObserver
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    // Observe all scroll-animate elements
+    const animateElements = document.querySelectorAll('.scroll-animate');
+    animateElements.forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => {
+      // Cleanup observer
+      animateElements.forEach((el) => {
+        observer.unobserve(el);
+      });
+    };
+  }, []);
+
   return (
     <div className="w-full">
       {/* Hero Section */}
       <Hero />
       
       {/* Services Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding bg-gray-50 scroll-animate opacity-0 translate-y-8 transition-all duration-700">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our <span className="animated-gradient-text">Services</span></h2>
@@ -52,7 +82,7 @@ const Index = () => {
       <Portfolio />
       
       {/* Testimonials Section */}
-      <section className="section-padding bg-white relative">
+      <section className="section-padding bg-white relative scroll-animate opacity-0 translate-y-8 transition-all duration-700">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients <span className="animated-gradient-text">Say</span></h2>

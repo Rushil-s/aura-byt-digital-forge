@@ -23,10 +23,11 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-3">
-            <div className="h-12 w-12">
+            <div className="h-12 w-12 relative group">
+              <div className="absolute inset-0 bg-blue-500/10 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <img 
                 alt="AuraByt Logo" 
-                className="h-full w-full object-contain" 
+                className="h-full w-full object-contain relative z-10" 
                 src="/lovable-uploads/ac5d9c7f-14f3-4b3a-8f12-0e098fb33699.png" 
               />
             </div>
