@@ -7,6 +7,7 @@ import { lazy, Suspense, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AnimationInitializer from "./components/AnimationInitializer";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Directly import the Index page for faster initial load
 import Index from "./pages/Index";
@@ -20,11 +21,9 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 // Enhanced loading component with tech animations
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-    {/* Tech background elements */}
     <div className="tech-grid"></div>
     <div className="animated-bg animated-bg-1"></div>
     <div className="animated-bg animated-bg-2"></div>
-
     <div className="relative z-10">
       <div className="loading-animation">
         <div></div>
@@ -59,8 +58,6 @@ const PageTransitions = () => {
 
     const timer = setTimeout(() => {
       document.body.classList.remove("page-transition");
-
-      // Reveal scroll-based animations
       requestAnimationFrame(() => {
         const scrollAnimateElements = document.querySelectorAll(".scroll-animate");
         scrollAnimateElements.forEach((el) => el.classList.add("is-visible"));
@@ -77,7 +74,7 @@ const PageTransitions = () => {
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
+      staleTime: 5 * 60 * 1000,
       retry: 1,
     },
   },
@@ -89,9 +86,8 @@ const App = () => {
       <BrowserRouter>
         <ScrollToTop />
         <PageTransitions />
-        <AnimationInitializer /> {/* Adds global effects like mouse follower, tech lines */}
+        <AnimationInitializer />
         <div className="min-h-screen flex flex-col relative">
-          {/* Global background tech effects */}
           <div className="fixed inset-0 pointer-events-none">
             <div className="tech-grid opacity-30"></div>
           </div>
@@ -110,8 +106,13 @@ const App = () => {
           </main>
           <Footer />
         </div>
+
+        {/* Toasts */}
         <Toaster />
         <Sonner />
+
+        {/* Vercel Speed Insights */}
+        <SpeedInsights />
       </BrowserRouter>
     </QueryClientProvider>
   );
