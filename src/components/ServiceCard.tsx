@@ -16,7 +16,7 @@ const ServiceCard = ({ title, description, icon, delay = 0, link }: ServiceCardP
   
   return (
     <div 
-      className="bg-white rounded-xl shadow-md p-6 hover-card overflow-hidden animate-fade-in"
+      className="bg-white rounded-xl shadow-md p-6 hover-card overflow-hidden animate-fade-in is-visible"
       style={{ animationDelay: `${delay}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

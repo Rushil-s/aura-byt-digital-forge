@@ -26,7 +26,18 @@ const App = () => {
       
       // Scroll to top on navigation
       window.scrollTo(0, 0);
+
+      // Ensure all sections are visible on page load
+      setTimeout(() => {
+        const scrollAnimateElements = document.querySelectorAll('.scroll-animate');
+        scrollAnimateElements.forEach(el => {
+          el.classList.add('is-visible');
+        });
+      }, 100);
     };
+    
+    // Run once on initial load
+    handleNavigation();
     
     // Add event listeners for route changes
     document.addEventListener('click', (e) => {

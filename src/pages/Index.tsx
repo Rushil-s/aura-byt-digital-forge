@@ -43,7 +43,7 @@ const Index = () => {
       <Hero />
       
       {/* Services Section */}
-      <section className="section-padding bg-gray-50 scroll-animate opacity-0 translate-y-8 transition-all duration-700">
+      <section className="section-padding bg-gray-50 scroll-animate is-visible">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our <span className="animated-gradient-text">Services</span></h2>
@@ -82,7 +82,7 @@ const Index = () => {
       <Portfolio />
       
       {/* Testimonials Section */}
-      <section className="section-padding bg-white relative scroll-animate opacity-0 translate-y-8 transition-all duration-700">
+      <section className="section-padding bg-white relative scroll-animate is-visible">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients <span className="animated-gradient-text">Say</span></h2>
