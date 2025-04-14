@@ -48,7 +48,7 @@ const Navbar = () => {
             <div className="h-12 w-12 relative overflow-visible transition-all duration-300 group-hover:scale-105">
               <div className="absolute -inset-1 bg-gradient-to-r from-aurabyt-purple/30 to-aurabyt-blue/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <img 
-                src="/lovable-uploads/eaf87533-e3ad-4c33-a3c3-01536c4d88e8.png" 
+                src="/lovable-uploads/d6af4d86-1665-461e-849c-56cbea314947.png" 
                 alt="AuraByt Logo" 
                 className="h-full w-full object-contain relative z-10" 
               />
