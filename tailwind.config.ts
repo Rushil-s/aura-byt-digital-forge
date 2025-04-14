@@ -96,6 +96,17 @@ export default {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' }
         },
+        'typewriter': {
+          '0%': { width: '100%' },
+          '25%': { width: '0%' },
+          '50%': { width: '0%' },
+          '75%': { width: '100%' },
+          '100%': { width: '100%' }
+        },
+        'blink': {
+          '0%, 100%': { borderColor: 'transparent' },
+          '50%': { borderColor: 'currentColor' }
+        }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -104,7 +115,9 @@ export default {
         'fade-out': 'fade-out 0.5s ease-out',
         'slide-up': 'slide-up 0.7s ease-out forwards',
         'pulse-slow': 'pulse-slow 3s infinite ease-in-out',
-        'float': 'float 6s infinite ease-in-out'
+        'float': 'float 6s infinite ease-in-out',
+        'typewriter': 'typewriter 4s steps(20) infinite',
+        'blink': 'blink 1s infinite'
 			},
       fontFamily: {
         'inter': ['Inter', 'sans-serif']
@@ -118,3 +131,4 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+

@@ -65,7 +65,7 @@ const Navbar = () => {
 
           <div className="hidden md:block">
             <NavigationMenu>
-              <NavigationMenuList>
+              <NavigationMenuList className="flex gap-1">
                 {navLinks.map(link => (
                   <NavigationMenuItem key={link.name}>
                     <Link 
