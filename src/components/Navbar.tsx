@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -41,10 +42,14 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="h-12 w-12 relative overflow-visible transition-all duration-300 group-hover:scale-105">
-              <div className="absolute -inset-1 bg-gradient-to-r from-aurabyt-purple/30 to-aurabyt-blue/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <img alt="AuraByt Logo" className="h-full w-full object-contain relative z-10" src="/lovable-uploads/63fbc197-0c87-4383-9aac-3173d458e0f4.png" />
+              <div className="absolute -inset-1 bg-blue-500/30 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <img 
+                alt="AuraByt Logo" 
+                className="h-full w-full object-contain relative z-10" 
+                src="/lovable-uploads/ac5d9c7f-14f3-4b3a-8f12-0e098fb33699.png" 
+              />
             </div>
-            <span className="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue">
+            <span className="font-bold text-xl text-foreground">
               AuraByt
             </span>
           </Link>

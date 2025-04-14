@@ -72,14 +72,14 @@ const Hero = () => {
           {/* Logo image with enhanced effects */}
           <div className="flex justify-center mb-6 relative">
             <div className="h-48 md:h-56 w-auto relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-aurabyt-purple/20 to-aurabyt-blue/20 blur-xl rounded-full animate-pulse-slow opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full animate-pulse-slow opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
               <img 
-                src="/lovable-uploads/d6af4d86-1665-461e-849c-56cbea314947.png" 
+                src="/lovable-uploads/ac5d9c7f-14f3-4b3a-8f12-0e098fb33699.png" 
                 alt="AuraByt Logo" 
                 className="h-full w-auto object-contain animate-float parallax-element relative z-10" 
                 data-speed="-0.03"
               />
-              <div className="absolute -inset-4 bg-gradient-to-r from-aurabyt-purple/5 to-aurabyt-blue/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 scale-105"></div>
+              <div className="absolute -inset-4 bg-blue-500/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 scale-105"></div>
             </div>
           </div>
           
