@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -32,7 +31,6 @@ const Navbar = () => {
     };
   }, []);
 
-  // Close mobile menu when changing routes
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
@@ -64,17 +62,12 @@ const Navbar = () => {
                 className="h-full w-full object-contain relative z-10" 
               />
             </div>
-            <span className="font-bold text-xl relative">
-              <span className={`bg-clip-text text-transparent bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue transition-all duration-300 ${
-                scrolled ? 'opacity-100' : 'opacity-100'
-              }`}>
-                AuraByt
-              </span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue group-hover:w-full transition-all duration-300"></span>
+            <span className="font-bold text-xl">
+              <span className="text-[#8B5CF6]">Aura</span>
+              <span className="text-[#3B82F6]">Byt</span>
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:block">
             <NavigationMenu>
               <NavigationMenuList>
@@ -108,7 +101,6 @@ const Navbar = () => {
             </NavigationMenu>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-foreground focus:outline-none"
             onClick={() => setIsOpen(!isOpen)}
@@ -117,7 +109,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden mt-4 py-4 bg-white/95 backdrop-blur-md rounded-lg shadow-lg">
             <nav className="flex flex-col space-y-4 px-4">
