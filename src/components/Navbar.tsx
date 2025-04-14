@@ -40,7 +40,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold gradient-text">AuraByt</span>
+            <img src="/lovable-uploads/ec4309c7-d899-4183-a36b-c7c5bf0211a6.png" alt="AuraByt Logo" className="h-8 md:h-10" />
           </Link>
 
           {/* Desktop Navigation */}
