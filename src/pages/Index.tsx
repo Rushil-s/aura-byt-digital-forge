@@ -78,8 +78,9 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Portfolio Section */}
+      {/* Portfolio Section - Commented out as requested
       <Portfolio />
+      */}
       
       {/* Testimonials Section */}
       <section className="section-padding bg-white relative scroll-animate is-visible">

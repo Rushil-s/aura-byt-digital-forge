@@ -171,7 +171,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
+      {/* Team Section - Commented out as requested 
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16 animate-on-scroll">
@@ -201,6 +201,7 @@ const About = () => {
           </div>
         </div>
       </section>
+      */}
 
       {/* Toronto Section */}
       <section className="py-20 bg-aurabyt-navy text-white relative">
