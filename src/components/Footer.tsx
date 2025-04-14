@@ -1,11 +1,8 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
-
 const Footer = () => {
-  return (
-    <footer className="bg-aurabyt-navy text-white pt-16 pb-8">
+  return <footer className="bg-aurabyt-navy text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -89,7 +86,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="mr-2 text-primary" />
-                <span className="text-gray-300">(123) 456-7890</span>
+                <span className="text-gray-300">(437) 925-2744</span>
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="mr-2 text-primary" />
@@ -105,8 +102,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
