@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Rushil-s/aura-byt-digital-forge/raw/main/public/assets/aurabytelogo.png" alt="AuraByt Logo" width="140" />
+  <img src="https://github.com/Rushil-s/aura-byt-digital-forge/raw/main/public/assets/aurabytlogo.png" alt="AuraByt Logo" width="140" />
 </p>
 
 <h1 align="center">⚡ AuraByt Digital Forge</h1>
