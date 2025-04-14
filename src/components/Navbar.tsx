@@ -63,7 +63,7 @@ const Navbar = () => {
               <img
                 alt="AuraByt Logo"
                 className="h-full w-full object-contain relative z-10"
-                src="/lovable-uploads/ac5d9c7f-14f3-4b3a-8f12-0e098fb33699.png"
+                src="/assets/aurabytlogo.png"
               />
             </div>
             <span className="font-bold text-xl animated-gradient-text">AuraByt</span>

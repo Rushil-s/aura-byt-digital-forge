@@ -129,7 +129,7 @@ const Hero = () => {
               <div className="logo-glow"></div>
               <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full opacity-60 group-hover:opacity-80 transition-opacity duration-500 hover-glow"></div>
               <img 
-                src="/lovable-uploads/ac5d9c7f-14f3-4b3a-8f12-0e098fb33699.png" 
+                src="/assets/aurabytlogo.png" 
                 alt="AuraByt Logo" 
                 className="h-full w-auto object-contain relative z-10" 
               />
