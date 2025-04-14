@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -65,7 +64,7 @@ const Services = () => {
         {
           icon: <Search size={36} />,
           title: 'SEO Optimization',
-          description: 'Improve your website's visibility in search engines and drive organic traffic.',
+          description: "Improve your website's visibility in search engines and drive organic traffic.",
           benefits: [
             'Keyword research and strategy',
             'On-page and off-page optimization',
