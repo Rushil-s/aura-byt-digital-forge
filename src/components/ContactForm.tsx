@@ -3,6 +3,7 @@ import React, { useState, useCallback, memo } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useForm, ValidationError } from '@formspree/react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -23,17 +24,23 @@ const ContactForm = () => {
   );
 
   // Show toast once after successful submission
-  if (state.succeeded) {
-    toast({
-      title: "Message sent!",
-      description: "Redirecting...",
-      duration: 3000,
-    });
-  
-    setTimeout(() => {
-      navigate("/thank-you");
-    }, 1500);
-  }   
+
+  useEffect(() => {
+    if (state.succeeded) {
+      toast({
+        title: "Message sent!",
+        description: "Redirecting...",
+        duration: 3000,
+      });
+
+      const timer = setTimeout(() => {
+        navigate("/thank-you", { state: { fromContactForm: true } });
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [state.succeeded, navigate, toast]);
+
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
