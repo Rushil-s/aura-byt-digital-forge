@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -49,7 +50,7 @@ const Navbar = () => {
                 src="/lovable-uploads/ac5d9c7f-14f3-4b3a-8f12-0e098fb33699.png" 
               />
             </div>
-            <span className="font-bold text-xl text-foreground">
+            <span className="font-bold text-xl animated-gradient-text">
               AuraByt
             </span>
           </Link>
@@ -64,7 +65,7 @@ const Navbar = () => {
                     </Link>
                   </NavigationMenuItem>)}
                 <NavigationMenuItem>
-                  <Link to="/contact" className="relative px-6 py-3 text-white font-medium rounded-lg overflow-hidden group">
+                  <Link to="/contact" className="relative px-6 py-3 text-white font-medium rounded-lg overflow-hidden group btn-hover-shine">
                     <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue"></span>
                     <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-indigo to-aurabyt-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                     <span className="relative">Get Started</span>
@@ -85,7 +86,7 @@ const Navbar = () => {
                   {link.name}
                   <span className="absolute bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                 </Link>)}
-              <Link to="/contact" className="relative px-6 py-3 text-white font-medium rounded-lg overflow-hidden group mt-2">
+              <Link to="/contact" className="relative px-6 py-3 text-white font-medium rounded-lg overflow-hidden group mt-2 btn-hover-shine">
                 <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue"></span>
                 <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-indigo to-aurabyt-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 <span className="relative text-center block">Get Started</span>

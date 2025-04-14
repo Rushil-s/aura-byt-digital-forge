@@ -40,8 +40,27 @@ const Hero = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     
+    // Add scroll animation
+    const animateOnScroll = () => {
+      const scrollElements = document.querySelectorAll('.scroll-animate');
+      
+      scrollElements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        const elementBottom = el.getBoundingClientRect().bottom;
+        const isVisible = elementTop < window.innerHeight && elementBottom > 0;
+        
+        if (isVisible) {
+          el.classList.add('is-visible');
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Initial check on load
+    
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', animateOnScroll);
     };
   }, []);
 
@@ -62,9 +81,17 @@ const Hero = () => {
         <div className="absolute bottom-1/3 right-1/3 w-6 h-6 rounded-full bg-aurabyt-blue/20 animate-ping animation-delay-500 parallax-element" data-speed="0.06"></div>
         <div className="absolute top-1/4 left-1/2 w-4 h-4 rounded-full bg-aurabyt-indigo/20 animate-ping animation-delay-700 parallax-element" data-speed="-0.04"></div>
         
+        {/* Enhanced floating particles */}
+        <div className="absolute top-1/3 left-1/5 w-3 h-3 bg-aurabyt-purple/40 rounded-full animate-float animation-delay-200 parallax-element" data-speed="0.08"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-5 h-5 bg-aurabyt-blue/40 rounded-full animate-float animation-delay-400 parallax-element" data-speed="-0.07"></div>
+        <div className="absolute top-2/3 right-1/6 w-4 h-4 bg-aurabyt-indigo/40 rounded-full animate-float animation-delay-600 parallax-element" data-speed="0.05"></div>
+        
         {/* Pixelpoint-inspired gradient beams */}
         <div className="absolute top-0 left-1/4 w-1/3 h-1/2 bg-gradient-radial from-aurabyt-purple/10 to-transparent opacity-60 blur-2xl parallax-element" data-speed="0.01"></div>
         <div className="absolute bottom-0 right-1/4 w-1/2 h-1/3 bg-gradient-radial from-aurabyt-blue/10 to-transparent opacity-50 blur-2xl parallax-element" data-speed="-0.02"></div>
+        
+        {/* Enhanced grain effect */}
+        <div className="absolute inset-0 grain opacity-20"></div>
       </div>
 
       <div className="container mx-auto px-4 z-10">
@@ -80,6 +107,9 @@ const Hero = () => {
                 data-speed="-0.03"
               />
               <div className="absolute -inset-4 bg-blue-500/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 scale-105"></div>
+              
+              {/* Enhanced glow effect */}
+              <div className="absolute inset-0 rounded-full bg-blue-500/10 blur-xl animate-pulse-slow animation-delay-200"></div>
             </div>
           </div>
           
@@ -98,19 +128,19 @@ const Hero = () => {
                 <span className="char-container inline-block">
                   <span className="char">a</span>
                 </span>
-                <span className="char-container inline-block text-gradient-start">
-                  <span className="char font-bold text-aurabyt-purple">B</span>
+                <span className="char-container inline-block">
+                  <span className="char animated-gradient-text">B</span>
                 </span>
-                <span className="char-container inline-block text-gradient-mid">
-                  <span className="char font-bold text-aurabyt-indigo">y</span>
+                <span className="char-container inline-block">
+                  <span className="char animated-gradient-text">y</span>
                 </span>
-                <span className="char-container inline-block text-gradient-end">
-                  <span className="char font-bold text-aurabyt-blue">t</span>
+                <span className="char-container inline-block">
+                  <span className="char animated-gradient-text">t</span>
                 </span>
               </div>
             </h1>
             <p className="text-xl md:text-2xl animate-fade-in animation-delay-500 mt-2">
-              Transforming Ideas into <span className="gradient-text font-medium">Digital Reality</span>
+              Transforming Ideas into <span className="animated-gradient-text font-medium">Digital Reality</span>
             </p>
           </div>
           
@@ -122,7 +152,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in animation-delay-900">
             <Link 
               to="/services" 
-              className="relative px-8 py-4 overflow-hidden group rounded-lg"
+              className="relative px-8 py-4 overflow-hidden group rounded-lg btn-hover-shine"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue transition-all duration-300 group-hover:scale-[1.02]"></span>
               <span className="relative flex items-center justify-center text-white font-medium">
@@ -135,6 +165,14 @@ const Hero = () => {
             >
               Get In Touch <span className="ml-1 opacity-0 w-0 group-hover:opacity-100 group-hover:w-5 transition-all duration-300">→</span>
             </Link>
+          </div>
+          
+          {/* Enhanced scroll indicator */}
+          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce animation-delay-900">
+            <div className="w-6 h-10 rounded-full border-2 border-gray-400 flex justify-center pt-1">
+              <div className="w-1 h-3 bg-gray-400 rounded-full animate-pulse-slow"></div>
+            </div>
+            <span className="text-sm text-gray-500 mt-2">Scroll Down</span>
           </div>
         </div>
       </div>
