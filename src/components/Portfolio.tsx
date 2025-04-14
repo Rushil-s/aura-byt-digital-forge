@@ -37,10 +37,10 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({ title, category, imageUrl
   return (
     <div 
       ref={itemRef}
-      className="group relative overflow-hidden rounded-lg hover-card opacity-0 translate-y-8 transition-all duration-700"
+      className="group relative overflow-hidden rounded-lg hover-card opacity-0 translate-y-8 transition-all duration-700 parallax-card"
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-64 overflow-hidden parallax-card-inner">
         {/* Gradient border effect */}
         <div className="absolute inset-0 p-0.5 rounded-lg">
           <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-aurabyt-purple/40 via-aurabyt-indigo/40 to-aurabyt-blue/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -74,8 +74,13 @@ const Portfolio = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          const items = entry.target.querySelectorAll('.is-visible');
-          items.forEach(item => item.classList.add('is-visible'));
+          entry.target.classList.add('is-visible');
+          const items = entry.target.querySelectorAll('.hover-card');
+          items.forEach((item, index) => {
+            setTimeout(() => {
+              item.classList.add('is-visible');
+            }, 100 * index);
+          });
         }
       },
       { threshold: 0.1 }
@@ -89,6 +94,36 @@ const Portfolio = () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
+    };
+  }, []);
+
+  // Mouse parallax effect for portfolio cards
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      requestAnimationFrame(() => {
+        const cards = document.querySelectorAll('.parallax-card');
+        cards.forEach((card: Element) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const moveX = (x - centerX) / 20;
+          const moveY = (y - centerY) / 20;
+          
+          const inner = card.querySelector('.parallax-card-inner') as HTMLElement;
+          if (inner && rect.top < window.innerHeight && rect.bottom > 0) {
+            inner.style.transform = `rotateY(${moveX}deg) rotateX(${-moveY}deg) translateZ(10px)`;
+          }
+        });
+      });
+    };
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
@@ -124,14 +159,14 @@ const Portfolio = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-16 relative overflow-hidden">
+    <section ref={sectionRef} className="py-16 relative overflow-hidden scroll-animate opacity-0 translate-y-8 transition-all duration-700">
       {/* Subtle background patterns */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50/80 to-white"></div>
       <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
       
       {/* Animated gradient orbs */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/2 bg-gradient-radial from-aurabyt-purple/5 to-transparent opacity-70 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-radial from-aurabyt-blue/5 to-transparent opacity-70 blur-3xl"></div>
+      <div className="absolute top-0 right-0 w-1/3 h-1/2 bg-gradient-radial from-aurabyt-purple/5 to-transparent opacity-70 blur-3xl animate-pulse-slow"></div>
+      <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-radial from-aurabyt-blue/5 to-transparent opacity-70 blur-3xl animate-pulse-slow" style={{ animationDelay: '1.5s' }}></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">

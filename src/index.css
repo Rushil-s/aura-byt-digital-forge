@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -185,6 +186,55 @@
   .text-reveal-delay-3 {
     animation-delay: 0.3s;
   }
+
+  /* Page transitions */
+  .page-transition {
+    animation: page-fade-out 0.3s ease forwards;
+  }
+
+  @keyframes page-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  /* Mouse follower effect */
+  .mouse-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,92,246,0.3) 0%, rgba(139,92,246,0) 70%);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out, width 0.2s ease, height 0.2s ease;
+    mix-blend-mode: screen;
+  }
+
+  /* Scroll progress bar */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #8B5CF6, #3B82F6);
+    z-index: 1000;
+  }
+
+  /* 3D Card effect */
+  .card-3d {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+  }
+
+  .card-3d-content {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .card-3d:hover .card-3d-content {
+    transform: translateZ(20px) rotateX(5deg) rotateY(5deg);
+  }
 }
 
 /* Animation delay classes */
@@ -360,4 +410,48 @@
 @keyframes blink {
   0%, 100% { border-color: transparent; }
   50% { border-color: currentColor; }
+}
+
+/* Additional fade animation variants */
+@keyframes fade-down {
+  0% { transform: translateY(-10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fade-left {
+  0% { transform: translateX(10px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fade-right {
+  0% { transform: translateX(-10px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.animate-fade-down {
+  animation: fade-down 0.5s ease-out forwards;
+}
+
+.animate-fade-left {
+  animation: fade-left 0.5s ease-out forwards;
+}
+
+.animate-fade-right {
+  animation: fade-right 0.5s ease-out forwards;
+}
+
+/* Prefer reduced motion */
+@media (prefers-reduced-motion) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-float, .floating, .animate-pulse-slow,
+  .grain::before, .btn-hover-shine::after,
+  .animated-gradient-text {
+    animation: none !important;
+  }
 }

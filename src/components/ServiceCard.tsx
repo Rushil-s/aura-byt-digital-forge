@@ -16,12 +16,12 @@ const ServiceCard = ({ title, description, icon, delay = 0, link }: ServiceCardP
   
   return (
     <div 
-      className="bg-white rounded-xl shadow-md p-6 hover-card overflow-hidden"
+      className="bg-white rounded-xl shadow-md p-6 hover-card overflow-hidden animate-fade-in"
       style={{ animationDelay: `${delay}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-6 text-primary">
+      <div className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-6 text-primary transform transition-all duration-300 group-hover:scale-110">
         {icon}
       </div>
       <h3 className="text-xl font-bold mb-3">{title}</h3>

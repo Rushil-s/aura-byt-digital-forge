@@ -11,7 +11,7 @@ const Index = () => {
   const sectionRefs = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
-    // Initialize IntersectionObserver
+    // Initialize IntersectionObserver with a callback that adds the is-visible class
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -20,7 +20,7 @@ const Index = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
     );
 
     // Observe all scroll-animate elements

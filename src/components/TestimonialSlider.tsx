@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 
 interface Testimonial {
@@ -45,43 +45,85 @@ const testimonials: Testimonial[] = [
 const TestimonialSlider = () => {
   const [active, setActive] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
+  const [animating, setAnimating] = useState(false);
   const max = testimonials.length - 1;
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
     
     if (autoplay) {
       interval = setInterval(() => {
-        setActive(prevActive => (prevActive === max ? 0 : prevActive + 1));
+        setAnimating(true);
+        setTimeout(() => {
+          setActive(prevActive => (prevActive === max ? 0 : prevActive + 1));
+          setAnimating(false);
+        }, 300);
       }, 5000);
     }
     
     return () => clearInterval(interval);
   }, [autoplay, max]);
 
+  // Add mouse parallax effect to testimonial cards
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!sliderRef.current) return;
+      
+      const { left, top, width, height } = sliderRef.current.getBoundingClientRect();
+      const x = (e.clientX - left) / width - 0.5;
+      const y = (e.clientY - top) / height - 0.5;
+      
+      const cards = sliderRef.current.querySelectorAll('.testimonial-card');
+      cards.forEach((card) => {
+        const cardEl = card as HTMLElement;
+        cardEl.style.transform = `perspective(1000px) rotateY(${x * 5}deg) rotateX(${y * -5}deg) translateZ(10px)`;
+      });
+    };
+    
+    const sliderElement = sliderRef.current;
+    if (sliderElement) {
+      sliderElement.addEventListener('mousemove', handleMouseMove);
+    }
+    
+    return () => {
+      if (sliderElement) {
+        sliderElement.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
+  }, []);
+
   const next = () => {
     setAutoplay(false);
-    setActive(prevActive => (prevActive === max ? 0 : prevActive + 1));
+    setAnimating(true);
+    setTimeout(() => {
+      setActive(prevActive => (prevActive === max ? 0 : prevActive + 1));
+      setAnimating(false);
+    }, 300);
   };
 
   const prev = () => {
     setAutoplay(false);
-    setActive(prevActive => (prevActive === 0 ? max : prevActive - 1));
+    setAnimating(true);
+    setTimeout(() => {
+      setActive(prevActive => (prevActive === 0 ? max : prevActive - 1));
+      setAnimating(false);
+    }, 300);
   };
 
   return (
-    <div className="w-full overflow-hidden py-10">
+    <div ref={sliderRef} className="w-full overflow-hidden py-10">
       <div className="relative">
         <div 
-          className="flex transition-transform duration-500 ease-out"
+          className={`flex transition-transform duration-500 ease-out ${animating ? 'opacity-0' : 'opacity-100'}`}
           style={{ transform: `translateX(-${active * 100}%)` }}
         >
           {testimonials.map((testimonial) => (
             <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-              <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8">
+              <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 testimonial-card transition-transform duration-300">
                 <div className="flex flex-col md:flex-row md:items-center">
                   <div className="mb-6 md:mb-0 md:mr-8">
-                    <div className="w-20 h-20 rounded-full overflow-hidden">
+                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary/20">
                       <img 
                         src={testimonial.image} 
                         alt={testimonial.name} 
@@ -95,15 +137,14 @@ const TestimonialSlider = () => {
                         <Star 
                           key={i}
                           size={18}
-                          fill={i < testimonial.rating ? "#8B5CF6" : "none"}
-                          color={i < testimonial.rating ? "#8B5CF6" : "#CBD5E1"}
+                          className={`${i < testimonial.rating ? 'text-primary fill-primary' : 'text-gray-300'} transition-all duration-300 hover:scale-110`}
                         />
                       ))}
                     </div>
                     <blockquote className="text-lg italic text-gray-700 mb-6">
                       "{testimonial.content}"
                     </blockquote>
-                    <div>
+                    <div className="animate-fade-in">
                       <div className="font-bold">{testimonial.name}</div>
                       <div className="text-sm text-gray-600">{testimonial.position}, {testimonial.company}</div>
                     </div>
@@ -117,16 +158,16 @@ const TestimonialSlider = () => {
         {/* Controls */}
         <div className="absolute inset-0 flex items-center justify-between pointer-events-none">
           <button 
-            className="ml-4 bg-white/80 rounded-full p-2 shadow-md pointer-events-auto hover:bg-white transition-colors"
+            className="ml-4 bg-white/80 rounded-full p-2 shadow-md pointer-events-auto hover:bg-white transition-colors transform hover:scale-110 transition-transform duration-300"
             onClick={prev}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={24} className="text-primary" />
           </button>
           <button 
-            className="mr-4 bg-white/80 rounded-full p-2 shadow-md pointer-events-auto hover:bg-white transition-colors"
+            className="mr-4 bg-white/80 rounded-full p-2 shadow-md pointer-events-auto hover:bg-white transition-colors transform hover:scale-110 transition-transform duration-300"
             onClick={next}
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={24} className="text-primary" />
           </button>
         </div>
         
@@ -135,7 +176,7 @@ const TestimonialSlider = () => {
           {testimonials.map((_, idx) => (
             <button
               key={idx}
-              className={`w-2.5 h-2.5 rounded-full transition-colors ${idx === active ? 'bg-primary' : 'bg-gray-300'}`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${idx === active ? 'bg-primary w-6' : 'bg-gray-300 hover:bg-primary/50'}`}
               onClick={() => {
                 setAutoplay(false);
                 setActive(idx);

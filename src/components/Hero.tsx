@@ -16,6 +16,7 @@ const Hero = () => {
       logoElement.classList.add('animate-float');
     }
 
+    // Set up text rotation interval
     const interval = setInterval(() => {
       setIsAnimating(true);
       setTimeout(() => {
@@ -33,7 +34,18 @@ const Hero = () => {
     }
 
     return () => clearInterval(interval);
-  }, [businessTexts.length, currentTextIndex]);
+  }, [businessTexts.length]);
+
+  // Update character animations whenever the current text changes
+  useEffect(() => {
+    const chars = textRef.current?.querySelectorAll('.char');
+    if (chars) {
+      chars.forEach((char) => char.classList.remove('visible'));
+      chars.forEach((char, i) => {
+        setTimeout(() => char.classList.add('visible'), 50 * i);
+      });
+    }
+  }, [currentTextIndex]);
 
   return (
     <section className="relative min-h-[calc(100vh-5rem)] flex items-center py-16 overflow-hidden">
@@ -50,7 +62,7 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="mb-6">
+          <div className="mb-6 animate-fade-in">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold animated-gradient-text mb-4">
               AuraByt
             </h1>
@@ -67,12 +79,12 @@ const Hero = () => {
             </p>
           </div>
           
-          <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto animate-fade-in animation-delay-200">
             <span className="animated-gradient-text">AuraByt</span> is a Toronto-based IT consultancy specializing in web development, 
             digital marketing, and IT support. We help businesses innovate and grow in the digital landscape.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in animation-delay-300">
             <Link 
               to="/services" 
               className="relative px-8 py-4 overflow-hidden group bg-gradient-to-r from-aurabyt-purple to-aurabyt-blue rounded-lg text-white font-medium hover:opacity-90 transition-all btn-hover-shine"

@@ -105,6 +105,18 @@ export default {
         'blink': {
           '0%, 100%': { borderColor: 'transparent' },
           '50%': { borderColor: 'currentColor' }
+        },
+        'shine': {
+          '0%': { backgroundPosition: '200% center' },
+          '100%': { backgroundPosition: '-200% center' }
+        },
+        'bounce-sm': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-4px)' }
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
         }
 			},
 			animation: {
@@ -116,7 +128,10 @@ export default {
         'pulse-slow': 'pulse-slow 3s infinite ease-in-out',
         'float': 'float 6s infinite ease-in-out',
         'typewriter': 'typewriter 4s steps(20) infinite',
-        'blink': 'blink 1s infinite'
+        'blink': 'blink 1s infinite',
+        'shine': 'shine 3s linear infinite',
+        'bounce-sm': 'bounce-sm 2s infinite ease-in-out',
+        'spin-slow': 'spin-slow 8s linear infinite'
 			},
       fontFamily: {
         'inter': ['Inter', 'sans-serif']
