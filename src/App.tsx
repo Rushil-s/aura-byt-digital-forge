@@ -20,7 +20,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-    <div className="tech-grid"></div>
+    {/* <div className="tech-grid"></div> */}
     <div className="animated-bg animated-bg-1"></div>
     <div className="animated-bg animated-bg-2"></div>
     <div className="relative z-10">
@@ -90,7 +90,7 @@ const AppRoutes = () => {
 
       <div className="min-h-screen flex flex-col relative">
         <div className="fixed inset-0 pointer-events-none">
-          <div className="tech-grid opacity-30"></div>
+          {/* <div className="tech-grid opacity-30"></div> */}
         </div>
 
         <Navbar />

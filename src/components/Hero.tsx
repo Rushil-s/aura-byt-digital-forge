@@ -96,7 +96,7 @@ const Hero = () => {
   return (
     <section ref={heroRef} className="relative min-h-[calc(100vh-5rem)] flex items-center py-16 overflow-hidden">
       {/* Mouse follower */}
-      <div ref={mouseFollowerRef} className="mouse-follower"></div>
+      {/* <div ref={mouseFollowerRef} className="mouse-follower"></div> */}
       
       {/* Animated background elements */}
       <div className="animated-bg animated-bg-1"></div>
@@ -104,7 +104,7 @@ const Hero = () => {
       <div className="animated-bg animated-bg-3"></div>
       
       {/* Tech grid background */}
-      <div className="tech-grid"></div>
+      {/* <div className="tech-grid"></div> */}
       
       {/* Particles */}
       {particles.map(particle => (
