@@ -206,8 +206,9 @@ const Hero = () => {
         <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
         <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-20"></div>
-        <div className="absolute inset-0 grain"></div>
+        {/* <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-20"></div> */}
+        {/* <div className="absolute inset-0 grain"></div> */}
+        <div className="absolute inset-0 -z-10 animate-gradient bg-gradient-to-br from-aurabyt-purple/10 via-aurabyt-blue/10 to-white/20 blur-3xl" />
       </div>
     </section>
   );
