@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+
 const Footer = () => {
   return <footer className="bg-aurabyt-navy text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
@@ -12,16 +14,16 @@ const Footer = () => {
               Digital innovation consultancy specializing in web development, digital marketing, and IT support.
             </p>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://www.facebook.com/aurabyt.inc" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="https://twitter.com" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://twitter.com/aurabyt_inc" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors">
                 <Twitter size={20} />
               </a>
-              <a href="https://instagram.com" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://www.instagram.com/aurabyt.inc" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="https://linkedin.com" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://www.linkedin.com/company/aurabyt" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -104,4 +106,5 @@ const Footer = () => {
       </div>
     </footer>;
 };
+
 export default Footer;

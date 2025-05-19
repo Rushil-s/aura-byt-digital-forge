@@ -2,10 +2,9 @@
 // src/pages/Index.tsx
 import React, { useEffect } from 'react';
 import Hero from '@/components/Hero';
-import ServiceCard from '@/components/ServiceCard';
-import { Code, BarChart3, ServerCog } from 'lucide-react';
 import SEO from '@/components/SEO';
 import ProductCard from '@/components/ProductCard';
+import { Code, BarChart3, ServerCog } from 'lucide-react';
 
 const Index = () => {
   useEffect(() => {
@@ -15,30 +14,6 @@ const Index = () => {
       el.classList.add('is-visible');
     });
   }, []);
-
-  const services = [
-    {
-      title: "Software & Web Development",
-      description: "Custom web applications, responsive websites, and software solutions that drive business growth and efficiency.",
-      icon: <Code size={32} />,
-      link: "/services",
-      delay: 100
-    },
-    {
-      title: "Digital Marketing",
-      description: "Strategic digital marketing campaigns that increase your brand visibility and drive meaningful customer engagement.",
-      icon: <BarChart3 size={32} />,
-      link: "/services",
-      delay: 200
-    },
-    {
-      title: "IT Support & Infrastructure",
-      description: "Reliable IT support and infrastructure solutions that keep your business running smoothly and securely.",
-      icon: <ServerCog size={32} />,
-      link: "/services",
-      delay: 300
-    }
-  ];
 
   const products = [
     {
@@ -64,11 +39,6 @@ const Index = () => {
     {
       title: "TheCricLine",
       description: "Fantasy cricket & prediction hub—dynamic match data, real-time scorecards, and community leaderboards for true cricket enthusiasts.",
-      link: "/services"
-    },
-    {
-      title: "AuraByt",
-      description: "Our flagship IT consultancy & digital-forge: software development, web design, digital marketing, and infrastructure services, all under one roof.",
       link: "/services"
     },
     {
@@ -128,27 +98,49 @@ const Index = () => {
       {/* Hero Section */}
       <Hero />
       
-      {/* Services Section - Made visible by default */}
+      {/* Our Professional Services Section */}
       <section className="section-padding bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our <span className="animated-gradient-text">Services</span></h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our <span className="animated-gradient-text">Core Services</span></h2>
             <p className="text-gray-600">
-              We provide comprehensive digital solutions tailored to your business needs.
+              We deliver comprehensive enterprise solutions tailored to your business requirements
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <ServiceCard 
-                key={index}
-                title={service.title}
-                description={service.description}
-                icon={service.icon}
-                link={service.link}
-                delay={service.delay}
-              />
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg shadow-md p-8 border-t-4 border-aurabyt-purple">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                <Code size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Software & Web Development</h3>
+              <p className="text-gray-600 mb-6">Custom web applications, responsive websites, and enterprise software solutions that drive business growth and operational efficiency.</p>
+              <a href="/services" className="text-primary font-medium flex items-center hover:underline">
+                Learn more <ArrowRight size={16} className="ml-2" />
+              </a>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-md p-8 border-t-4 border-aurabyt-blue">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                <BarChart3 size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Digital Marketing</h3>
+              <p className="text-gray-600 mb-6">Strategic digital marketing campaigns, SEO optimization, and data-driven solutions that increase brand visibility and drive meaningful customer engagement.</p>
+              <a href="/services" className="text-primary font-medium flex items-center hover:underline">
+                Learn more <ArrowRight size={16} className="ml-2" />
+              </a>
+            </div>
+            
+            <div className="bg-white rounded-lg shadow-md p-8 border-t-4 border-primary">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
+                <ServerCog size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-3">IT Support & Infrastructure</h3>
+              <p className="text-gray-600 mb-6">Reliable enterprise-grade IT support, cloud services, and infrastructure solutions that keep your business secure and operations running smoothly.</p>
+              <a href="/services" className="text-primary font-medium flex items-center hover:underline">
+                Learn more <ArrowRight size={16} className="ml-2" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -157,9 +149,9 @@ const Index = () => {
       <section className="section-padding bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our <span className="animated-gradient-text">Products & Services</span></h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our <span className="animated-gradient-text">Products Portfolio</span></h2>
             <p className="text-gray-600">
-              AuraByt offers a diverse range of digital products and services to accelerate your business growth.
+              Innovative digital solutions designed to solve complex business challenges
             </p>
           </div>
           
