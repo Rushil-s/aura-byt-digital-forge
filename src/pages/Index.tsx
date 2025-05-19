@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import Hero from '@/components/Hero';
 import ServiceCard from '@/components/ServiceCard';
-import TestimonialSlider from '@/components/TestimonialSlider';
 import { Code, BarChart3, ServerCog } from 'lucide-react';
 import SEO from '@/components/SEO';
 
@@ -49,7 +48,7 @@ const Index = () => {
       {/* Hero Section */}
       <Hero />
       
-      {/* Services Section - Made visible by default */}
+      {/* Services Section */}
       <section className="section-padding bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
@@ -71,19 +70,6 @@ const Index = () => {
               />
             ))}
           </div>
-        </div>
-      </section>
-      
-      {/* Testimonials Section - Made visible by default */}
-      <section className="section-padding bg-white relative">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients <span className="animated-gradient-text">Say</span></h2>
-            <p className="text-gray-600">
-              Don't take our word for it. Here's what our clients have to say about our services.
-            </p>
-          </div>
-          <TestimonialSlider />
         </div>
       </section>
     </div>
