@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
 import ProductCard from '@/components/ProductCard';
-import { Code, BarChart3, ServerCog } from 'lucide-react';
+import { Code, BarChart3, ServerCog, ArrowRight } from 'lucide-react';
 
 const Index = () => {
   useEffect(() => {
