@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,7 +70,7 @@ const Navbar = () => {
             <span className="font-bold text-xl animated-gradient-text">AuraByt</span>
           </Link>
 
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 items-center">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -83,6 +84,7 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            <ThemeToggle />
           </nav>
 
           <button
@@ -116,6 +118,7 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
+              <ThemeToggle />
             </nav>
           </div>
         )}
