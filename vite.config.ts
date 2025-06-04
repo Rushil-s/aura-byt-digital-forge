@@ -10,9 +10,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      plugins: [
-        ["@swc/plugin-emotion", {}],
-      ],
+      plugins: [["@swc/plugin-emotion", {}]],
     }),
     mode === "development" && componentTagger(),
   ].filter(Boolean),
@@ -35,5 +33,10 @@ export default defineConfig(({ mode }) => ({
   },
   optimizeDeps: {
     include: ["react", "react-dom", "react-router-dom"],
+  },
+  css: {
+    postcss: {
+      plugins: [require("tailwindcss"), require("autoprefixer")],
+    },
   },
 }));
