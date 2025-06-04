@@ -4,37 +4,65 @@
 
 @layer base {
   :root {
-    --background: 220 33% 98%;
-    --foreground: 222 47% 11%;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
     
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 240 10% 3.9%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 240 10% 3.9%;
     
-    --primary: 250 95% 64%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
     
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
     
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
     
-    --accent: 224 82% 56%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
     
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222 84% 4.9%;
-    
-    --radius: 1rem;
+    --destructive-foreground: 0 0% 98%;
 
-    scroll-behavior: smooth;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
   }
 
   * {
@@ -57,30 +85,22 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient dark:from-white dark:via-primary dark:to-white;
   }
 
   .btn-primary {
-    @apply px-6 py-3 bg-primary text-white font-medium rounded-xl 
+    @apply px-6 py-3 bg-primary text-primary-foreground font-medium rounded-xl 
            hover:opacity-90 transition-all duration-300 
-           hover:shadow-lg hover:shadow-primary/20
+           hover:shadow-lg hover:shadow-primary/20 dark:hover:shadow-white/10
            active:scale-[0.98] disabled:opacity-50
            relative overflow-hidden isolation-auto;
   }
 
-  .btn-primary::before {
-    @apply content-[''] absolute inset-0 -z-10
-           bg-gradient-to-r from-primary via-accent to-primary
-           opacity-0 transition-opacity duration-300;
-  }
-
-  .btn-primary:hover::before {
-    @apply opacity-100;
-  }
-
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1
-           hover:shadow-primary/10 rounded-xl bg-white;
+    @apply transition-all duration-300 
+           hover:shadow-xl hover:-translate-y-1
+           hover:shadow-primary/10 dark:hover:shadow-white/5 
+           rounded-xl bg-card;
   }
 
   .section-padding {
@@ -94,6 +114,7 @@
   .animated-gradient-bg {
     @apply absolute inset-0 -z-10 bg-[size:400%_400%]
            bg-gradient-to-br from-primary/30 via-accent/20 to-background
+           dark:from-white/10 dark:via-primary/5 dark:to-background
            blur-3xl opacity-50 animate-gradient;
   }
 }
@@ -129,14 +150,14 @@
 }
 
 /* Modern scrollbar styling */
-::-webkit-scrollbar {
+.dark ::-webkit-scrollbar {
   @apply w-2;
 }
 
-::-webkit-scrollbar-track {
-  @apply bg-muted rounded-full;
+.dark ::-webkit-scrollbar-track {
+  @apply bg-muted/50 rounded-full;
 }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-primary/50 rounded-full hover:bg-primary/70 transition-colors;
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full hover:bg-primary/30 transition-colors;
 }
