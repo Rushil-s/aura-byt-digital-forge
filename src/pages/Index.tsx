@@ -31,21 +31,18 @@ const Index = () => {
       title: "Software Development",
       description: "Enterprise-grade applications, cloud-native solutions, and scalable architectures built with cutting-edge technologies.",
       features: ["React & Next.js", "Node.js & Python", "Cloud Architecture", "Microservices"],
-      color: "from-blue-500 to-cyan-500"
     },
     {
       icon: <BarChart3 size={32} />,
       title: "Digital Transformation",
       description: "Strategic digital initiatives, process automation, and data-driven solutions that accelerate business growth.",
       features: ["Process Automation", "Data Analytics", "Digital Strategy", "Performance Optimization"],
-      color: "from-purple-500 to-pink-500"
     },
     {
       icon: <ServerCog size={32} />,
       title: "Infrastructure & Security",
       description: "Robust cloud infrastructure, cybersecurity frameworks, and 24/7 monitoring for enterprise-level reliability.",
       features: ["Cloud Migration", "Security Audits", "DevOps", "Monitoring"],
-      color: "from-green-500 to-emerald-500"
     }
   ];
 
@@ -102,11 +99,11 @@ const Index = () => {
       <Hero />
       
       {/* Services Section */}
-      <section className="section-padding bg-gradient-to-br from-background via-card/20 to-background relative overflow-hidden">
+      <section className="section-padding bg-background relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl rounded-full" />
-          <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 blur-3xl rounded-full" />
+          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full" />
+          <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-primary/5 blur-3xl rounded-full" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -131,12 +128,9 @@ const Index = () => {
                 className="group relative scroll-animate opacity-0"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <div className="card-modern h-full group">
-                  {/* Gradient background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`} />
-                  
+                <div className="professional-card h-full group">
                   <div className="relative z-10">
-                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-8 text-white group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                    <div className="w-20 h-20 rounded-lg bg-primary/10 flex items-center justify-center mb-8 text-primary group-hover:scale-110 transition-transform duration-300">
                       {service.icon}
                     </div>
                     
@@ -159,7 +153,7 @@ const Index = () => {
                     
                     <a 
                       href="/services" 
-                      className="inline-flex items-center text-primary font-semibold hover:text-accent transition-colors group/link text-lg"
+                      className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors group/link text-lg"
                     >
                       Learn more 
                       <ArrowRight size={20} className="ml-3 group-hover/link:translate-x-1 transition-transform" />
@@ -188,10 +182,10 @@ const Index = () => {
             {technologies.map((tech, index) => (
               <div 
                 key={index}
-                className="group p-6 rounded-2xl bg-card/30 backdrop-blur-sm border border-border/50 hover:bg-card/50 hover:border-primary/30 transition-all duration-300 hover:scale-105 text-center scroll-animate opacity-0"
+                className="group p-6 rounded-lg bg-card/30 backdrop-blur-sm border border-border hover:bg-card/50 hover:border-primary/30 transition-all duration-300 hover:scale-105 text-center scroll-animate opacity-0"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="flex items-center justify-center mb-4 text-primary group-hover:text-accent transition-colors duration-300">
+                <div className="flex items-center justify-center mb-4 text-primary group-hover:text-primary/80 transition-colors duration-300">
                   {tech.icon}
                 </div>
                 <div className="text-sm font-medium text-foreground">{tech.name}</div>
@@ -205,7 +199,7 @@ const Index = () => {
       <section className="section-padding bg-background relative">
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto mb-20 scroll-animate opacity-0">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-accent/10 text-accent rounded-full text-sm font-medium mb-8 border border-accent/20">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20">
               <Zap size={16} />
               Innovation Portfolio
             </div>
@@ -237,21 +231,21 @@ const Index = () => {
           <div className="text-center mt-16 scroll-animate opacity-0">
             <a 
               href="/services"
-              className="inline-flex items-center px-10 py-5 bg-gradient-to-r from-primary to-accent text-background font-semibold rounded-2xl hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 group text-lg"
+              className="btn-primary text-lg"
             >
               View All Solutions
-              <ArrowRight size={24} className="ml-3 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={24} className="ml-3" />
             </a>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-card via-background to-card text-foreground relative overflow-hidden">
+      <section className="py-24 bg-card/20 text-foreground relative overflow-hidden">
         {/* Background effects */}
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-primary/20 to-accent/20 blur-3xl rounded-full" />
-          <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-gradient-to-tl from-purple-500/20 to-pink-500/20 blur-3xl rounded-full" />
+          <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-primary/5 blur-3xl rounded-full" />
+          <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -267,15 +261,15 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-8 justify-center">
               <a
                 href="/contact"
-                className="px-10 py-5 bg-gradient-to-r from-primary to-accent text-background font-semibold rounded-2xl hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 group text-lg"
+                className="btn-primary text-lg"
               >
                 Start Your Project
-                <ArrowRight size={24} className="inline-block ml-3 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={24} className="ml-3" />
               </a>
               
               <a
                 href="/services"
-                className="px-10 py-5 border-2 border-primary/30 text-primary font-semibold rounded-2xl hover:bg-primary/10 hover:border-primary transition-all duration-300 hover:scale-105 text-lg"
+                className="btn-secondary text-lg"
               >
                 Explore Services
               </a>

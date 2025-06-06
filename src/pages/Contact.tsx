@@ -1,4 +1,3 @@
-// src/pages/Contact.tsx
 import React, { useEffect } from 'react';
 import ContactForm from '@/components/ContactForm';
 import { Mail, Phone, Clock } from 'lucide-react';
@@ -32,7 +31,7 @@ const Contact = () => {
       />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-aurabyt-navy text-white">
+      <section className="pt-32 pb-20 bg-background text-foreground">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">Get In Touch</h1>
@@ -48,14 +47,14 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div className="bg-white rounded-xl shadow-lg p-8">
+            <div className="professional-card">
               <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
               <ContactForm />
             </div>
 
-            {/* Contact Info - Optimized for mobile */}
+            {/* Contact Info */}
             <div>
-              <div className="bg-white rounded-xl shadow-lg p-8">
+              <div className="professional-card">
                 <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
                 <div className="space-y-6">
                   {contactInfo.map((item, index) => (
@@ -65,7 +64,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <h3 className="font-bold mb-1">{item.title}</h3>
-                        <p className="text-gray-600">{item.details}</p>
+                        <p className="text-muted-foreground">{item.details}</p>
                       </div>
                     </div>
                   ))}
@@ -77,7 +76,7 @@ const Contact = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-card/20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
@@ -101,9 +100,9 @@ const Contact = () => {
                   answer: "We take a data-driven approach to digital marketing, focusing on strategies that deliver measurable results. We start by understanding your business goals and target audience, then develop a customized strategy to reach and engage them effectively."
                 }
               ].map((faq, index) => (
-                <div key={index} className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+                <div key={index} className="professional-card hover:shadow-lg transition-shadow">
                   <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
-                  <p className="text-gray-600">{faq.answer}</p>
+                  <p className="text-muted-foreground">{faq.answer}</p>
                 </div>
               ))}
             </div>

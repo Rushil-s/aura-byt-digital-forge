@@ -1,4 +1,3 @@
-// src/pages/About.tsx
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
@@ -13,7 +12,7 @@ const About = () => {
     return new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-slide-up');
+          entry.target.classList.add('animate-fade-in');
           (entry.target as HTMLElement).style.opacity = '1';
         }
       });
@@ -55,20 +54,20 @@ const About = () => {
       />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-aurabyt-navy text-white relative overflow-hidden">
-        {/* Background animations - reduced for better performance */}
+      <section className="pt-32 pb-20 bg-background text-foreground relative overflow-hidden">
+        {/* Background animations */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-aurabyt-purple/10 blur-3xl animate-pulse-slow"></div>
-          <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-aurabyt-blue/10 blur-3xl animate-float animation-delay-300"></div>
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-primary/10 blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-primary/5 blur-3xl animate-float animation-delay-300"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
-              About <span className="animated-gradient-text">AuraByt</span>
+              About <span className="gradient-text">AuraByt</span>
             </h1>
             <p className="text-xl opacity-90 animate-fade-in text-center" style={{ animationDelay: '0.2s' }}>
-              <span className="animated-gradient-text">AuraByt</span> is about <span className="animated-gradient-text typewriter-text">{attributes[currentAttributeIndex]}</span>
+              <span className="gradient-text">AuraByt</span> is about <span className="gradient-text typewriter-text">{attributes[currentAttributeIndex]}</span>
             </p>
           </div>
         </div>
@@ -80,10 +79,10 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="animate-on-scroll">
               <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-              <p className="text-gray-700 mb-6">
-                At <span className="animated-gradient-text">AuraByt</span>, our mission is to empower businesses through innovative digital solutions that drive growth, efficiency, and competitive advantage. We believe that technology should work for you, not the other way around.
+              <p className="text-muted-foreground mb-6">
+                At <span className="gradient-text">AuraByt</span>, our mission is to empower businesses through innovative digital solutions that drive growth, efficiency, and competitive advantage. We believe that technology should work for you, not the other way around.
               </p>
-              <p className="text-gray-700 mb-6">
+              <p className="text-muted-foreground mb-6">
                 Based in the vibrant tech hub of Toronto, we combine global expertise with local knowledge to deliver tailored solutions that meet the unique needs of each client.
               </p>
               <div className="space-y-4">
@@ -111,20 +110,17 @@ const About = () => {
                   className="w-full h-auto"
                 />
               </div>
-              {/* Decorative elements */}
-              <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-lg bg-primary/10 -z-10"></div>
-              <div className="absolute -top-6 -right-6 w-24 h-24 rounded-lg bg-accent/10 -z-10"></div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-card/20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16 animate-on-scroll">
             <h2 className="text-3xl font-bold mb-4">Our Values</h2>
-            <p className="text-gray-700">
+            <p className="text-muted-foreground">
               The principles that guide our work and relationships with clients.
             </p>
           </div>
@@ -148,12 +144,12 @@ const About = () => {
                 description: "We work closely with our clients, treating their goals as our own."
               }
             ].map((value, index) => (
-              <div key={index} className="bg-white p-8 rounded-xl shadow hover:shadow-lg transition-shadow animate-on-scroll" style={{ transitionDelay: `${index * 100}ms` }}>
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary">
+              <div key={index} className="professional-card text-center animate-on-scroll" style={{ transitionDelay: `${index * 100}ms` }}>
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6 text-primary mx-auto">
                   <span className="text-xl font-bold">{index + 1}</span>
                 </div>
                 <h3 className="text-xl font-bold mb-3">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
+                <p className="text-muted-foreground">{value.description}</p>
               </div>
             ))}
           </div>
@@ -161,11 +157,11 @@ const About = () => {
       </section>
 
       {/* Toronto Section */}
-      <section className="py-20 bg-aurabyt-navy text-white relative">
-        {/* Background animations - optimized */}
+      <section className="py-20 bg-background text-foreground relative">
+        {/* Background animations */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-1/2 h-1/3 bg-white/5 blur-3xl rounded-full animate-pulse-slow"></div>
-          <div className="absolute bottom-0 right-1/3 w-1/3 h-1/2 bg-white/5 blur-3xl rounded-full animate-float animation-delay-300"></div>
+          <div className="absolute top-0 left-1/4 w-1/2 h-1/3 bg-primary/5 blur-3xl rounded-full animate-pulse-slow"></div>
+          <div className="absolute bottom-0 right-1/3 w-1/3 h-1/2 bg-primary/5 blur-3xl rounded-full animate-float animation-delay-300"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -173,14 +169,14 @@ const About = () => {
             <div className="animate-on-scroll">
               <h2 className="text-3xl font-bold mb-6">Proudly Based in Toronto</h2>
               <p className="text-xl opacity-90 mb-6">
-                Located in the heart of Toronto's tech district, <span className="animated-gradient-text">AuraByt</span> is proud to be part of Canada's most dynamic technology ecosystem.
+                Located in the heart of Toronto's tech district, <span className="gradient-text">AuraByt</span> is proud to be part of Canada's most dynamic technology ecosystem.
               </p>
               <p className="opacity-80 mb-8">
                 Our Toronto roots influence our approach to business - innovative, diverse, and forward-thinking. We leverage the city's vibrant tech community to stay at the cutting edge of digital trends and technologies.
               </p>
               <Link 
                 to="/contact" 
-                className="inline-block px-6 py-3 bg-white text-aurabyt-navy rounded-lg font-medium hover:bg-gray-100 transition-colors"
+                className="btn-primary"
               >
                 Connect With Us
               </Link>
@@ -202,16 +198,16 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-card/20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center animate-on-scroll">
             <h2 className="text-3xl font-bold mb-4">Ready to Work With Us?</h2>
-            <p className="text-xl text-gray-700 mb-8">
-              Let's discuss how <span className="animated-gradient-text">AuraByt</span> can help transform your business.
+            <p className="text-xl text-muted-foreground mb-8">
+              Let's discuss how <span className="gradient-text">AuraByt</span> can help transform your business.
             </p>
             <Link 
               to="/contact" 
-              className="inline-block px-8 py-4 btn-primary"
+              className="btn-primary"
             >
               Get in Touch
             </Link>

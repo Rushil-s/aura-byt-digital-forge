@@ -4,11 +4,11 @@ import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-card via-background to-card text-foreground relative overflow-hidden border-t border-border/50">
+    <footer className="bg-background text-foreground relative overflow-hidden border-t border-border">
       {/* Background effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl rounded-full" />
-        <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-gradient-to-tl from-purple-500/10 to-pink-500/10 blur-3xl rounded-full" />
+        <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-primary/5 blur-3xl rounded-full" />
+        <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -17,15 +17,15 @@ const Footer = () => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-4 mb-8">
-                <div className="h-16 w-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center border border-primary/20">
+                <div className="h-16 w-16 bg-primary/10 rounded-lg flex items-center justify-center border border-primary/20">
                   <img
                     alt="AuraByt Logo"
-                    className="h-10 w-10 object-contain filter brightness-0 invert"
+                    className="h-10 w-10 object-contain"
                     src="/assets/aurabytlogo.png"
                   />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <h3 className="text-3xl font-bold gradient-text">
                     AuraByt
                   </h3>
                   <p className="text-muted-foreground font-medium">Enterprise IT Consultancy</p>
@@ -49,10 +49,10 @@ const Footer = () => {
                     href={social.href} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="w-12 h-12 bg-card/50 hover:bg-gradient-to-br hover:from-primary hover:to-accent rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 group border border-border/50 hover:border-primary/30"
+                    className="w-12 h-12 bg-card/50 hover:bg-primary rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 group border border-border hover:border-primary"
                     aria-label={social.label}
                   >
-                    <span className="group-hover:scale-110 transition-transform duration-300 text-muted-foreground group-hover:text-background">
+                    <span className="group-hover:scale-110 transition-transform duration-300 text-muted-foreground group-hover:text-primary-foreground">
                       {social.icon}
                     </span>
                   </a>
@@ -91,7 +91,7 @@ const Footer = () => {
             {/* Contact */}
             <div>
               <h4 className="text-xl font-semibold mb-8 flex items-center">
-                <Shield size={20} className="mr-3 text-accent" />
+                <Shield size={20} className="mr-3 text-primary" />
                 Contact
               </h4>
               <ul className="space-y-6">
@@ -112,26 +112,11 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
-              
-              {/* Newsletter signup */}
-              <div className="mt-8">
-                <h5 className="text-lg font-semibold mb-4 text-foreground">Stay Updated</h5>
-                <div className="flex">
-                  <input 
-                    type="email" 
-                    placeholder="Your email"
-                    className="flex-1 px-4 py-3 bg-card/50 border border-border/50 rounded-l-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary transition-colors duration-300 backdrop-blur-sm"
-                  />
-                  <button className="px-6 py-3 bg-gradient-to-r from-primary to-accent rounded-r-xl hover:shadow-lg transition-all duration-300 hover:scale-105">
-                    <ArrowRight size={18} className="text-background" />
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
 
           {/* Bottom section */}
-          <div className="border-t border-border/50 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-muted-foreground mb-4 md:mb-0">
               &copy; {new Date().getFullYear()} AuraByt. All rights reserved. Engineered with precision in Toronto.
             </p>

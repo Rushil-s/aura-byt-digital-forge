@@ -1,4 +1,3 @@
-// src/pages/Services.tsx
 import React, { useEffect, useRef, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck, Server, Headphones, Settings, Cpu, CheckCircle, Users, MonitorSmartphone, Coffee, Cloud, Share2, TrendingUp, LineChart, Youtube, Instagram, Palette, FileCode } from 'lucide-react';
@@ -22,13 +21,13 @@ const ServiceCategory = memo(({
   return (
     <section 
       id={id} 
-      className={`py-12 md:py-20 ${index % 2 === 1 ? 'bg-gray-50' : 'bg-white'} relative overflow-hidden`}
+      className={`py-12 md:py-20 ${index % 2 === 1 ? 'bg-card/20' : 'bg-background'} relative overflow-hidden`}
     >
-      {/* Background elements - reduced for performance */}
+      {/* Background elements */}
       {index % 2 === 0 && (
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-radial from-aurabyt-purple/5 to-transparent opacity-60 blur-2xl"></div>
-          <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-radial from-aurabyt-blue/5 to-transparent opacity-60 blur-2xl"></div>
+          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full"></div>
+          <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-primary/5 blur-3xl rounded-full"></div>
         </div>
       )}
       
@@ -36,7 +35,7 @@ const ServiceCategory = memo(({
         <div className="max-w-3xl mx-auto mb-12 text-center section-title">
           <h2 className="text-3xl font-bold mb-4">{category}</h2>
           <div className="w-16 h-1 bg-primary mx-auto"></div>
-          <p className="mt-4 text-gray-600">{description}</p>
+          <p className="mt-4 text-muted-foreground">{description}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -57,17 +56,14 @@ const ServiceCategory = memo(({
 const ServiceItem = memo(({ service, index }: { service: any; index: number }) => {
   return (
     <div 
-      className="bg-white rounded-xl shadow-md p-6 md:p-8 hover-card relative service-card group" 
+      className="professional-card relative service-card group" 
       style={{ transitionDelay: `${index * 50}ms` }}
     >
-      {/* Hover effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-aurabyt-purple/5 to-aurabyt-blue/5 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300"></div>
-      
       <div className="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-4 md:mb-6 text-primary group-hover:scale-110 transition-transform">
         {service.icon}
       </div>
       <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 group-hover:text-primary transition-colors">{service.title}</h3>
-      <p className="text-gray-600 mb-4 md:mb-6">{service.description}</p>
+      <p className="text-muted-foreground mb-4 md:mb-6">{service.description}</p>
       
       <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Key Benefits:</h4>
       <ul className="space-y-1 md:space-y-2 mb-4 md:mb-6 text-sm md:text-base">
@@ -83,7 +79,7 @@ const ServiceItem = memo(({ service, index }: { service: any; index: number }) =
       <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Technologies:</h4>
       <div className="flex flex-wrap gap-1 md:gap-2">
         {service.technologies.map((tech: string, k: number) => (
-          <span key={k} className="px-2 py-1 bg-gray-100 text-gray-700 rounded-md text-xs md:text-sm">
+          <span key={k} className="px-2 py-1 bg-primary/10 text-primary rounded-md text-xs md:text-sm">
             {tech}
           </span>
         ))}
@@ -103,7 +99,7 @@ const Services = () => {
         if (entry.isIntersecting) {
           // Use requestAnimationFrame for smoother animations
           requestAnimationFrame(() => {
-            entry.target.classList.add('animate-slide-up');
+            entry.target.classList.add('animate-fade-in');
             // Cast to HTMLElement to access style property
             (entry.target as HTMLElement).style.opacity = '1';
           });
@@ -299,25 +295,25 @@ const Services = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white">
+    <div className="bg-background">
       <SEO 
         title="AuraByt Services - Web Development, Digital Marketing & IT Support"
         description="Explore AuraByt's comprehensive services including web development, digital marketing and IT support solutions tailored for your business needs."
         keywords="web development, digital marketing, IT support, software development, SEO, cloud solutions"
       />
       
-      {/* Services Hero Section - Enhanced with animations */}
-      <section className="pt-32 pb-16 md:pb-24 bg-aurabyt-navy text-white relative overflow-hidden">
-        {/* Background animations - reduced for better performance */}
+      {/* Services Hero Section */}
+      <section className="pt-32 pb-16 md:pb-24 bg-background text-foreground relative overflow-hidden">
+        {/* Background animations */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-aurabyt-purple/10 blur-3xl animate-pulse-slow"></div>
-          <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-aurabyt-blue/10 blur-3xl animate-float animation-delay-300"></div>
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-primary/10 blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-primary/5 blur-3xl animate-float animation-delay-300"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in text-reveal">
-              Our <span className="animated-gradient-text">Services</span>
+              Our <span className="gradient-text">Services</span>
             </h1>
             <p className="text-xl opacity-90 mb-8 animate-fade-in text-reveal-delay-1" style={{
               animationDelay: '0.2s'
@@ -331,7 +327,7 @@ const Services = () => {
                 <button 
                   key={service.id}
                   onClick={() => scrollToService(service.id)}
-                  className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-all duration-300 animate-fade-in flex items-center gap-2"
+                  className="px-4 py-2 bg-primary/10 hover:bg-primary/20 rounded-lg transition-all duration-300 animate-fade-in flex items-center gap-2"
                   style={{ animationDelay: `${0.3 + index * 0.1}s` }}
                 >
                   {index === 0 ? <Code size={18} /> : index === 1 ? <BarChart size={18} /> : <Server size={18} />}
@@ -344,26 +340,8 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services Tabs - Mobile-friendly navigation for smaller screens */}
-      <div className="sticky top-16 z-30 bg-white shadow-md py-3 md:hidden">
-        <div className="container mx-auto px-4">
-          <div className="flex overflow-x-auto no-scrollbar gap-2">
-            {services.map((service, index) => (
-              <button 
-                key={service.id}
-                onClick={() => scrollToService(service.id)}
-                className="px-3 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-all duration-300 whitespace-nowrap text-sm flex-shrink-0 flex items-center gap-1"
-              >
-                {index === 0 ? <Code size={16} /> : index === 1 ? <BarChart size={16} /> : <Server size={16} />}
-                {service.category.split(' ')[0]}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
       <div ref={servicesRef}>
-        {/* Services Sections with enhanced animations and mobile optimization */}
+        {/* Services Sections */}
         {services.map((serviceCategory, index) => (
           <ServiceCategory 
             key={serviceCategory.id}
@@ -376,9 +354,9 @@ const Services = () => {
         ))}
       </div>
 
-      {/* Enhanced CTA Section with better mobile support */}
-      <section className="py-12 md:py-16 bg-purple-gradient text-white relative overflow-hidden">
-        {/* Background animation elements - reduced for performance */}
+      {/* CTA Section */}
+      <section className="py-12 md:py-16 bg-primary text-primary-foreground relative overflow-hidden">
+        {/* Background animation elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/4 w-1/2 h-1/3 bg-white/5 blur-3xl rounded-full animate-pulse-slow"></div>
         </div>
@@ -389,9 +367,8 @@ const Services = () => {
             <p className="text-lg md:text-xl mb-6 md:mb-8">
               Contact us today to discuss how we can help your business grow.
             </p>
-            <Link to="/contact" className="inline-block px-6 py-3 md:px-8 md:py-4 bg-white text-primary rounded-lg font-bold hover:bg-gray-100 transition-colors btn-hover-shine group">
+            <Link to="/contact" className="inline-block px-6 py-3 md:px-8 md:py-4 bg-background text-primary rounded-lg font-bold hover:bg-background/90 transition-colors">
               Contact Us
-              <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </div>
         </div>
