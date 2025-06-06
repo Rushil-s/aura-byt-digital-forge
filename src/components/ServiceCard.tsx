@@ -1,4 +1,4 @@
-// src/components/ServiceCard.tsx
+
 import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -16,19 +16,19 @@ const ServiceCard = ({ title, description, icon, delay = 0, link }: ServiceCardP
   
   return (
     <div 
-      className="bg-white rounded-xl shadow-md p-6 hover-card overflow-hidden animate-fade-in is-visible"
+      className="professional-card group animate-fade-in is-visible"
       style={{ animationDelay: `${delay}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-6 text-primary transform transition-all duration-300 group-hover:scale-110">
+      <div className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-6 text-primary transform transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20">
         {icon}
       </div>
-      <h3 className="text-xl font-bold mb-3">{title}</h3>
-      <p className="text-gray-600 mb-6">{description}</p>
+      <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">{title}</h3>
+      <p className="text-muted-foreground mb-6">{description}</p>
       <Link
         to={link}
-        className="flex items-center font-medium text-primary hover:underline transition-all"
+        className="flex items-center font-medium text-primary hover:text-accent transition-all"
       >
         Learn more 
         <ArrowRight 

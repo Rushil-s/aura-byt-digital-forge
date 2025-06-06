@@ -5,65 +5,65 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
     
-    --card: 240 10% 6%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
     
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
     
-    --primary: 59 130% 60%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: 220 100% 70%;
+    --primary-foreground: 0 0% 10%;
     
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
     
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
     
-    --accent: 139 76% 55%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 200 100% 70%;
+    --accent-foreground: 0 0% 10%;
     
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 220 100% 70%;
 
     --radius: 1rem;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
     
-    --card: 240 10% 6%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
     
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
     
-    --primary: 59 130% 60%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: 220 100% 70%;
+    --primary-foreground: 0 0% 10%;
     
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
     
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
     
-    --accent: 139 76% 55%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 200 100% 70%;
+    --accent-foreground: 0 0% 10%;
     
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 220 100% 70%;
   }
 
   * {
@@ -114,21 +114,21 @@
 
   .animated-gradient-bg {
     @apply absolute inset-0 -z-10 bg-[size:400%_400%]
-           bg-gradient-to-br from-primary/10 via-accent/5 to-background
-           blur-3xl opacity-30 animate-gradient;
+           bg-gradient-to-br from-primary/5 via-accent/5 to-background
+           blur-3xl opacity-20 animate-gradient;
   }
 
   .professional-card {
-    @apply bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6
-           hover:bg-card/70 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10
+    @apply bg-card/80 backdrop-blur-sm border border-border rounded-xl p-6
+           hover:bg-card hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10
            transition-all duration-300 hover:-translate-y-1;
   }
 
   .tech-grid {
     @apply absolute inset-0 opacity-5;
     background-image: 
-      linear-gradient(rgba(139, 215, 122, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(139, 215, 122, 0.1) 1px, transparent 1px);
+      linear-gradient(rgba(70, 130, 180, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(70, 130, 180, 0.1) 1px, transparent 1px);
     background-size: 50px 50px;
   }
 }
@@ -191,7 +191,7 @@
   position: absolute;
   width: 1px;
   height: 100px;
-  background: linear-gradient(180deg, transparent, rgba(139, 215, 122, 0.8), transparent);
+  background: linear-gradient(180deg, transparent, rgba(70, 130, 180, 0.8), transparent);
   animation: tech-line 10s linear infinite;
 }
 
@@ -224,7 +224,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(139, 215, 122, 0.8);
+  background: hsl(var(--primary));
   animation: loading-bounce 1.4s ease-in-out infinite both;
 }
 
