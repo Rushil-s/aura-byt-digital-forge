@@ -74,8 +74,8 @@ const Navbar = () => {
       ref={navbarRef}
       className={`fixed w-full z-50 transition-all duration-500 ease-out ${
         scrolled
-          ? 'navbar-scrolled'
-          : 'navbar-glass'
+          ? 'bg-background/98 backdrop-blur-xl shadow-2xl border-b border-primary/30'
+          : 'bg-background/80 backdrop-blur-xl border-b border-border/50'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -126,7 +126,7 @@ const Navbar = () => {
                     
                     {/* Dropdown Menu */}
                     {activeDropdown === link.name && (
-                      <div className="absolute top-full left-0 mt-3 w-80 bg-card/95 backdrop-blur-xl rounded-lg shadow-2xl border border-border py-3 animate-in fade-in-0 zoom-in-95 duration-200">
+                      <div className="absolute top-full left-0 mt-3 w-80 bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border py-3 animate-in fade-in-0 zoom-in-95 duration-200">
                         {link.dropdown.map((item) => (
                           <Link
                             key={item.name}
@@ -188,7 +188,7 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="lg:hidden py-4 animate-in slide-in-from-top-2 duration-300">
-            <div className="bg-card/95 backdrop-blur-xl rounded-lg shadow-2xl border border-border p-4 space-y-2">
+            <div className="bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border p-4 space-y-2">
               {navLinks.map((link, idx) => (
                 <div key={link.name}>
                   {link.dropdown ? (
