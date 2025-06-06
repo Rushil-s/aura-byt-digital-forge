@@ -77,12 +77,12 @@ const Hero = () => {
               <span className="gradient-text">Byt</span>
             </h1>
             
-            <div className="text-3xl md:text-4xl lg:text-5xl font-light text-muted-foreground">
-              <div className="flex items-center justify-center gap-4">
+            <div className="text-2xl md:text-3xl lg:text-4xl font-light text-muted-foreground">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
                 <span>Driving digital</span>
                 <span 
                   ref={textRef}
-                  className={`relative inline-block font-medium gradient-text transition-opacity duration-500 w-80 text-left ${isAnimating ? 'opacity-0' : 'opacity-100'}`}
+                  className={`relative inline-block font-medium gradient-text transition-opacity duration-500 min-w-[200px] text-center ${isAnimating ? 'opacity-0' : 'opacity-100'}`}
                 >
                   {businessTexts[currentTextIndex].split('').map((char, i) => (
                     <span key={i} className="char inline-block transition-all duration-300 transform">{char}</span>
