@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight, Code, Shield } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
+    <footer className="bg-gradient-to-br from-card via-background to-card text-foreground relative overflow-hidden border-t border-border/50">
       {/* Background effects */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl rounded-full" />
@@ -12,29 +12,29 @@ const Footer = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="pt-16 pb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="pt-20 pb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             {/* Company Info */}
             <div className="lg:col-span-2">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="h-12 w-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center">
+              <div className="flex items-center space-x-4 mb-8">
+                <div className="h-16 w-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center border border-primary/20">
                   <img
                     alt="AuraByt Logo"
-                    className="h-8 w-8 object-contain filter brightness-0 invert"
+                    className="h-10 w-10 object-contain filter brightness-0 invert"
                     src="/assets/aurabytlogo.png"
                   />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                     AuraByt
                   </h3>
-                  <p className="text-sm text-gray-400">Digital Innovation Consultancy</p>
+                  <p className="text-muted-foreground font-medium">Enterprise IT Consultancy</p>
                 </div>
               </div>
               
-              <p className="text-gray-300 mb-6 leading-relaxed max-w-md">
-                Empowering businesses through innovative digital solutions. We specialize in web development, 
-                digital marketing, and IT support to help you thrive in the digital landscape.
+              <p className="text-muted-foreground mb-8 leading-relaxed max-w-md text-lg">
+                Architecting the future of business technology through innovative software development, 
+                digital transformation, and enterprise infrastructure solutions.
               </p>
               
               <div className="flex space-x-4">
@@ -49,10 +49,10 @@ const Footer = () => {
                     href={social.href} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="w-10 h-10 bg-white/10 hover:bg-gradient-to-br hover:from-primary hover:to-accent rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+                    className="w-12 h-12 bg-card/50 hover:bg-gradient-to-br hover:from-primary hover:to-accent rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 group border border-border/50 hover:border-primary/30"
                     aria-label={social.label}
                   >
-                    <span className="group-hover:scale-110 transition-transform duration-300">
+                    <span className="group-hover:scale-110 transition-transform duration-300 text-muted-foreground group-hover:text-background">
                       {social.icon}
                     </span>
                   </a>
@@ -62,23 +62,23 @@ const Footer = () => {
 
             {/* Services */}
             <div>
-              <h4 className="text-lg font-semibold mb-6 flex items-center">
-                <Sparkles size={18} className="mr-2 text-primary" />
-                Services
+              <h4 className="text-xl font-semibold mb-8 flex items-center">
+                <Code size={20} className="mr-3 text-primary" />
+                Solutions
               </h4>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {[
-                  { name: "Web Development", href: "/services#web-development" },
-                  { name: "Digital Marketing", href: "/services#digital-marketing" },
-                  { name: "IT Support", href: "/services#it-support" },
-                  { name: "Cloud Solutions", href: "/services" }
+                  { name: "Software Development", href: "/services#web-development" },
+                  { name: "Digital Transformation", href: "/services#digital-marketing" },
+                  { name: "Infrastructure & Security", href: "/services#it-support" },
+                  { name: "Enterprise Consulting", href: "/services" }
                 ].map((service, index) => (
                   <li key={index}>
                     <Link 
                       to={service.href} 
-                      className="text-gray-300 hover:text-primary transition-colors duration-300 flex items-center group"
+                      className="text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center group"
                     >
-                      <ArrowRight size={14} className="mr-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
+                      <ArrowRight size={14} className="mr-3 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
                       <span className="group-hover:translate-x-1 transition-transform duration-300">
                         {service.name}
                       </span>
@@ -90,40 +90,40 @@ const Footer = () => {
 
             {/* Contact */}
             <div>
-              <h4 className="text-lg font-semibold mb-6 flex items-center">
-                <Mail size={18} className="mr-2 text-accent" />
+              <h4 className="text-xl font-semibold mb-8 flex items-center">
+                <Shield size={20} className="mr-3 text-accent" />
                 Contact
               </h4>
-              <ul className="space-y-4">
+              <ul className="space-y-6">
                 <li className="flex items-start group">
-                  <MapPin size={20} className="mr-3 text-primary mt-1 group-hover:scale-110 transition-transform duration-300" />
-                  <span className="text-gray-300">Toronto, Canada</span>
+                  <MapPin size={20} className="mr-4 text-primary mt-1 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="text-muted-foreground">Toronto, Canada</span>
                 </li>
                 <li className="flex items-center group">
-                  <Phone size={20} className="mr-3 text-primary group-hover:scale-110 transition-transform duration-300" />
-                  <a href="tel:+14379252744" className="text-gray-300 hover:text-primary transition-colors duration-300">
+                  <Phone size={20} className="mr-4 text-primary group-hover:scale-110 transition-transform duration-300" />
+                  <a href="tel:+14379252744" className="text-muted-foreground hover:text-primary transition-colors duration-300">
                     (437) 925-2744
                   </a>
                 </li>
                 <li className="flex items-center group">
-                  <Mail size={20} className="mr-3 text-primary group-hover:scale-110 transition-transform duration-300" />
-                  <a href="mailto:connect@aurabyt.com" className="text-gray-300 hover:text-primary transition-colors duration-300">
+                  <Mail size={20} className="mr-4 text-primary group-hover:scale-110 transition-transform duration-300" />
+                  <a href="mailto:connect@aurabyt.com" className="text-muted-foreground hover:text-primary transition-colors duration-300">
                     connect@aurabyt.com
                   </a>
                 </li>
               </ul>
               
               {/* Newsletter signup */}
-              <div className="mt-6">
-                <h5 className="text-sm font-semibold mb-3 text-gray-200">Stay Updated</h5>
+              <div className="mt-8">
+                <h5 className="text-lg font-semibold mb-4 text-foreground">Stay Updated</h5>
                 <div className="flex">
                   <input 
                     type="email" 
                     placeholder="Your email"
-                    className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded-l-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary transition-colors duration-300"
+                    className="flex-1 px-4 py-3 bg-card/50 border border-border/50 rounded-l-xl text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary transition-colors duration-300 backdrop-blur-sm"
                   />
-                  <button className="px-4 py-2 bg-gradient-to-r from-primary to-accent rounded-r-lg hover:shadow-lg transition-all duration-300 hover:scale-105">
-                    <ArrowRight size={16} />
+                  <button className="px-6 py-3 bg-gradient-to-r from-primary to-accent rounded-r-xl hover:shadow-lg transition-all duration-300 hover:scale-105">
+                    <ArrowRight size={18} className="text-background" />
                   </button>
                 </div>
               </div>
@@ -131,20 +131,20 @@ const Footer = () => {
           </div>
 
           {/* Bottom section */}
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} AuraByt. All rights reserved. Made with ❤️ in Toronto.
+          <div className="border-t border-border/50 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-muted-foreground mb-4 md:mb-0">
+              &copy; {new Date().getFullYear()} AuraByt. All rights reserved. Engineered with precision in Toronto.
             </p>
             
-            <div className="flex space-x-6 text-sm">
-              <Link to="/privacy" className="text-gray-400 hover:text-primary transition-colors duration-300">
+            <div className="flex space-x-8 text-sm">
+              <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors duration-300">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-gray-400 hover:text-primary transition-colors duration-300">
+              <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors duration-300">
                 Terms of Service
               </Link>
-              <Link to="/cookies" className="text-gray-400 hover:text-primary transition-colors duration-300">
-                Cookie Policy
+              <Link to="/security" className="text-muted-foreground hover:text-primary transition-colors duration-300">
+                Security
               </Link>
             </div>
           </div>

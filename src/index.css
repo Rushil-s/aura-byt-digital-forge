@@ -4,65 +4,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    
-    --accent: 199.2 89.1% 48.4%;
-    --accent-foreground: 210 40% 98%;
-    
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-
-    --radius: 1rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 8 8% 8%;
     --foreground: 210 40% 98%;
     
-    --card: 222.2 84% 4.9%;
+    --card: 12 12% 12%;
     --card-foreground: 210 40% 98%;
     
-    --popover: 222.2 84% 4.9%;
+    --popover: 8 8% 8%;
     --popover-foreground: 210 40% 98%;
     
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 8 8% 8%;
     
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 15 15% 15%;
     --secondary-foreground: 210 40% 98%;
     
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 15 15% 15%;
+    --muted-foreground: 215 20% 65%;
     
-    --accent: 199.2 89.1% 48.4%;
+    --accent: 142 76% 36%;
     --accent-foreground: 210 40% 98%;
     
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62% 30%;
     --destructive-foreground: 210 40% 98%;
     
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 94.1%;
+    --border: 15 15% 20%;
+    --input: 15 15% 20%;
+    --ring: 217 91% 60%;
+
+    --radius: 1rem;
   }
 
   * {
@@ -90,7 +60,7 @@
   }
 
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-to-r from-primary to-accent text-white font-semibold rounded-xl 
+    @apply px-8 py-4 bg-gradient-to-r from-primary to-accent text-background font-semibold rounded-xl 
            hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 
            hover:scale-105 active:scale-95 disabled:opacity-50
            relative overflow-hidden;
@@ -106,39 +76,38 @@
     @apply translate-x-full;
   }
 
-  .card-hover {
-    @apply transition-all duration-500 
-           hover:shadow-2xl hover:-translate-y-2
-           hover:shadow-primary/10 hover:border-primary/20
-           rounded-2xl bg-white border border-gray-200/50 backdrop-blur-sm;
+  .btn-secondary {
+    @apply px-8 py-4 border-2 border-primary/30 text-primary font-semibold rounded-xl 
+           hover:bg-primary/10 hover:border-primary transition-all duration-300 
+           hover:scale-105 active:scale-95 backdrop-blur-sm;
+  }
+
+  .card-modern {
+    @apply bg-card/50 backdrop-blur-xl border border-border/50 rounded-2xl p-8
+           hover:bg-card/80 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10
+           transition-all duration-500 hover:-translate-y-2 relative overflow-hidden;
+  }
+
+  .card-modern::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 
+           opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl;
   }
 
   .section-padding {
-    @apply py-20 md:py-32;
+    @apply py-24 md:py-32;
   }
 
   .container-padding {
     @apply px-4 md:px-6 lg:px-8;
   }
 
-  .professional-card {
-    @apply bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-2xl p-8
-           hover:bg-white hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10
-           transition-all duration-500 hover:-translate-y-2;
-  }
-
-  .professional-card::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 
-           opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl;
-  }
-
   .tech-grid {
-    @apply absolute inset-0 opacity-30;
+    @apply absolute inset-0 opacity-20;
     background-image: 
-      linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
+      linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
   }
 
   .animate-gradient {
@@ -162,6 +131,14 @@
   .char.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .navbar-glass {
+    @apply bg-background/80 backdrop-blur-xl border-b border-border/50;
+  }
+
+  .navbar-scrolled {
+    @apply bg-background/95 backdrop-blur-xl shadow-2xl border-b border-primary/20;
   }
 }
 
@@ -220,20 +197,13 @@
   animation: fadeIn 0.8s ease-out forwards;
 }
 
-/* Smooth scrolling for modern browsers */
-@media (prefers-reduced-motion: no-preference) {
-  :root {
-    scroll-behavior: smooth;
-  }
-}
-
-/* Enhanced scrollbar styling */
+/* Enhanced scrollbar styling for dark theme */
 ::-webkit-scrollbar {
   @apply w-2;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 rounded-full;
+  @apply bg-background rounded-full;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -270,15 +240,15 @@
 
 /* Glass morphism effects */
 .glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.glass-dark {
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Improved focus states */
@@ -298,7 +268,7 @@
 }
 
 .card-3d:hover {
-  transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+  transform: rotateY(2deg) rotateX(2deg) translateZ(20px);
 }
 
 /* Improved text animations */
@@ -326,17 +296,26 @@
   }
 }
 
-/* Modern shadows */
+/* Modern shadows for dark theme */
 .shadow-soft {
-  box-shadow: 0 2px 40px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.3);
 }
 
 .shadow-medium {
-  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 60px rgba(0, 0, 0, 0.4);
 }
 
 .shadow-hard {
-  box-shadow: 0 8px 80px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 80px rgba(0, 0, 0, 0.5);
+}
+
+/* Glow effects */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.glow-accent {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
 }
 
 /* Responsive improvements */
@@ -371,4 +350,60 @@
   .btn-primary {
     @apply border-2 border-primary;
   }
+}
+
+/* Cyber grid effect */
+.cyber-grid {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 100px 100px;
+  animation: grid-move 20s linear infinite;
+}
+
+@keyframes grid-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+/* Neon effects */
+.neon-text {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor,
+    0 0 20px currentColor;
+}
+
+.neon-border {
+  box-shadow: 
+    0 0 5px currentColor,
+    inset 0 0 5px currentColor;
+}
+
+/* Professional hover states */
+.hover-lift {
+  @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl;
+}
+
+.hover-glow {
+  @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/25;
+}
+
+/* Modern button styles */
+.btn-modern {
+  @apply relative overflow-hidden bg-gradient-to-r from-primary to-accent text-background font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95;
+}
+
+.btn-modern::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full transition-transform duration-700;
+}
+
+.btn-modern:hover::before {
+  @apply translate-x-full;
+}
+
+.btn-outline-modern {
+  @apply relative overflow-hidden border-2 border-primary/30 text-primary font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-primary/10 hover:border-primary backdrop-blur-sm;
 }
