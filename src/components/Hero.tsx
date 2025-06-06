@@ -114,7 +114,7 @@ const Hero = () => {
           </p>
           
           {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-20">
+          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
             <Link 
               to="/services" 
               className="btn-primary text-lg"
@@ -129,28 +129,6 @@ const Hero = () => {
             >
               Schedule Consultation
             </Link>
-          </div>
-          
-          {/* Professional metrics */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {[
-              { number: '100+', label: 'Enterprise Clients', icon: <Globe size={28} /> },
-              { number: '99.9%', label: 'System Uptime', icon: <Shield size={28} /> },
-              { number: '24/7', label: 'Technical Support', icon: <Zap size={28} /> },
-              { number: '5+', label: 'Years Excellence', icon: <Code size={28} /> }
-            ].map((stat, index) => (
-              <div 
-                key={index} 
-                className="professional-card text-center"
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <div className="flex items-center justify-center mb-4 text-primary">
-                  {stat.icon}
-                </div>
-                <div className="text-4xl font-bold text-foreground mb-2">{stat.number}</div>
-                <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
