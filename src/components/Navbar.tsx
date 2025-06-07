@@ -101,7 +101,7 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Removed redundant CTA button */}
           <nav className="hidden lg:flex items-center space-x-2">
             {navLinks.map((link) => (
               <div key={link.name} className="relative" ref={link.dropdown ? dropdownRef : undefined}>
@@ -164,14 +164,6 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            
-            {/* CTA Button */}
-            <Link
-              to="/contact"
-              className="ml-6 btn-primary"
-            >
-              Get Started
-            </Link>
           </nav>
 
           {/* Mobile menu button */}
@@ -185,7 +177,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - Also removed redundant CTA */}
         {isOpen && (
           <div className="lg:hidden py-4 animate-in slide-in-from-top-2 duration-300">
             <div className="bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border p-4 space-y-2">
@@ -237,21 +229,13 @@ const Navbar = () => {
                           : 'text-foreground hover:text-primary hover:bg-primary/5'
                       }`}
                       style={{ animationDelay: `${idx * 50}ms` }}
+                      onClick={() => setIsOpen(false)}
                     >
                       {link.name}
                     </Link>
                   )}
                 </div>
               ))}
-              
-              {/* Mobile CTA */}
-              <Link
-                to="/contact"
-                className="block w-full mt-4 px-4 py-3 bg-primary text-primary-foreground font-semibold rounded-lg text-center hover:bg-primary/90 transition-all duration-300"
-                onClick={() => setIsOpen(false)}
-              >
-                Get Started
-              </Link>
             </div>
           </div>
         )}
