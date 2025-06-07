@@ -42,15 +42,19 @@ const Contact = () => {
         keywords="Contact AuraByt, IT consultancy contact, Toronto tech company, web development services, digital marketing contact"
       />
       
-      {/* Animated Background */}
-      <AnimatedShaderBackground 
-        className="fixed inset-0" 
-        intensity={0.8}
-        speed={0.7}
-      />
+      {/* Animated Background - Now visible from top */}
+      <div className="fixed inset-0 w-full h-full overflow-hidden" style={{ zIndex: -1 }}>
+        <AnimatedShaderBackground 
+          className="absolute inset-0 w-full h-full" 
+          intensity={0.6}
+          speed={0.5}
+        />
+        {/* Additional overlay to ensure readability */}
+        <div className="absolute inset-0 bg-background/20 backdrop-blur-[0.5px]" />
+      </div>
       
-      {/* Smaller Hero Section - No buttons */}
-      <section className="relative pt-32 pb-12 overflow-hidden">
+      {/* Hero Section - Smaller and cleaner */}
+      <section className="relative pt-24 pb-8 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 border border-primary/20 backdrop-blur-sm">
@@ -70,7 +74,7 @@ const Contact = () => {
       </section>
 
       {/* Main Contact Section */}
-      <section className="relative py-20" id="contact-form">
+      <section className="relative py-16" id="contact-form">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -87,7 +91,7 @@ const Contact = () => {
                     movementDuration={2}
                   />
                   
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-8 shadow-sm">
+                  <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/95 backdrop-blur-md p-8 shadow-sm">
                     <div className="mb-8">
                       <h2 className="text-3xl font-bold mb-4">
                         Send Us a <span className="gradient-text">Message</span>
@@ -127,7 +131,7 @@ const Contact = () => {
                           movementDuration={1.2}
                         />
                         
-                        <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/80 backdrop-blur-sm p-6 shadow-sm">
+                        <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-6 shadow-sm">
                           <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform border border-primary/20">
                             {item.icon}
                           </div>
@@ -162,7 +166,7 @@ const Contact = () => {
                       movementDuration={1.8}
                     />
                     
-                    <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/80 backdrop-blur-sm p-8 shadow-sm">
+                    <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-8 shadow-sm">
                       <h3 className="text-xl font-bold mb-4">
                         Why Choose <span className="gradient-text">AuraByt</span>?
                       </h3>
@@ -247,7 +251,7 @@ const Contact = () => {
                         movementDuration={1}
                       />
                       
-                      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/80 backdrop-blur-sm p-6 shadow-sm">
+                      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-6 shadow-sm">
                         <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
                         <p className="text-muted-foreground">{faq.answer}</p>
                       </div>
