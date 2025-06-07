@@ -35,6 +35,7 @@
     @apply antialiased font-inter scroll-smooth;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     scroll-padding-top: 100px;
+    font-size: 16px;
   }
 
   body {
@@ -43,10 +44,16 @@
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
   }
 
   ::selection {
     @apply bg-primary/20 text-primary;
+  }
+
+  /* Better focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-primary outline-offset-2;
   }
 }
 
@@ -57,36 +64,40 @@
   }
 
   .btn-primary {
-    @apply px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg 
+    @apply px-6 py-3 sm:px-8 sm:py-4 bg-primary text-primary-foreground font-semibold rounded-lg 
            hover:bg-primary/90 transition-all duration-300 
            hover:scale-105 active:scale-95 disabled:opacity-50
            relative overflow-hidden shadow-lg hover:shadow-primary/25
-           inline-flex items-center justify-center;
+           inline-flex items-center justify-center text-sm sm:text-base
+           focus:ring-2 focus:ring-primary focus:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply px-8 py-4 border border-primary/30 text-primary font-semibold rounded-lg 
+    @apply px-6 py-3 sm:px-8 sm:py-4 border border-primary/30 text-primary font-semibold rounded-lg 
            hover:bg-primary/10 hover:border-primary transition-all duration-300 
            hover:scale-105 active:scale-95 backdrop-blur-sm
-           inline-flex items-center justify-center;
+           inline-flex items-center justify-center text-sm sm:text-base
+           focus:ring-2 focus:ring-primary focus:ring-offset-2;
   }
 
   .professional-card {
-    @apply bg-card/80 backdrop-blur-sm border border-border rounded-xl p-8
+    @apply bg-card/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8
            hover:bg-card hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10
            transition-all duration-300 hover:-translate-y-1 relative overflow-hidden;
     transform: translateZ(0);
     backface-visibility: hidden;
+    will-change: transform;
   }
 
   .section-padding {
-    @apply py-20 md:py-24;
+    @apply py-16 sm:py-20 md:py-24;
   }
 
   .scroll-animate {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
   }
 
   .scroll-animate.is-visible {
@@ -111,6 +122,12 @@
 
   .loading-animation div:nth-child(1) { animation-delay: -0.32s; }
   .loading-animation div:nth-child(2) { animation-delay: -0.16s; }
+
+  /* Container utilities for consistent spacing */
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1200px;
+  }
 }
 
 @keyframes gradient {
@@ -149,5 +166,42 @@
   .scroll-animate {
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+/* Enhanced mobile optimizations */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+  
+  html {
+    font-size: 14px;
+  }
+  
+  .professional-card {
+    @apply p-6;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .hover\:scale-105:hover {
+    transform: none;
+  }
+  
+  .professional-card:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    @apply text-black bg-white;
+  }
+  
+  .gradient-text {
+    @apply text-black;
   }
 }

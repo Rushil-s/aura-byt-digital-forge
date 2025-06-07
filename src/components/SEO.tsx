@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -7,6 +8,7 @@ interface SEOProps {
   keywords?: string;
   ogImage?: string;
   canonical?: string;
+  schema?: object;
 }
 
 const SEO: React.FC<SEOProps> = ({ 
@@ -14,7 +16,8 @@ const SEO: React.FC<SEOProps> = ({
   description = 'AuraByt is a Toronto-based enterprise IT consultancy specializing in software development, digital transformation, and infrastructure solutions. Transform your business with our expert team.',
   keywords = 'IT consultancy, software development, digital transformation, web development, digital marketing, IT support, Toronto, enterprise solutions, cloud solutions',
   ogImage = '/assets/aurabytlogo.png',
-  canonical
+  canonical,
+  schema
 }) => {
   const { pathname } = useLocation();
   const baseUrl = 'https://aurabyt.com';
@@ -54,19 +57,24 @@ const SEO: React.FC<SEOProps> = ({
       document.head.appendChild(canonicalElement);
     }
 
-    // Update meta tags
+    // Basic meta tags
     updateMetaTag('description', description);
     updateMetaTag('keywords', keywords);
     updateMetaTag('author', 'AuraByt');
-    updateMetaTag('robots', 'index, follow');
+    updateMetaTag('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+    updateMetaTag('viewport', 'width=device-width, initial-scale=1.0, viewport-fit=cover');
     
     // Open Graph meta tags
     updateMetaTag('og:title', title, true);
     updateMetaTag('og:description', description, true);
     updateMetaTag('og:url', currentUrl, true);
     updateMetaTag('og:image', `${baseUrl}${ogImage}`, true);
+    updateMetaTag('og:image:width', '1200', true);
+    updateMetaTag('og:image:height', '630', true);
+    updateMetaTag('og:image:alt', 'AuraByt - Enterprise IT Consultancy', true);
     updateMetaTag('og:type', 'website', true);
     updateMetaTag('og:site_name', 'AuraByt', true);
+    updateMetaTag('og:locale', 'en_US', true);
     
     // Twitter meta tags
     updateMetaTag('twitter:card', 'summary_large_image');
@@ -74,15 +82,37 @@ const SEO: React.FC<SEOProps> = ({
     updateMetaTag('twitter:description', description);
     updateMetaTag('twitter:url', currentUrl);
     updateMetaTag('twitter:image', `${baseUrl}${ogImage}`);
+    updateMetaTag('twitter:image:alt', 'AuraByt - Enterprise IT Consultancy');
     updateMetaTag('twitter:site', '@aurabyt_inc');
+    updateMetaTag('twitter:creator', '@aurabyt_inc');
     
     // Additional SEO meta tags
     updateMetaTag('theme-color', '#3B82F6');
     updateMetaTag('msapplication-TileColor', '#3B82F6');
     updateMetaTag('apple-mobile-web-app-capable', 'yes');
-    updateMetaTag('apple-mobile-web-app-status-bar-style', 'default');
+    updateMetaTag('apple-mobile-web-app-status-bar-style', 'black-translucent');
+    updateMetaTag('apple-mobile-web-app-title', 'AuraByt');
+    updateMetaTag('application-name', 'AuraByt');
+    updateMetaTag('format-detection', 'telephone=no');
     
-  }, [title, description, keywords, currentUrl, ogImage]);
+    // Performance hints
+    updateMetaTag('dns-prefetch', 'https://fonts.googleapis.com');
+    updateMetaTag('preconnect', 'https://fonts.gstatic.com');
+    
+    // Schema.org structured data
+    if (schema) {
+      let schemaScript = document.querySelector('script[type="application/ld+json"]');
+      if (schemaScript) {
+        schemaScript.textContent = JSON.stringify(schema);
+      } else {
+        schemaScript = document.createElement('script');
+        schemaScript.type = 'application/ld+json';
+        schemaScript.textContent = JSON.stringify(schema);
+        document.head.appendChild(schemaScript);
+      }
+    }
+    
+  }, [title, description, keywords, currentUrl, ogImage, schema]);
 
   return null;
 };
