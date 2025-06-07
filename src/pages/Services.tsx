@@ -3,7 +3,134 @@ import { Link } from 'react-router-dom';
 import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck, Server, Headphones, Settings, Cpu, CheckCircle, Users, MonitorSmartphone, Coffee, Cloud, Share2, TrendingUp, LineChart, Youtube, Instagram, Palette, FileCode } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import SEO from '@/components/SEO';
-import SchemaCard from '@/components/ui/schema-card-with-animated-wave-visualizer';
+
+// Enhanced service item with wave animation
+const ServiceItemWithWaves = memo(({ service, index }: { service: any; index: number }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    let time = 0;
+    let animationId: number;
+    
+    const waveData = Array.from({ length: 4 }).map(() => ({
+      value: Math.random() * 0.3 + 0.1,
+      targetValue: Math.random() * 0.3 + 0.1,
+      speed: Math.random() * 0.015 + 0.005
+    }));
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+
+    function updateWaveData() {
+      waveData.forEach(data => {
+        if (Math.random() < 0.008) data.targetValue = Math.random() * 0.4 + 0.1;
+        const diff = data.targetValue - data.value;
+        data.value += diff * data.speed;
+      });
+    }
+
+    function draw() {
+      if (!canvas || !ctx) return;
+      
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
+      
+      // Clear with transparent background
+      ctx.clearRect(0, 0, width, height);
+
+      waveData.forEach((data, i) => {
+        const freq = data.value * 5;
+        ctx.beginPath();
+        for (let x = 0; x < width; x++) {
+          const nx = (x / width) * 2 - 1;
+          const px = nx + i * 0.03 + freq * 0.02;
+          const py = Math.sin(px * 8 + time) * Math.cos(px * 1.5) * freq * 0.08 * ((i + 1) / 4);
+          const y = (py + 1) * height / 2;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        const intensity = Math.min(1, freq * 0.4);
+        const hue = 217;
+        const saturation = 91;
+        const lightness = 60 + intensity * 15;
+        ctx.lineWidth = 0.8 + i * 0.2;
+        ctx.strokeStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, ${0.3 + intensity * 0.3})`;
+        ctx.stroke();
+      });
+    }
+
+    function animate() {
+      time += 0.015;
+      updateWaveData();
+      draw();
+      animationId = requestAnimationFrame(animate);
+    }
+
+    const handleResize = () => resizeCanvas();
+    window.addEventListener('resize', handleResize);
+    resizeCanvas();
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (animationId) cancelAnimationFrame(animationId);
+    };
+  }, []);
+
+  return (
+    <div 
+      className="professional-card relative service-card group overflow-hidden" 
+      style={{ transitionDelay: `${index * 50}ms` }}
+    >
+      {/* Animated wave background */}
+      <canvas 
+        ref={canvasRef} 
+        className="absolute inset-0 w-full h-full opacity-40 pointer-events-none"
+        style={{ width: '100%', height: '100%' }}
+      />
+      
+      {/* Tech grid overlay */}
+      <div className="absolute inset-0 tech-grid opacity-10 pointer-events-none" />
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <div className="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-4 md:mb-6 text-primary group-hover:scale-110 transition-transform border border-primary/20 backdrop-blur-sm">
+          {service.icon}
+        </div>
+        <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 group-hover:text-primary transition-colors">{service.title}</h3>
+        <p className="text-muted-foreground mb-4 md:mb-6">{service.description}</p>
+        
+        <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Key Benefits:</h4>
+        <ul className="space-y-1 md:space-y-2 mb-4 md:mb-6 text-sm md:text-base">
+          {service.benefits.slice(0, 4).map((benefit: string, j: number) => (
+            <li key={j} className="flex items-start">
+              <CheckCircle className="text-primary mr-2 h-4 w-4 md:h-5 md:w-5 mt-0.5 flex-shrink-0" />
+              <span>{benefit}</span>
+            </li>
+          ))}
+        </ul>
+        
+        <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Technologies:</h4>
+        <div className="flex flex-wrap gap-1 md:gap-2">
+          {service.technologies.map((tech: string, k: number) => (
+            <span key={k} className="px-2 py-1 bg-primary/10 text-primary rounded-md text-xs md:text-sm border border-primary/20 backdrop-blur-sm">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+});
 
 // Memoize service components for performance
 const ServiceCategory = memo(({ 
@@ -41,7 +168,7 @@ const ServiceCategory = memo(({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {items.map((service, i) => (
-            <ServiceItem 
+            <ServiceItemWithWaves 
               key={i} 
               service={service} 
               index={i} 
@@ -50,42 +177,6 @@ const ServiceCategory = memo(({
         </div>
       </div>
     </section>
-  );
-});
-
-// Memoize service item component
-const ServiceItem = memo(({ service, index }: { service: any; index: number }) => {
-  return (
-    <div 
-      className="professional-card relative service-card group" 
-      style={{ transitionDelay: `${index * 50}ms` }}
-    >
-      <div className="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-4 md:mb-6 text-primary group-hover:scale-110 transition-transform">
-        {service.icon}
-      </div>
-      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 group-hover:text-primary transition-colors">{service.title}</h3>
-      <p className="text-muted-foreground mb-4 md:mb-6">{service.description}</p>
-      
-      <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Key Benefits:</h4>
-      <ul className="space-y-1 md:space-y-2 mb-4 md:mb-6 text-sm md:text-base">
-        {service.benefits.slice(0, 4).map((benefit: string, j: number) => (
-          <li key={j} className="flex items-start">
-            <CheckCircle className="text-primary mr-2 h-4 w-4 md:h-5 md:w-5 mt-0.5 flex-shrink-0" />
-            <span>{benefit}</span>
-          </li>
-        ))}
-      </ul>
-      
-      {/* Technologies section */}
-      <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Technologies:</h4>
-      <div className="flex flex-wrap gap-1 md:gap-2">
-        {service.technologies.map((tech: string, k: number) => (
-          <span key={k} className="px-2 py-1 bg-primary/10 text-primary rounded-md text-xs md:text-sm">
-            {tech}
-          </span>
-        ))}
-      </div>
-    </div>
   );
 });
 
@@ -337,30 +428,6 @@ const Services = () => {
                 </button>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Schema Card Showcase - Integrated into the flow */}
-      <section className="py-16 bg-card/20 relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Advanced <span className="gradient-text">Database</span> Solutions
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Experience our cutting-edge database management and schema visualization tools
-            </p>
-          </div>
-          
-          <div className="flex justify-center">
-            <SchemaCard 
-              title="Real-time Analytics Dashboard"
-              description="Monitor your database performance with live metrics and intelligent insights powered by AI-driven analytics."
-              badge="Analytics"
-              actionText="Explore"
-              statusText="Active"
-            />
           </div>
         </div>
       </section>
