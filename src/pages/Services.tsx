@@ -516,7 +516,7 @@ const Services = () => {
             </p>
             
             {/* Quick navigation */}
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <div className="flex flex-wrap justify-center gap-4">
               {services.map((service, index) => (
                 <button 
                   key={service.id}
@@ -528,22 +528,6 @@ const Services = () => {
                   </span>
                 </button>
               ))}
-            </div>
-
-            {/* Trust indicators */}
-            <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">500+</div>
-                <div className="text-sm text-muted-foreground">Projects Completed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">99.9%</div>
-                <div className="text-sm text-muted-foreground">Client Satisfaction</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-                <div className="text-sm text-muted-foreground">Support Available</div>
-              </div>
             </div>
           </div>
         </div>
