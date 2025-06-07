@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Code, Shield, Zap, Globe } from 'lucide-react';
-import { ParticleTextEffect } from '@/components/ui/interactive-text-particle';
+import { HoverButton } from '@/components/ui/hover-glow-button';
 
 const Hero = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const businessTexts = ['innovation', 'transformation', 'excellence', 'growth', 'success'];
   const [isAnimating, setIsAnimating] = useState(false);
-  const [showParticleText, setShowParticleText] = useState(false);
   const textRef = useRef<HTMLSpanElement>(null);
   const heroRef = useRef<HTMLElement>(null);
 
@@ -21,14 +20,8 @@ const Hero = () => {
       }, 500);
     }, 3000);
 
-    // Show particle text after initial load
-    const particleTimer = setTimeout(() => {
-      setShowParticleText(true);
-    }, 2000);
-
     return () => {
       clearInterval(interval);
-      clearTimeout(particleTimer);
     };
   }, [businessTexts.length]);
 
@@ -57,26 +50,6 @@ const Hero = () => {
         <div className="absolute w-80 h-80 rounded-full bg-primary/5 blur-3xl animate-float bottom-20 left-5 animation-delay-300" />
         <div className="absolute w-64 h-64 rounded-full bg-primary/5 blur-3xl animate-float top-60 right-1/3 animation-delay-500" />
       </div>
-
-      {/* Interactive Particle Text Overlay */}
-      {showParticleText && (
-        <div className="absolute inset-0 z-20 pointer-events-auto">
-          <ParticleTextEffect
-            text="AuraByt"
-            className="absolute top-0 left-0"
-            colors={[
-              '3b82f6', // Blue-500
-              '6366f1', // Indigo-500  
-              '8b5cf6', // Violet-500
-              'a855f7', // Purple-500
-              'd946ef', // Fuchsia-500
-              'ec4899', // Pink-500
-            ]}
-            animationForce={60}
-            particleDensity={3}
-          />
-        </div>
-      )}
       
       <div className="container mx-auto px-4 z-10 relative">
         <div className="max-w-6xl mx-auto text-center">
@@ -141,30 +114,31 @@ const Hero = () => {
             We architect the future of business technology.
           </p>
           
-          {/* CTA buttons */}
+          {/* CTA buttons with hover glow effect */}
           <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-            <Link 
-              to="/services" 
-              className="btn-primary text-lg z-30 relative"
+            <HoverButton
+              href="/services"
+              glowColor="hsl(217, 91%, 60%)"
+              backgroundColor="hsl(217, 91%, 60%)"
+              textColor="hsl(var(--primary-foreground))"
+              hoverTextColor="hsl(var(--primary-foreground))"
+              className="shadow-lg hover:shadow-primary/25"
             >
               Explore Solutions
               <ArrowRight className="ml-3" size={24} />
-            </Link>
+            </HoverButton>
             
-            <Link 
-              to="/contact" 
-              className="btn-secondary text-lg z-30 relative"
+            <HoverButton
+              href="/contact"
+              glowColor="hsl(217, 91%, 60%)"
+              backgroundColor="transparent"
+              textColor="hsl(217, 91%, 60%)"
+              hoverTextColor="hsl(var(--primary-foreground))"
+              className="shadow-lg"
             >
               Schedule Consultation
-            </Link>
+            </HoverButton>
           </div>
-
-          {/* Interaction hint */}
-          {showParticleText && (
-            <div className="mt-12 text-sm text-muted-foreground/70 animate-pulse">
-              Move your mouse over the screen to interact with the particles
-            </div>
-          )}
         </div>
       </div>
     </section>

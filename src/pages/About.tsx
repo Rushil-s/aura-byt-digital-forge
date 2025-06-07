@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
-import { ParticleTextEffect } from '@/components/ui/interactive-text-particle';
+import { HoverButton } from '@/components/ui/hover-glow-button';
 import SEO from '@/components/SEO';
 
 const About = () => {
   const [currentAttributeIndex, setCurrentAttributeIndex] = useState(0);
-  const [showParticleText, setShowParticleText] = useState(false);
   const attributes = ['clarity', 'creativity', 'scalability', 'support', 'success'];
 
   // Memoize observer creation to prevent recreation on each render
@@ -30,11 +29,6 @@ const About = () => {
       setCurrentAttributeIndex(prevIndex => (prevIndex + 1) % attributes.length);
     }, 3000);
     
-    // Show particle text after a delay
-    const particleTimer = setTimeout(() => {
-      setShowParticleText(true);
-    }, 1500);
-    
     // Animation for elements when they come into view
     const observer = createObserver();
     
@@ -48,7 +42,6 @@ const About = () => {
 
     return () => {
       clearInterval(rotationInterval);
-      clearTimeout(particleTimer);
       observer.disconnect();
     };
   }, [attributes.length, createObserver]);
@@ -68,24 +61,6 @@ const About = () => {
           <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-primary/10 blur-3xl animate-pulse-slow"></div>
           <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-primary/5 blur-3xl animate-float animation-delay-300"></div>
         </div>
-
-        {/* Interactive Particle Text for "About" */}
-        {showParticleText && (
-          <div className="absolute inset-0 z-10 pointer-events-auto">
-            <ParticleTextEffect
-              text="About"
-              className="absolute top-0 left-0"
-              colors={[
-                '3b82f6', // Blue-500
-                '6366f1', // Indigo-500  
-                '8b5cf6', // Violet-500
-                'a855f7', // Purple-500
-              ]}
-              animationForce={50}
-              particleDensity={4}
-            />
-          </div>
-        )}
         
         <div className="container mx-auto px-4 relative z-20">
           <div className="max-w-3xl mx-auto text-center">
@@ -95,13 +70,6 @@ const About = () => {
             <p className="text-xl opacity-90 animate-fade-in text-center" style={{ animationDelay: '0.2s' }}>
               <span className="gradient-text">AuraByt</span> is about <span className="gradient-text typewriter-text">{attributes[currentAttributeIndex]}</span>
             </p>
-            
-            {/* Interaction hint */}
-            {showParticleText && (
-              <div className="mt-8 text-sm text-muted-foreground/70 animate-pulse">
-                Hover over the screen to see the interactive particles
-              </div>
-            )}
           </div>
         </div>
       </section>
@@ -207,12 +175,16 @@ const About = () => {
               <p className="opacity-80 mb-8">
                 Our Toronto roots influence our approach to business - innovative, diverse, and forward-thinking. We leverage the city's vibrant tech community to stay at the cutting edge of digital trends and technologies.
               </p>
-              <Link 
-                to="/contact" 
-                className="btn-primary"
+              <HoverButton
+                href="/contact"
+                glowColor="hsl(217, 91%, 60%)"
+                backgroundColor="hsl(217, 91%, 60%)"
+                textColor="hsl(var(--primary-foreground))"
+                hoverTextColor="hsl(var(--primary-foreground))"
+                className="shadow-lg hover:shadow-primary/25"
               >
                 Connect With Us
-              </Link>
+              </HoverButton>
             </div>
             <div className="relative animate-on-scroll">
               <div className="rounded-lg overflow-hidden shadow-xl">
@@ -238,12 +210,16 @@ const About = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Let's discuss how <span className="gradient-text">AuraByt</span> can help transform your business.
             </p>
-            <Link 
-              to="/contact" 
-              className="btn-primary"
+            <HoverButton
+              href="/contact"
+              glowColor="hsl(217, 91%, 60%)"
+              backgroundColor="hsl(217, 91%, 60%)"
+              textColor="hsl(var(--primary-foreground))"
+              hoverTextColor="hsl(var(--primary-foreground))"
+              className="shadow-lg hover:shadow-primary/25"
             >
               Get in Touch
-            </Link>
+            </HoverButton>
           </div>
         </div>
       </section>

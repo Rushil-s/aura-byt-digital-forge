@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
 import ProductCard from '@/components/ProductCard';
 import FeatureShowcase from '@/components/FeatureShowcase';
+import { HoverButton } from '@/components/ui/hover-glow-button';
 import { Code, BarChart3, ServerCog, ArrowRight, Shield, Zap, Globe, Users, Cpu, Database } from 'lucide-react';
 
 const Index = () => {
@@ -233,13 +234,17 @@ const Index = () => {
           </div>
           
           <div className="text-center mt-16 scroll-animate opacity-0">
-            <a 
+            <HoverButton
               href="/services"
-              className="btn-primary text-lg"
+              glowColor="hsl(217, 91%, 60%)"
+              backgroundColor="hsl(217, 91%, 60%)"
+              textColor="hsl(var(--primary-foreground))"
+              hoverTextColor="hsl(var(--primary-foreground))"
+              className="shadow-lg hover:shadow-primary/25"
             >
               View All Solutions
               <ArrowRight size={24} className="ml-3" />
-            </a>
+            </HoverButton>
           </div>
         </div>
       </section>
@@ -263,20 +268,28 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-8 justify-center">
-              <a
+              <HoverButton
                 href="/contact"
-                className="btn-primary text-lg"
+                glowColor="hsl(217, 91%, 60%)"
+                backgroundColor="hsl(217, 91%, 60%)"
+                textColor="hsl(var(--primary-foreground))"
+                hoverTextColor="hsl(var(--primary-foreground))"
+                className="shadow-lg hover:shadow-primary/25"
               >
                 Start Your Project
                 <ArrowRight size={24} className="ml-3" />
-              </a>
+              </HoverButton>
               
-              <a
+              <HoverButton
                 href="/services"
-                className="btn-secondary text-lg"
+                glowColor="hsl(217, 91%, 60%)"
+                backgroundColor="transparent"
+                textColor="hsl(217, 91%, 60%)"
+                hoverTextColor="hsl(var(--primary-foreground))"
+                className="shadow-lg"
               >
                 Explore Services
-              </a>
+              </HoverButton>
             </div>
           </div>
         </div>
