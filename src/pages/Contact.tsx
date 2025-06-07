@@ -3,7 +3,6 @@ import ContactForm from '@/components/ContactForm';
 import { Mail, Phone, Clock, MapPin, Send } from 'lucide-react';
 import { AnimatedShaderBackground } from '@/components/ui/animated-shader-background';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
-import { HoverButton } from '@/components/ui/hover-glow-button';
 import { Faq3 } from '@/components/ui/faq3';
 import SEO from '@/components/SEO';
 
@@ -50,7 +49,7 @@ const Contact = () => {
         speed={0.7}
       />
       
-      {/* Smaller Hero Section */}
+      {/* Smaller Hero Section - No buttons */}
       <section className="relative pt-32 pb-12 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
@@ -64,31 +63,8 @@ const Contact = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
-              Transform your ideas into reality with our expert team.
+              Transform your ideas into reality with our expert team. Fill out the form below to get started.
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <HoverButton
-                href="#contact-form"
-                variant="primary"
-                glowColor="hsl(217, 91%, 60%)"
-                className="shadow-lg hover:shadow-primary/25"
-                onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                <Send size={18} />
-                Start Your Project
-              </HoverButton>
-              
-              <HoverButton
-                href="tel:+14379252744"
-                variant="secondary"
-                glowColor="hsl(217, 91%, 60%)"
-                className="shadow-lg"
-              >
-                <Phone size={18} />
-                Call Now
-              </HoverButton>
-            </div>
           </div>
         </div>
       </section>
@@ -218,17 +194,69 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* FAQ Section with new accordion style */}
-      <section className="relative">
+      {/* FAQ Section - Simple version without support section */}
+      <section className="relative py-20">
         <div className="relative z-10">
-          <Faq3
-            heading="Frequently Asked Questions"
-            description="Get quick answers to common questions about our services and process."
-            supportHeading="Still have questions?"
-            supportDescription="Our team is here to help with any additional questions or to discuss your specific project needs."
-            supportButtonText="Contact Our Team"
-            supportButtonUrl="/contact"
-          />
+          <div className="container space-y-16">
+            <div className="mx-auto flex max-w-3xl flex-col text-left md:text-center">
+              <h2 className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-muted-foreground lg:text-lg">
+                Get quick answers to common questions about our services and process.
+              </p>
+            </div>
+            
+            <div className="mx-auto w-full lg:max-w-3xl">
+              <div className="space-y-4">
+                {[
+                  {
+                    question: "What types of businesses do you work with?",
+                    answer: "We work with businesses of all sizes across various industries, including e-commerce, healthcare, finance, education, and more. Our solutions are tailored to meet the specific needs of each client."
+                  },
+                  {
+                    question: "How long does a typical web development project take?",
+                    answer: "The timeline varies depending on the scope and complexity of the project. A simple website might take 4-6 weeks, while a complex web application could take 3-6 months. We'll provide a detailed timeline during our initial consultation."
+                  },
+                  {
+                    question: "Do you offer ongoing support after project completion?",
+                    answer: "Yes, we provide ongoing support and maintenance for all our projects. We offer various support packages to ensure your digital assets continue to perform optimally."
+                  },
+                  {
+                    question: "What is your approach to digital marketing?",
+                    answer: "We take a data-driven approach to digital marketing, focusing on strategies that deliver measurable results. We start by understanding your business goals and target audience, then develop a customized strategy to reach and engage them effectively."
+                  },
+                  {
+                    question: "How quickly can you start my project?",
+                    answer: "We can typically begin new projects within 1-2 weeks, depending on scope and current workload. Rush projects can often be accommodated with proper planning."
+                  },
+                  {
+                    question: "Do you work with international clients?",
+                    answer: "Yes! While we're based in Toronto, we work with clients globally. We're experienced in remote collaboration and different time zones."
+                  }
+                ].map((faq, index) => (
+                  <div key={index} className="relative">
+                    <div className="relative h-full rounded-xl border border-border p-2">
+                      <GlowingEffect
+                        spread={20}
+                        glow={true}
+                        disabled={false}
+                        proximity={50}
+                        inactiveZone={0.1}
+                        borderWidth={1}
+                        movementDuration={1}
+                      />
+                      
+                      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/80 backdrop-blur-sm p-6 shadow-sm">
+                        <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
+                        <p className="text-muted-foreground">{faq.answer}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
