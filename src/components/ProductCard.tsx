@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Code } from 'lucide-react';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 interface ProductCardProps {
   title: string;
@@ -11,6 +12,16 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ title, description, link }) => {
   return (
     <div className="group relative professional-card h-full flex flex-col overflow-hidden">
+      <GlowingEffect
+        spread={35}
+        glow={true}
+        disabled={false}
+        proximity={70}
+        inactiveZone={0.05}
+        borderWidth={2}
+        movementDuration={1.8}
+      />
+      
       {/* Floating icon */}
       <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
         <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">

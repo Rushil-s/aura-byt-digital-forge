@@ -1,6 +1,7 @@
 import { Zap, Cpu, Fingerprint, Pencil, Settings2, Sparkles, Shield, Globe, Database, Code, BarChart3, ServerCog } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { FeatureCard } from '@/components/ui/grid-feature-cards';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 const features = [
 	{
@@ -64,7 +65,18 @@ export default function FeatureShowcase() {
 					className="grid grid-cols-1 divide-x divide-y divide-dashed border border-dashed border-border/50 sm:grid-cols-2 lg:grid-cols-3 rounded-xl overflow-hidden"
 				>
 					{features.map((feature, i) => (
-						<FeatureCard key={i} feature={feature} />
+						<div key={i} className="relative">
+							<GlowingEffect
+								spread={25}
+								glow={true}
+								disabled={false}
+								proximity={60}
+								inactiveZone={0.1}
+								borderWidth={1}
+								movementDuration={1.2}
+							/>
+							<FeatureCard feature={feature} />
+						</div>
 					))}
 				</AnimatedContainer>
 			</div>

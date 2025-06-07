@@ -2,9 +2,10 @@ import React, { useEffect, useRef, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck, Server, Headphones, Settings, Cpu, CheckCircle, Users, MonitorSmartphone, Coffee, Cloud, Share2, TrendingUp, LineChart, Youtube, Instagram, Palette, FileCode } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 import SEO from '@/components/SEO';
 
-// Enhanced service item with wave animation
+// Enhanced service item with wave animation and glowing effect
 const ServiceItemWithWaves = memo(({ service, index }: { service: any; index: number }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -88,44 +89,66 @@ const ServiceItemWithWaves = memo(({ service, index }: { service: any; index: nu
 
   return (
     <div 
-      className="professional-card relative service-card group overflow-hidden" 
+      className="relative service-card group overflow-hidden min-h-[20rem]" 
       style={{ transitionDelay: `${index * 50}ms` }}
     >
-      {/* Animated wave background */}
-      <canvas 
-        ref={canvasRef} 
-        className="absolute inset-0 w-full h-full opacity-40 pointer-events-none"
-        style={{ width: '100%', height: '100%' }}
-      />
-      
-      {/* Tech grid overlay */}
-      <div className="absolute inset-0 tech-grid opacity-10 pointer-events-none" />
-      
-      {/* Content */}
-      <div className="relative z-10">
-        <div className="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-4 md:mb-6 text-primary group-hover:scale-110 transition-transform border border-primary/20 backdrop-blur-sm">
-          {service.icon}
-        </div>
-        <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 group-hover:text-primary transition-colors">{service.title}</h3>
-        <p className="text-muted-foreground mb-4 md:mb-6">{service.description}</p>
+      <div className="relative h-full rounded-xl border border-border p-2">
+        {/* Glowing Effect */}
+        <GlowingEffect
+          spread={30}
+          glow={true}
+          disabled={false}
+          proximity={80}
+          inactiveZone={0.01}
+          borderWidth={2}
+          movementDuration={1.5}
+        />
         
-        <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Key Benefits:</h4>
-        <ul className="space-y-1 md:space-y-2 mb-4 md:mb-6 text-sm md:text-base">
-          {service.benefits.slice(0, 4).map((benefit: string, j: number) => (
-            <li key={j} className="flex items-start">
-              <CheckCircle className="text-primary mr-2 h-4 w-4 md:h-5 md:w-5 mt-0.5 flex-shrink-0" />
-              <span>{benefit}</span>
-            </li>
-          ))}
-        </ul>
-        
-        <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Technologies:</h4>
-        <div className="flex flex-wrap gap-1 md:gap-2">
-          {service.technologies.map((tech: string, k: number) => (
-            <span key={k} className="px-2 py-1 bg-primary/10 text-primary rounded-md text-xs md:text-sm border border-primary/20 backdrop-blur-sm">
-              {tech}
-            </span>
-          ))}
+        <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-lg border bg-card/80 backdrop-blur-sm p-6 shadow-sm">
+          {/* Animated wave background */}
+          <canvas 
+            ref={canvasRef} 
+            className="absolute inset-0 w-full h-full opacity-30 pointer-events-none"
+            style={{ width: '100%', height: '100%' }}
+          />
+          
+          {/* Tech grid overlay */}
+          <div className="absolute inset-0 tech-grid opacity-10 pointer-events-none" />
+          
+          {/* Content */}
+          <div className="relative z-10 flex flex-col h-full">
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-primary/10 flex items-center justify-center mb-4 md:mb-6 text-primary group-hover:scale-110 transition-transform border border-primary/20 backdrop-blur-sm">
+              {service.icon}
+            </div>
+            
+            <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 group-hover:text-primary transition-colors">{service.title}</h3>
+            <p className="text-muted-foreground mb-4 md:mb-6 flex-grow">{service.description}</p>
+            
+            <div className="space-y-4">
+              <div>
+                <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Key Benefits:</h4>
+                <ul className="space-y-1 md:space-y-2 mb-4 md:mb-6 text-sm md:text-base">
+                  {service.benefits.slice(0, 3).map((benefit: string, j: number) => (
+                    <li key={j} className="flex items-start">
+                      <CheckCircle className="text-primary mr-2 h-4 w-4 md:h-5 md:w-5 mt-0.5 flex-shrink-0" />
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="font-semibold mb-2 md:mb-3 text-sm md:text-base">Technologies:</h4>
+                <div className="flex flex-wrap gap-1 md:gap-2">
+                  {service.technologies.slice(0, 4).map((tech: string, k: number) => (
+                    <span key={k} className="px-2 py-1 bg-primary/10 text-primary rounded-md text-xs md:text-sm border border-primary/20 backdrop-blur-sm">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
