@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import ContactForm from '@/components/ContactForm';
-import { Mail, Phone, Clock, MapPin, Send, MessageCircle, Calendar } from 'lucide-react';
+import { Mail, Phone, Clock, MapPin, Send } from 'lucide-react';
 import { AnimatedShaderBackground } from '@/components/ui/animated-shader-background';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 import { HoverButton } from '@/components/ui/hover-glow-button';
@@ -35,27 +35,6 @@ const Contact = () => {
     }
   ];
 
-  const quickActions = [
-    {
-      icon: <MessageCircle size={20} />,
-      title: 'Quick Chat',
-      description: 'Get instant answers to your questions',
-      action: 'Start Chat'
-    },
-    {
-      icon: <Calendar size={20} />,
-      title: 'Schedule Meeting',
-      description: 'Book a consultation call with our team',
-      action: 'Book Now'
-    },
-    {
-      icon: <Send size={20} />,
-      title: 'Send Proposal',
-      description: 'Share your project requirements',
-      action: 'Send Details'
-    }
-  ];
-
   return (
     <div className="relative min-h-screen">
       <SEO 
@@ -71,25 +50,24 @@ const Contact = () => {
         speed={0.7}
       />
       
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      {/* Smaller Hero Section */}
+      <section className="relative pt-32 pb-12 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20 backdrop-blur-sm">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 border border-primary/20 backdrop-blur-sm">
               <Send size={16} />
               Let's Connect
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 animate-fade-in">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
               Ready to Build Something <span className="gradient-text">Amazing</span>?
             </h1>
             
-            <p className="text-xl md:text-2xl text-muted-foreground mb-12 animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
-              Transform your ideas into reality. Our team of experts is here to help you 
-              navigate the digital landscape and achieve your business goals.
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
+              Transform your ideas into reality with our expert team.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
               <HoverButton
                 href="#contact-form"
                 variant="primary"
@@ -97,7 +75,7 @@ const Contact = () => {
                 className="shadow-lg hover:shadow-primary/25"
                 onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                <Send size={20} />
+                <Send size={18} />
                 Start Your Project
               </HoverButton>
               
@@ -107,66 +85,9 @@ const Contact = () => {
                 glowColor="hsl(217, 91%, 60%)"
                 className="shadow-lg"
               >
-                <Phone size={20} />
+                <Phone size={18} />
                 Call Now
               </HoverButton>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Actions Section */}
-      <section className="relative py-20">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                How Can We <span className="gradient-text">Help</span> You?
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Choose the best way to get in touch with our team
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-              {quickActions.map((action, index) => (
-                <div key={index} className="relative group">
-                  <div className="relative h-full rounded-xl border border-border p-2">
-                    <GlowingEffect
-                      spread={35}
-                      glow={true}
-                      disabled={false}
-                      proximity={80}
-                      inactiveZone={0.05}
-                      borderWidth={2}
-                      movementDuration={1.5}
-                    />
-                    
-                    <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-lg border bg-card/80 backdrop-blur-sm p-8 shadow-sm text-center">
-                      <div className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-4 text-primary group-hover:scale-110 transition-transform border border-primary/20">
-                        {action.icon}
-                      </div>
-                      
-                      <div>
-                        <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
-                          {action.title}
-                        </h3>
-                        <p className="text-muted-foreground mb-6">
-                          {action.description}
-                        </p>
-                        
-                        <HoverButton
-                          variant="secondary"
-                          glowColor="hsl(217, 91%, 60%)"
-                          className="w-full"
-                        >
-                          {action.action}
-                        </HoverButton>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
