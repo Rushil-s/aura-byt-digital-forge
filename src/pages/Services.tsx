@@ -4,6 +4,7 @@ import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck,
 import { useIsMobile } from '@/hooks/use-mobile';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 import { HoverButton } from '@/components/ui/hover-glow-button';
+import { SpiralBackground } from '@/components/ui/spiral-background';
 import SEO from '@/components/SEO';
 
 // Enhanced service card with better visual hierarchy
@@ -116,7 +117,7 @@ const ServiceCategory = memo(({
   return (
     <section 
       id={id} 
-      className={`py-20 ${index % 2 === 1 ? 'bg-card/20' : 'bg-background'} relative overflow-hidden`}
+      className={`py-20 ${index % 2 === 1 ? 'bg-card/20 backdrop-blur-sm' : 'bg-background/60 backdrop-blur-sm'} relative overflow-hidden`}
     >
       {/* Background elements */}
       {index % 2 === 0 && (
@@ -129,7 +130,7 @@ const ServiceCategory = memo(({
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="max-w-4xl mx-auto mb-16 text-center section-title">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20 backdrop-blur-sm">
             <Zap size={16} />
             {category}
           </div>
@@ -485,15 +486,25 @@ const Services = () => {
   };
 
   return (
-    <div className="bg-background">
+    <div className="bg-background relative">
       <SEO 
         title="AuraByt Services - Web Development, Digital Marketing & IT Support"
         description="Explore AuraByt's comprehensive services including web development, digital marketing and IT support solutions tailored for your business needs."
         keywords="web development, digital marketing, IT support, software development, SEO, cloud solutions"
       />
       
+      {/* Spiral Background - spans entire page */}
+      <SpiralBackground 
+        totalDots={350}
+        dotRadius={1}
+        duration={15}
+        dotColor="hsl(217, 91%, 60%)"
+        opacity={0.06}
+        className="fixed inset-0"
+      />
+      
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-background text-foreground relative overflow-hidden">
+      <section className="pt-32 pb-20 bg-background/80 backdrop-blur-sm text-foreground relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-primary/10 blur-3xl animate-pulse-slow"></div>
           <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-primary/5 blur-3xl animate-float animation-delay-300"></div>
@@ -501,7 +512,7 @@ const Services = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20 backdrop-blur-sm">
               <Star size={16} />
               Our Services
             </div>
@@ -549,7 +560,7 @@ const Services = () => {
       </div>
 
       {/* Process Section */}
-      <section className="py-20 bg-card/20">
+      <section className="py-20 bg-card/20 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-4xl font-bold mb-6">
@@ -568,7 +579,7 @@ const Services = () => {
               { step: "04", title: "Support", description: "We provide ongoing support and optimization" }
             ].map((item, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 border border-primary/20">
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 border border-primary/20 backdrop-blur-sm">
                   <span className="text-primary font-bold">{item.step}</span>
                 </div>
                 <h3 className="text-xl font-bold mb-3">{item.title}</h3>
@@ -580,7 +591,7 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-background relative overflow-hidden">
+      <section className="py-20 bg-background/60 backdrop-blur-sm relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-primary/5 blur-3xl rounded-full" />
           <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full" />
@@ -600,7 +611,7 @@ const Services = () => {
                   movementDuration={2}
                 />
                 
-                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-md p-12 shadow-sm text-center">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/40 backdrop-blur-md p-12 shadow-sm text-center">
                   <h2 className="text-4xl md:text-5xl font-bold mb-6">
                     Ready to Get <span className="gradient-text">Started</span>?
                   </h2>

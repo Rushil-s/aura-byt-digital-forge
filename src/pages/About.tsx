@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { CheckCircle, Users, Target, Lightbulb, Heart, MapPin, Calendar, Award, Zap, Globe, Code, BarChart3, Shield, Rocket, Star, TrendingUp, Sparkles } from 'lucide-react';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 import { HoverButton } from '@/components/ui/hover-glow-button';
-import { SpiralAnimation } from '@/components/ui/spiral-animation';
+import { SpiralBackground } from '@/components/ui/spiral-background';
 import SEO from '@/components/SEO';
 
 const About = () => {
@@ -152,16 +152,26 @@ const About = () => {
   ];
 
   return (
-    <div>
+    <div className="relative">
       <SEO 
         title="About AuraByt - Digital Innovation Consultancy" 
         description="AuraByt is a Toronto-based IT consultancy focused on delivering innovative digital solutions through clarity, creativity, scalability, support, and success."
         keywords="IT consultancy, Toronto tech company, web development, digital marketing, IT support, business growth"
       />
       
+      {/* Spiral Background - spans entire page */}
+      <SpiralBackground 
+        totalDots={400}
+        dotRadius={1.5}
+        duration={12}
+        dotColor="hsl(217, 91%, 60%)"
+        opacity={0.08}
+        className="fixed inset-0"
+      />
+      
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-background text-foreground relative overflow-hidden">
-        {/* Background animations */}
+      <section className="pt-32 pb-20 bg-background/80 backdrop-blur-sm text-foreground relative overflow-hidden">
+        {/* Additional background animations */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-primary/10 blur-3xl animate-pulse-slow"></div>
           <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-primary/5 blur-3xl animate-float animation-delay-300"></div>
@@ -169,7 +179,7 @@ const About = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20 backdrop-blur-sm">
               <Users size={16} />
               About Us
             </div>
@@ -189,70 +199,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* Spiral Animation Section */}
-      <section className="py-20 bg-card/20 relative overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16 animate-on-scroll">
-              <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20">
-                <Sparkles size={16} />
-                Innovation in Motion
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Where Art Meets <span className="gradient-text">Technology</span>
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                Experience the beauty of mathematical precision and creative design working in harmony.
-              </p>
-            </div>
-
-            <div className="relative">
-              <div className="relative h-full rounded-xl border border-border/30 p-2">
-                <GlowingEffect
-                  spread={40}
-                  glow={true}
-                  disabled={false}
-                  proximity={100}
-                  inactiveZone={0.05}
-                  borderWidth={2}
-                  movementDuration={2}
-                />
-                
-                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm shadow-sm">
-                  <div className="h-[500px] flex items-center justify-center">
-                    <SpiralAnimation 
-                      totalDots={400}
-                      size={400}
-                      dotRadius={1.5}
-                      duration={5}
-                      dotColor="hsl(217, 91%, 60%)"
-                      backgroundColor="transparent"
-                    />
-                  </div>
-                  
-                  <div className="p-8 text-center border-t border-border/30">
-                    <h3 className="text-xl font-bold mb-3">Golden Ratio Spiral</h3>
-                    <p className="text-muted-foreground mb-4">
-                      This mesmerizing pattern demonstrates our commitment to precision, beauty, and mathematical elegance in everything we create.
-                    </p>
-                    <HoverButton
-                      href="/demo/spiral"
-                      variant="secondary"
-                      glowColor="hsl(217, 91%, 60%)"
-                      className="shadow-lg"
-                    >
-                      View Full Demo
-                    </HoverButton>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Stats Section */}
-      <section className="py-16 bg-background">
+      <section className="py-16 bg-background/60 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -268,7 +216,7 @@ const About = () => {
                     movementDuration={1.2}
                   />
                   
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-6 shadow-sm text-center">
+                  <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/40 backdrop-blur-sm p-6 shadow-sm text-center">
                     <div className="text-primary mb-3 flex justify-center">
                       {stat.icon}
                     </div>
@@ -283,7 +231,7 @@ const About = () => {
       </section>
 
       {/* Enhanced Who We Are Section */}
-      <section className="py-20">
+      <section className="py-20 bg-background/60 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 animate-on-scroll">
@@ -311,7 +259,7 @@ const About = () => {
                       movementDuration={1.8}
                     />
                     
-                    <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-8 shadow-sm group hover:scale-105 transition-transform duration-300">
+                    <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/40 backdrop-blur-sm p-8 shadow-sm group hover:scale-105 transition-transform duration-300">
                       <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform duration-300 border border-primary/20">
                         {item.icon}
                       </div>
@@ -351,7 +299,7 @@ const About = () => {
                   movementDuration={2}
                 />
                 
-                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-12 shadow-sm">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/40 backdrop-blur-sm p-12 shadow-sm">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="animate-on-scroll">
                       <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 border border-primary/20">
@@ -421,7 +369,7 @@ const About = () => {
       </section>
 
       {/* Mission/Vision/Approach Tabs */}
-      <section className="py-20 bg-card/20">
+      <section className="py-20 bg-card/20 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 animate-on-scroll">
@@ -445,7 +393,7 @@ const About = () => {
                   movementDuration={2}
                 />
                 
-                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm shadow-sm">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/40 backdrop-blur-sm shadow-sm">
                   {/* Tab Navigation */}
                   <div className="flex border-b border-border/30">
                     {Object.keys(tabContent).map((tab) => (
@@ -506,7 +454,7 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20">
+      <section className="py-20 bg-background/60 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto text-center mb-16 animate-on-scroll">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -531,7 +479,7 @@ const About = () => {
                     movementDuration={1.8}
                   />
                   
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-8 shadow-sm group hover:scale-105 transition-transform duration-300">
+                  <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/40 backdrop-blur-sm p-8 shadow-sm group hover:scale-105 transition-transform duration-300">
                     <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${value.color} p-4 mb-6 text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                       {value.icon}
                     </div>
@@ -550,7 +498,7 @@ const About = () => {
       </section>
 
       {/* Toronto Section */}
-      <section className="py-20 bg-card/20 text-foreground relative">
+      <section className="py-20 bg-card/20 backdrop-blur-sm text-foreground relative">
         {/* Background animations */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/4 w-1/2 h-1/3 bg-primary/5 blur-3xl rounded-full animate-pulse-slow"></div>
@@ -571,7 +519,7 @@ const About = () => {
                   movementDuration={2}
                 />
                 
-                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-12 shadow-sm">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/40 backdrop-blur-sm p-12 shadow-sm">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="animate-on-scroll">
                       <div className="flex items-center mb-6">
@@ -630,7 +578,7 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-background relative overflow-hidden">
+      <section className="py-20 bg-background/60 backdrop-blur-sm relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-primary/5 blur-3xl rounded-full" />
           <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full" />
@@ -650,7 +598,7 @@ const About = () => {
                   movementDuration={2}
                 />
                 
-                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-md p-12 shadow-sm text-center animate-on-scroll">
+                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/40 backdrop-blur-md p-12 shadow-sm text-center animate-on-scroll">
                   <h2 className="text-4xl md:text-5xl font-bold mb-6">
                     Ready to Work <span className="gradient-text">Together</span>?
                   </h2>
