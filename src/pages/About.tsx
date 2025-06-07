@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { CheckCircle, Users, Target, Lightbulb, Heart, MapPin, Calendar, Award, Zap, Globe, Code, BarChart3 } from 'lucide-react';
+import { CheckCircle, Users, Target, Lightbulb, Heart, MapPin, Calendar, Award, Zap, Globe, Code, BarChart3, Shield, Rocket, Star, TrendingUp } from 'lucide-react';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 import { HoverButton } from '@/components/ui/hover-glow-button';
 import SEO from '@/components/SEO';
@@ -48,7 +48,7 @@ const About = () => {
   }, [attributes.length, createObserver]);
 
   const stats = [
-    { number: "50+", label: "Projects Delivered", icon: <Award size={24} /> },
+    { number: "100+", label: "Projects Delivered", icon: <Award size={24} /> },
     { number: "99%", label: "Client Satisfaction", icon: <Heart size={24} /> },
     { number: "5+", label: "Years Experience", icon: <Calendar size={24} /> },
     { number: "24/7", label: "Support Available", icon: <Zap size={24} /> }
@@ -57,26 +57,26 @@ const About = () => {
   const values = [
     {
       title: "Innovation",
-      description: "We embrace cutting-edge technologies and creative solutions to solve complex business challenges.",
+      description: "We embrace cutting-edge technologies and creative solutions to solve complex business challenges and drive digital transformation.",
       icon: <Lightbulb size={32} />,
       color: "from-blue-500 to-cyan-500"
     },
     {
       title: "Excellence",
-      description: "We maintain the highest standards in every project, ensuring quality that exceeds expectations.",
+      description: "We maintain the highest standards in every project, ensuring quality that exceeds expectations and delivers lasting value.",
       icon: <Award size={32} />,
       color: "from-purple-500 to-pink-500"
     },
     {
-      title: "Collaboration",
-      description: "We work closely with our clients as partners, treating their success as our own.",
+      title: "Partnership",
+      description: "We work closely with our clients as true partners, treating their success as our own and building long-term relationships.",
       icon: <Users size={32} />,
       color: "from-green-500 to-emerald-500"
     },
     {
       title: "Growth",
-      description: "We focus on solutions that scale with your business and drive sustainable growth.",
-      icon: <Target size={32} />,
+      description: "We focus on solutions that scale with your business and drive sustainable growth through strategic technology implementation.",
+      icon: <TrendingUp size={32} />,
       color: "from-orange-500 to-red-500"
     }
   ];
@@ -113,6 +113,42 @@ const About = () => {
       ]
     }
   };
+
+  const whoWeAreContent = [
+    {
+      title: "Technology Innovators",
+      description: "We're a team of passionate technologists who live and breathe innovation. Our expertise spans across modern web technologies, cloud platforms, and emerging digital trends.",
+      icon: <Rocket size={32} />,
+      features: [
+        "Full-stack development expertise",
+        "Cloud-native architecture specialists",
+        "AI and machine learning integration",
+        "Modern DevOps practices"
+      ]
+    },
+    {
+      title: "Business Strategists",
+      description: "Beyond technical skills, we understand business. We align technology solutions with your strategic goals to ensure every project drives real business value.",
+      icon: <Target size={32} />,
+      features: [
+        "Business process optimization",
+        "Digital transformation planning",
+        "ROI-focused solutions",
+        "Scalable growth strategies"
+      ]
+    },
+    {
+      title: "Problem Solvers",
+      description: "We thrive on complex challenges. Whether it's legacy system modernization or building cutting-edge applications, we find innovative solutions to your toughest problems.",
+      icon: <Shield size={32} />,
+      features: [
+        "Legacy system modernization",
+        "Complex integration challenges",
+        "Performance optimization",
+        "Security and compliance"
+      ]
+    }
+  ];
 
   return (
     <div>
@@ -183,7 +219,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission/Vision/Approach Tabs */}
+      {/* Enhanced Who We Are Section */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -191,8 +227,146 @@ const About = () => {
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Who We <span className="gradient-text">Are</span>
               </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                We're more than just an IT consultancy. We're your strategic technology partner, 
+                combining deep technical expertise with business insight to drive meaningful results.
+              </p>
+            </div>
+
+            {/* Who We Are Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+              {whoWeAreContent.map((item, index) => (
+                <div key={index} className="relative animate-on-scroll" style={{ transitionDelay: `${index * 100}ms` }}>
+                  <div className="relative h-full rounded-xl border border-border/30 p-2">
+                    <GlowingEffect
+                      spread={30}
+                      glow={true}
+                      disabled={false}
+                      proximity={70}
+                      inactiveZone={0.05}
+                      borderWidth={2}
+                      movementDuration={1.8}
+                    />
+                    
+                    <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-8 shadow-sm group hover:scale-105 transition-transform duration-300">
+                      <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform duration-300 border border-primary/20">
+                        {item.icon}
+                      </div>
+                      
+                      <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
+                        {item.title}
+                      </h3>
+                      
+                      <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">
+                        {item.description}
+                      </p>
+
+                      <div className="space-y-3">
+                        {item.features.map((feature, i) => (
+                          <div key={i} className="flex items-center text-sm">
+                            <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0" />
+                            <span className="text-muted-foreground">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Company Story */}
+            <div className="relative">
+              <div className="relative h-full rounded-xl border border-border/30 p-2">
+                <GlowingEffect
+                  spread={40}
+                  glow={true}
+                  disabled={false}
+                  proximity={100}
+                  inactiveZone={0.05}
+                  borderWidth={2}
+                  movementDuration={2}
+                />
+                
+                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-12 shadow-sm">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div className="animate-on-scroll">
+                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 border border-primary/20">
+                        <Star size={16} />
+                        Our Story
+                      </div>
+                      
+                      <h3 className="text-3xl font-bold mb-6">
+                        Built on <span className="gradient-text">Passion</span> & <span className="gradient-text">Purpose</span>
+                      </h3>
+                      
+                      <div className="space-y-6 text-muted-foreground leading-relaxed">
+                        <p>
+                          Founded with a vision to bridge the gap between complex technology and business success, 
+                          AuraByt emerged from the recognition that many businesses struggle to leverage technology effectively.
+                        </p>
+                        
+                        <p>
+                          Our founders, seasoned technology professionals with decades of combined experience, 
+                          saw an opportunity to create a consultancy that truly understands both the technical 
+                          and business sides of digital transformation.
+                        </p>
+                        
+                        <p>
+                          Today, we're proud to be a trusted partner for businesses across industries, 
+                          helping them navigate the digital landscape and achieve their goals through 
+                          innovative technology solutions.
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-6 mt-8">
+                        <div className="flex items-center">
+                          <Globe size={20} className="text-primary mr-3" />
+                          <div>
+                            <div className="font-semibold">Global Reach</div>
+                            <div className="text-sm text-muted-foreground">Serving clients worldwide</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center">
+                          <Code size={20} className="text-primary mr-3" />
+                          <div>
+                            <div className="font-semibold">Tech Excellence</div>
+                            <div className="text-sm text-muted-foreground">Cutting-edge solutions</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="relative animate-on-scroll">
+                      <div className="rounded-lg overflow-hidden shadow-xl">
+                        <img 
+                          src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1024&q=80" 
+                          alt="AuraByt Team Collaboration" 
+                          loading="lazy"
+                          width="1024"
+                          height="683"
+                          className="w-full h-auto"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission/Vision/Approach Tabs */}
+      <section className="py-20 bg-card/20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16 animate-on-scroll">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Our <span className="gradient-text">Foundation</span>
+              </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Learn more about our mission, vision, and approach to delivering exceptional results.
+                The principles that guide our work and define our commitment to excellence.
               </p>
             </div>
 
@@ -250,8 +424,8 @@ const About = () => {
                       <div className="relative">
                         <div className="rounded-lg overflow-hidden shadow-xl">
                           <img 
-                            src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1024&q=80" 
-                            alt="AuraByt Team Collaboration" 
+                            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1024&q=80" 
+                            alt="Team Strategy Session" 
                             loading="lazy"
                             width="1024"
                             height="683"
@@ -269,7 +443,7 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-card/20">
+      <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto text-center mb-16 animate-on-scroll">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -313,7 +487,7 @@ const About = () => {
       </section>
 
       {/* Toronto Section */}
-      <section className="py-20 bg-background text-foreground relative">
+      <section className="py-20 bg-card/20 text-foreground relative">
         {/* Background animations */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/4 w-1/2 h-1/3 bg-primary/5 blur-3xl rounded-full animate-pulse-slow"></div>
@@ -388,68 +562,6 @@ const About = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-20 bg-card/20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-16 animate-on-scroll">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Meet Our <span className="gradient-text">Team</span>
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Passionate professionals dedicated to your success.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                name: "Expert Developers",
-                role: "Full-Stack Development",
-                description: "Experienced in modern frameworks and technologies",
-                icon: <Code size={32} />
-              },
-              {
-                name: "Digital Strategists", 
-                role: "Marketing & Growth",
-                description: "Data-driven approach to digital marketing",
-                icon: <BarChart3 size={32} />
-              },
-              {
-                name: "Solution Architects",
-                role: "Infrastructure & Support", 
-                description: "Designing scalable and secure systems",
-                icon: <Zap size={32} />
-              }
-            ].map((member, index) => (
-              <div key={index} className="relative animate-on-scroll" style={{ transitionDelay: `${index * 100}ms` }}>
-                <div className="relative h-full rounded-xl border border-border/30 p-2">
-                  <GlowingEffect
-                    spread={25}
-                    glow={true}
-                    disabled={false}
-                    proximity={60}
-                    inactiveZone={0.1}
-                    borderWidth={1}
-                    movementDuration={1.2}
-                  />
-                  
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-8 shadow-sm text-center group hover:scale-105 transition-transform duration-300">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 text-primary group-hover:scale-110 transition-transform duration-300 border border-primary/20">
-                      {member.icon}
-                    </div>
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
-                      {member.name}
-                    </h3>
-                    <p className="text-primary font-medium mb-3">{member.role}</p>
-                    <p className="text-muted-foreground text-sm">{member.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
