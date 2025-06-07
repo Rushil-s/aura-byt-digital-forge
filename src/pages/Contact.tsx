@@ -34,172 +34,171 @@ const Contact = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-background">
+    <div className="relative min-h-screen bg-background overflow-hidden">
       <SEO 
         title="Contact AuraByt - Get In Touch With Our Team" 
         description="Contact AuraByt for all your web development, digital marketing and IT support needs. Our team is ready to help your business grow."
         keywords="Contact AuraByt, IT consultancy contact, Toronto tech company, web development services, digital marketing contact"
       />
       
-      {/* Animated Background - Properly positioned */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
+      {/* Animated Background - Fixed positioning to cover entire viewport */}
+      <div className="fixed inset-0 w-full h-full z-0">
         <AnimatedShaderBackground 
           className="w-full h-full" 
-          intensity={0.7}
-          speed={0.6}
+          intensity={0.8}
+          speed={0.7}
         />
-        {/* Subtle overlay for better text readability */}
-        <div className="absolute inset-0 bg-background/10 backdrop-blur-[0.5px]" />
       </div>
       
-      {/* Hero Section - Smaller and cleaner */}
-      <section className="relative pt-32 pb-12 overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 border border-primary/20 backdrop-blur-sm">
-              <Send size={16} />
-              Let's Connect
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
-              Ready to Build Something <span className="gradient-text">Amazing</span>?
-            </h1>
-            
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
-              Transform your ideas into reality with our expert team. Fill out the form below to get started.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Contact Section */}
-      <section className="relative py-16" id="contact-form">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-              {/* Contact Form */}
-              <div className="relative">
-                <div className="relative h-full rounded-xl border border-border p-2">
-                  <GlowingEffect
-                    spread={40}
-                    glow={true}
-                    disabled={false}
-                    proximity={100}
-                    inactiveZone={0.05}
-                    borderWidth={2}
-                    movementDuration={2}
-                  />
-                  
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/95 backdrop-blur-md p-8 shadow-sm">
-                    <div className="mb-8">
-                      <h2 className="text-3xl font-bold mb-4">
-                        Send Us a <span className="gradient-text">Message</span>
-                      </h2>
-                      <p className="text-muted-foreground">
-                        Tell us about your project and we'll get back to you within 24 hours.
-                      </p>
-                    </div>
-                    
-                    <ContactForm />
-                  </div>
-                </div>
+      {/* Content overlay with proper z-index */}
+      <div className="relative z-10">
+        {/* Hero Section - Smaller and cleaner */}
+        <section className="pt-32 pb-12 overflow-hidden">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 border border-primary/20 backdrop-blur-sm">
+                <Send size={16} />
+                Let's Connect
               </div>
+              
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+                Ready to Build Something <span className="gradient-text">Amazing</span>?
+              </h1>
+              
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
+                Transform your ideas into reality with our expert team. Fill out the form below to get started.
+              </p>
+            </div>
+          </div>
+        </section>
 
-              {/* Contact Information */}
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6">
-                    Get In <span className="gradient-text">Touch</span>
-                  </h2>
-                  <p className="text-xl text-muted-foreground mb-8">
-                    Ready to start your next project? We're here to help you every step of the way.
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {contactInfo.map((item, index) => (
-                    <div key={index} className="relative group">
-                      <div className="relative h-full rounded-xl border border-border p-2">
-                        <GlowingEffect
-                          spread={25}
-                          glow={true}
-                          disabled={false}
-                          proximity={60}
-                          inactiveZone={0.1}
-                          borderWidth={1}
-                          movementDuration={1.2}
-                        />
-                        
-                        <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-6 shadow-sm">
-                          <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform border border-primary/20">
-                            {item.icon}
-                          </div>
-                          
-                          <h3 className="font-bold mb-2 group-hover:text-primary transition-colors">
-                            {item.title}
-                          </h3>
-                          
-                          <p className="text-sm font-medium mb-1">
-                            {item.details}
-                          </p>
-                          
-                          <p className="text-xs text-muted-foreground">
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Additional Info */}
+        {/* Main Contact Section */}
+        <section className="py-16" id="contact-form">
+          <div className="container mx-auto px-4">
+            <div className="max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                {/* Contact Form */}
                 <div className="relative">
                   <div className="relative h-full rounded-xl border border-border p-2">
                     <GlowingEffect
-                      spread={30}
+                      spread={40}
                       glow={true}
                       disabled={false}
-                      proximity={70}
+                      proximity={100}
                       inactiveZone={0.05}
                       borderWidth={2}
-                      movementDuration={1.8}
+                      movementDuration={2}
                     />
                     
-                    <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-8 shadow-sm">
-                      <h3 className="text-xl font-bold mb-4">
-                        Why Choose <span className="gradient-text">AuraByt</span>?
-                      </h3>
+                    <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/95 backdrop-blur-md p-8 shadow-sm">
+                      <div className="mb-8">
+                        <h2 className="text-3xl font-bold mb-4">
+                          Send Us a <span className="gradient-text">Message</span>
+                        </h2>
+                        <p className="text-muted-foreground">
+                          Tell us about your project and we'll get back to you within 24 hours.
+                        </p>
+                      </div>
                       
-                      <ul className="space-y-3 text-muted-foreground">
-                        <li className="flex items-start">
-                          <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
-                          <span>Expert team with 10+ years of experience</span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
-                          <span>24/7 support and maintenance</span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
-                          <span>Transparent pricing and timelines</span>
-                        </li>
-                        <li className="flex items-start">
-                          <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
-                          <span>100% satisfaction guarantee</span>
-                        </li>
-                      </ul>
+                      <ContactForm />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contact Information */}
+                <div className="space-y-8">
+                  <div>
+                    <h2 className="text-3xl font-bold mb-6">
+                      Get In <span className="gradient-text">Touch</span>
+                    </h2>
+                    <p className="text-xl text-muted-foreground mb-8">
+                      Ready to start your next project? We're here to help you every step of the way.
+                    </p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {contactInfo.map((item, index) => (
+                      <div key={index} className="relative group">
+                        <div className="relative h-full rounded-xl border border-border p-2">
+                          <GlowingEffect
+                            spread={25}
+                            glow={true}
+                            disabled={false}
+                            proximity={60}
+                            inactiveZone={0.1}
+                            borderWidth={1}
+                            movementDuration={1.2}
+                          />
+                          
+                          <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-6 shadow-sm">
+                            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform border border-primary/20">
+                              {item.icon}
+                            </div>
+                            
+                            <h3 className="font-bold mb-2 group-hover:text-primary transition-colors">
+                              {item.title}
+                            </h3>
+                            
+                            <p className="text-sm font-medium mb-1">
+                              {item.details}
+                            </p>
+                            
+                            <p className="text-xs text-muted-foreground">
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* Additional Info */}
+                  <div className="relative">
+                    <div className="relative h-full rounded-xl border border-border p-2">
+                      <GlowingEffect
+                        spread={30}
+                        glow={true}
+                        disabled={false}
+                        proximity={70}
+                        inactiveZone={0.05}
+                        borderWidth={2}
+                        movementDuration={1.8}
+                      />
+                      
+                      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-8 shadow-sm">
+                        <h3 className="text-xl font-bold mb-4">
+                          Why Choose <span className="gradient-text">AuraByt</span>?
+                        </h3>
+                        
+                        <ul className="space-y-3 text-muted-foreground">
+                          <li className="flex items-start">
+                            <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
+                            <span>Expert team with 10+ years of experience</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
+                            <span>24/7 support and maintenance</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
+                            <span>Transparent pricing and timelines</span>
+                          </li>
+                          <li className="flex items-start">
+                            <div className="w-2 h-2 bg-primary rounded-full mr-3 mt-2 flex-shrink-0" />
+                            <span>100% satisfaction guarantee</span>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FAQ Section - Simple version without support section */}
-      <section className="relative py-20">
-        <div className="relative z-10">
+        {/* FAQ Section - Simple version without support section */}
+        <section className="py-20">
           <div className="container space-y-16">
             <div className="mx-auto flex max-w-3xl flex-col text-left md:text-center">
               <h2 className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl">
@@ -260,8 +259,8 @@ const Contact = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };
