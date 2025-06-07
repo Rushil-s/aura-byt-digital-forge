@@ -3,7 +3,6 @@ import ContactForm from '@/components/ContactForm';
 import { Mail, Phone, Clock, MapPin, Send } from 'lucide-react';
 import { AnimatedShaderBackground } from '@/components/ui/animated-shader-background';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
-import { Faq3 } from '@/components/ui/faq3';
 import SEO from '@/components/SEO';
 
 const Contact = () => {
@@ -35,26 +34,26 @@ const Contact = () => {
   ];
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen bg-background">
       <SEO 
         title="Contact AuraByt - Get In Touch With Our Team" 
         description="Contact AuraByt for all your web development, digital marketing and IT support needs. Our team is ready to help your business grow."
         keywords="Contact AuraByt, IT consultancy contact, Toronto tech company, web development services, digital marketing contact"
       />
       
-      {/* Animated Background - Now visible from top */}
-      <div className="fixed inset-0 w-full h-full overflow-hidden" style={{ zIndex: -1 }}>
+      {/* Animated Background - Properly positioned */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
         <AnimatedShaderBackground 
-          className="absolute inset-0 w-full h-full" 
-          intensity={0.6}
-          speed={0.5}
+          className="w-full h-full" 
+          intensity={0.7}
+          speed={0.6}
         />
-        {/* Additional overlay to ensure readability */}
-        <div className="absolute inset-0 bg-background/20 backdrop-blur-[0.5px]" />
+        {/* Subtle overlay for better text readability */}
+        <div className="absolute inset-0 bg-background/10 backdrop-blur-[0.5px]" />
       </div>
       
       {/* Hero Section - Smaller and cleaner */}
-      <section className="relative pt-24 pb-8 overflow-hidden">
+      <section className="relative pt-32 pb-12 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 border border-primary/20 backdrop-blur-sm">
