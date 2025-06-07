@@ -1,4 +1,3 @@
-// src/components/SEO.tsx
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -7,77 +6,85 @@ interface SEOProps {
   description?: string;
   keywords?: string;
   ogImage?: string;
+  canonical?: string;
 }
 
 const SEO: React.FC<SEOProps> = ({ 
-  title = 'AuraByt – Digital Innovation Consultancy',
-  description = 'AuraByt is a Toronto-based IT consultancy specializing in web development, digital marketing, and IT support.',
-  keywords = 'IT consultancy, web development, digital marketing, IT support, Toronto',
-  ogImage = ''
+  title = 'AuraByt – Enterprise IT Consultancy & Digital Solutions',
+  description = 'AuraByt is a Toronto-based enterprise IT consultancy specializing in software development, digital transformation, and infrastructure solutions. Transform your business with our expert team.',
+  keywords = 'IT consultancy, software development, digital transformation, web development, digital marketing, IT support, Toronto, enterprise solutions, cloud solutions',
+  ogImage = '/assets/aurabytlogo.png',
+  canonical
 }) => {
   const { pathname } = useLocation();
   const baseUrl = 'https://aurabyt.com';
-  const currentUrl = `${baseUrl}${pathname}`;
+  const currentUrl = canonical || `${baseUrl}${pathname}`;
 
   React.useEffect(() => {
     // Update the document title
     document.title = title;
     
     // Update meta tags
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', description);
+    const updateMetaTag = (name: string, content: string, property = false) => {
+      const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;
+      let metaElement = document.querySelector(selector);
+      
+      if (metaElement) {
+        metaElement.setAttribute('content', content);
+      } else {
+        metaElement = document.createElement('meta');
+        if (property) {
+          metaElement.setAttribute('property', name);
+        } else {
+          metaElement.setAttribute('name', name);
+        }
+        metaElement.setAttribute('content', content);
+        document.head.appendChild(metaElement);
+      }
+    };
+
+    // Update canonical link
+    let canonicalElement = document.querySelector('link[rel="canonical"]');
+    if (canonicalElement) {
+      canonicalElement.setAttribute('href', currentUrl);
+    } else {
+      canonicalElement = document.createElement('link');
+      canonicalElement.setAttribute('rel', 'canonical');
+      canonicalElement.setAttribute('href', currentUrl);
+      document.head.appendChild(canonicalElement);
     }
+
+    // Update meta tags
+    updateMetaTag('description', description);
+    updateMetaTag('keywords', keywords);
+    updateMetaTag('author', 'AuraByt');
+    updateMetaTag('robots', 'index, follow');
     
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.setAttribute('content', keywords);
-    }
+    // Open Graph meta tags
+    updateMetaTag('og:title', title, true);
+    updateMetaTag('og:description', description, true);
+    updateMetaTag('og:url', currentUrl, true);
+    updateMetaTag('og:image', `${baseUrl}${ogImage}`, true);
+    updateMetaTag('og:type', 'website', true);
+    updateMetaTag('og:site_name', 'AuraByt', true);
     
-    // Update Open Graph meta tags
-    const ogTitleElement = document.querySelector('meta[property="og:title"]');
-    if (ogTitleElement) {
-      ogTitleElement.setAttribute('content', title);
-    }
+    // Twitter meta tags
+    updateMetaTag('twitter:card', 'summary_large_image');
+    updateMetaTag('twitter:title', title);
+    updateMetaTag('twitter:description', description);
+    updateMetaTag('twitter:url', currentUrl);
+    updateMetaTag('twitter:image', `${baseUrl}${ogImage}`);
+    updateMetaTag('twitter:site', '@aurabyt_inc');
     
-    const ogDescriptionElement = document.querySelector('meta[property="og:description"]');
-    if (ogDescriptionElement) {
-      ogDescriptionElement.setAttribute('content', description);
-    }
+    // Additional SEO meta tags
+    updateMetaTag('theme-color', '#3B82F6');
+    updateMetaTag('msapplication-TileColor', '#3B82F6');
+    updateMetaTag('apple-mobile-web-app-capable', 'yes');
+    updateMetaTag('apple-mobile-web-app-status-bar-style', 'default');
     
-    const ogUrlElement = document.querySelector('meta[property="og:url"]');
-    if (ogUrlElement) {
-      ogUrlElement.setAttribute('content', currentUrl);
-    }
-    
-    const ogImageElement = document.querySelector('meta[property="og:image"]');
-    if (ogImageElement) {
-      ogImageElement.setAttribute('content', ogImage);
-    }
-    
-    // Update Twitter meta tags
-    const twitterTitleElement = document.querySelector('meta[name="twitter:title"]');
-    if (twitterTitleElement) {
-      twitterTitleElement.setAttribute('content', title);
-    }
-    
-    const twitterDescriptionElement = document.querySelector('meta[name="twitter:description"]');
-    if (twitterDescriptionElement) {
-      twitterDescriptionElement.setAttribute('content', description);
-    }
-    
-    const twitterUrlElement = document.querySelector('meta[name="twitter:url"]');
-    if (twitterUrlElement) {
-      twitterUrlElement.setAttribute('content', currentUrl);
-    }
-    
-    const twitterImageElement = document.querySelector('meta[name="twitter:image"]');
-    if (twitterImageElement) {
-      twitterImageElement.setAttribute('content', ogImage);
-    }
   }, [title, description, keywords, currentUrl, ogImage]);
 
-  return null; // This component doesn't render anything
+  return null;
 };
 
 export default SEO;

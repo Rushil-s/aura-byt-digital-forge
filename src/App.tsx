@@ -7,8 +7,10 @@ import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AnimationInitializer from "./components/AnimationInitializer";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
+import { validateLinks } from "./utils/linkChecker";
 
 import Index from "./pages/Index";
 import ThankYou from "./pages/ThankYou";
@@ -20,7 +22,6 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-    {/* <div className="tech-grid"></div> */}
     <div className="animated-bg animated-bg-1"></div>
     <div className="animated-bg animated-bg-2"></div>
     <div className="relative z-10">
@@ -28,7 +29,7 @@ const PageLoader = () => (
         <div></div><div></div><div></div><div></div>
       </div>
       <div className="mt-4 text-center">
-        <div className="h-4 w-32 bg-primary/20 rounded animate-pulse"></div>
+        <div className="h-4 w-32 bg-primary/20 rounded animate-pulse mx-auto"></div>
       </div>
     </div>
   </div>
@@ -61,15 +62,20 @@ const PageTransitions = () => {
 const AppRoutes = () => {
   const location = useLocation();
   const [showLoader, setShowLoader] = useState(false);
-  const [loaderTimer, setLoaderTimer] = useState<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    // Validate links on app load
+    const linkValidation = validateLinks();
+    if (!linkValidation.allLinksValid) {
+      console.warn('Some links may be broken. Check console for details.');
+    }
+  }, []);
 
   useEffect(() => {
     // Start a timer — show loader only after delay (e.g., 250ms)
     const timer = setTimeout(() => {
       setShowLoader(true);
     }, 250);
-
-    setLoaderTimer(timer);
 
     // Clear loader after 1s max (or when component mounts)
     const stopTimer = setTimeout(() => {
@@ -83,14 +89,14 @@ const AppRoutes = () => {
   }, [location.pathname]);
 
   return (
-    <>
+    <ErrorBoundary>
       <ScrollToTop />
       <PageTransitions />
       <AnimationInitializer />
 
       <div className="min-h-screen flex flex-col relative">
         <div className="fixed inset-0 pointer-events-none">
-          {/* <div className="tech-grid opacity-30"></div> */}
+          {/* Background tech grid */}
         </div>
 
         <Navbar />
@@ -108,13 +114,17 @@ const AppRoutes = () => {
         </main>
         <Footer />
       </div>
-    </>
+    </ErrorBoundary>
   );
 };
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { staleTime: 5 * 60 * 1000, retry: 1 },
+    queries: { 
+      staleTime: 5 * 60 * 1000, 
+      retry: 1,
+      refetchOnWindowFocus: false 
+    },
   },
 });
 

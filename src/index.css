@@ -42,15 +42,24 @@
   html {
     @apply antialiased font-inter scroll-smooth;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-background text-foreground relative min-h-screen;
     overflow-x: hidden;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
     @apply bg-primary/20 text-primary;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-padding-top: 100px;
   }
 }
 
@@ -173,6 +182,26 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Loading states */
+  .loading-skeleton {
+    @apply bg-muted/50 animate-pulse rounded;
+  }
+
+  /* Focus states for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  /* Error states */
+  .error-state {
+    @apply text-red-400 bg-red-400/10 border border-red-400/20 rounded-lg p-4;
+  }
+
+  /* Success states */
+  .success-state {
+    @apply text-green-400 bg-green-400/10 border border-green-400/20 rounded-lg p-4;
+  }
 }
 
 @layer utilities {
@@ -194,6 +223,16 @@
 
   .animation-delay-700 {
     animation-delay: 700ms;
+  }
+
+  /* Utility for hiding scrollbars while maintaining functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -272,47 +311,6 @@
   }
 }
 
-/* Enhanced focus states */
-.focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
-}
-
-/* Optimized card animations */
-.card-3d {
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease;
-  will-change: transform;
-}
-
-.card-3d:hover {
-  transform: rotateY(2deg) rotateX(2deg) translateZ(10px);
-}
-
-/* Optimized text animations */
-.text-reveal {
-  opacity: 0;
-  animation: textReveal 0.6s ease-out forwards;
-}
-
-.text-reveal-delay-1 {
-  animation-delay: 0.2s;
-}
-
-.text-reveal-delay-2 {
-  animation-delay: 0.4s;
-}
-
-@keyframes textReveal {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Mouse follower optimization */
 .mouse-follower {
   position: fixed;
@@ -364,9 +362,63 @@
   contain: layout style;
 }
 
-/* Optimize font rendering */
-body {
-  text-rendering: optimizeSpeed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .gradient-text {
+    color: black !important;
+    background: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .gradient-text {
+    @apply text-primary;
+    background: none;
+  }
+  
+  .btn-primary {
+    @apply border-2 border-primary;
+  }
+  
+  .professional-card {
+    @apply border-2 border-border;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Safe area insets for mobile devices */
+@supports (padding: max(0px)) {
+  .safe-area-inset {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
 }

@@ -69,6 +69,11 @@ const Navbar = () => {
     setActiveDropdown(activeDropdown === linkName ? null : linkName);
   };
 
+  const handleLinkClick = () => {
+    setIsOpen(false);
+    setActiveDropdown(null);
+  };
+
   return (
     <header
       ref={navbarRef}
@@ -81,7 +86,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group relative z-10">
+          <Link to="/" className="flex items-center space-x-3 group relative z-10" onClick={handleLinkClick}>
             <div className="relative">
               <div className="h-12 w-12 relative flex items-center justify-center overflow-hidden rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 border border-primary/20">
                 <img
@@ -101,7 +106,7 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation - Removed redundant CTA button */}
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-2">
             {navLinks.map((link) => (
               <div key={link.name} className="relative" ref={link.dropdown ? dropdownRef : undefined}>
@@ -132,7 +137,7 @@ const Navbar = () => {
                             key={item.name}
                             to={item.path}
                             className="flex items-start px-4 py-4 text-sm hover:bg-primary/10 transition-all duration-200 mx-2 rounded-lg group"
-                            onClick={() => setActiveDropdown(null)}
+                            onClick={handleLinkClick}
                           >
                             <div className="flex-shrink-0 w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center mr-3 group-hover:bg-primary/20 transition-colors duration-200">
                               <span className="text-primary">{item.icon}</span>
@@ -158,6 +163,7 @@ const Navbar = () => {
                         ? 'text-primary bg-primary/10'
                         : 'text-foreground hover:text-primary'
                     }`}
+                    onClick={handleLinkClick}
                   >
                     {link.name}
                   </Link>
@@ -177,7 +183,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation - Also removed redundant CTA */}
+        {/* Mobile Navigation */}
         {isOpen && (
           <div className="lg:hidden py-4 animate-in slide-in-from-top-2 duration-300">
             <div className="bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border p-4 space-y-2">
@@ -208,10 +214,7 @@ const Navbar = () => {
                               key={item.name}
                               to={item.path}
                               className="flex items-center px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg"
-                              onClick={() => {
-                                setIsOpen(false);
-                                setActiveDropdown(null);
-                              }}
+                              onClick={handleLinkClick}
                             >
                               <span className="mr-3 text-primary">{item.icon}</span>
                               {item.name}
@@ -229,7 +232,7 @@ const Navbar = () => {
                           : 'text-foreground hover:text-primary hover:bg-primary/5'
                       }`}
                       style={{ animationDelay: `${idx * 50}ms` }}
-                      onClick={() => setIsOpen(false)}
+                      onClick={handleLinkClick}
                     >
                       {link.name}
                     </Link>

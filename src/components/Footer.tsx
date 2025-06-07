@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight, Code, Shield } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight, Code, Shield, ExternalLink } from 'lucide-react';
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-background text-foreground relative overflow-hidden border-t border-border">
       {/* Background effects */}
@@ -60,27 +62,27 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Services */}
+            {/* Quick Links */}
             <div>
               <h4 className="text-xl font-semibold mb-8 flex items-center">
                 <Code size={20} className="mr-3 text-primary" />
-                Solutions
+                Quick Links
               </h4>
               <ul className="space-y-4">
                 {[
-                  { name: "Software Development", href: "/services#web-development" },
-                  { name: "Digital Transformation", href: "/services#digital-marketing" },
-                  { name: "Infrastructure & Security", href: "/services#it-support" },
-                  { name: "Enterprise Consulting", href: "/services" }
-                ].map((service, index) => (
+                  { name: "Home", href: "/" },
+                  { name: "About Us", href: "/about" },
+                  { name: "Our Services", href: "/services" },
+                  { name: "Contact Us", href: "/contact" }
+                ].map((link, index) => (
                   <li key={index}>
                     <Link 
-                      to={service.href} 
+                      to={link.href} 
                       className="text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center group"
                     >
                       <ArrowRight size={14} className="mr-3 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
                       <span className="group-hover:translate-x-1 transition-transform duration-300">
-                        {service.name}
+                        {link.name}
                       </span>
                     </Link>
                   </li>
@@ -97,19 +99,28 @@ const Footer = () => {
               <ul className="space-y-6">
                 <li className="flex items-start group">
                   <MapPin size={20} className="mr-4 text-primary mt-1 group-hover:scale-110 transition-transform duration-300" />
-                  <span className="text-muted-foreground">Toronto, Canada</span>
+                  <div>
+                    <div className="font-medium">Toronto, Canada</div>
+                    <div className="text-sm text-muted-foreground">Serving clients globally</div>
+                  </div>
                 </li>
-                <li className="flex items-center group">
-                  <Phone size={20} className="mr-4 text-primary group-hover:scale-110 transition-transform duration-300" />
-                  <a href="tel:+14379252744" className="text-muted-foreground hover:text-primary transition-colors duration-300">
-                    (437) 925-2744
-                  </a>
+                <li className="flex items-start group">
+                  <Phone size={20} className="mr-4 text-primary mt-1 group-hover:scale-110 transition-transform duration-300" />
+                  <div>
+                    <a href="tel:+14379252744" className="text-muted-foreground hover:text-primary transition-colors duration-300 font-medium">
+                      (437) 925-2744
+                    </a>
+                    <div className="text-sm text-muted-foreground">Mon-Fri 9AM-6PM EST</div>
+                  </div>
                 </li>
-                <li className="flex items-center group">
-                  <Mail size={20} className="mr-4 text-primary group-hover:scale-110 transition-transform duration-300" />
-                  <a href="mailto:connect@aurabyt.com" className="text-muted-foreground hover:text-primary transition-colors duration-300">
-                    connect@aurabyt.com
-                  </a>
+                <li className="flex items-start group">
+                  <Mail size={20} className="mr-4 text-primary mt-1 group-hover:scale-110 transition-transform duration-300" />
+                  <div>
+                    <a href="mailto:connect@aurabyt.com" className="text-muted-foreground hover:text-primary transition-colors duration-300 font-medium">
+                      connect@aurabyt.com
+                    </a>
+                    <div className="text-sm text-muted-foreground">24/7 support available</div>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -117,20 +128,26 @@ const Footer = () => {
 
           {/* Bottom section */}
           <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-muted-foreground mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} AuraByt. All rights reserved. Engineered with precision in Toronto.
+            <p className="text-muted-foreground mb-4 md:mb-0 text-center md:text-left">
+              &copy; {currentYear} AuraByt. All rights reserved. Engineered with precision in Toronto.
             </p>
             
-            <div className="flex space-x-8 text-sm">
+            <div className="flex flex-wrap justify-center md:justify-end space-x-6 text-sm">
               <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors duration-300">
                 Privacy Policy
               </Link>
               <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors duration-300">
                 Terms of Service
               </Link>
-              <Link to="/security" className="text-muted-foreground hover:text-primary transition-colors duration-300">
-                Security
-              </Link>
+              <a 
+                href="https://aurabyt.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center"
+              >
+                Visit Main Site
+                <ExternalLink size={12} className="ml-1" />
+              </a>
             </div>
           </div>
         </div>
