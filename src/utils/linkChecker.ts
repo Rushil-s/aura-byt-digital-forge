@@ -5,6 +5,8 @@ export const validateLinks = () => {
     '/about',
     '/services',
     '/contact',
+    '/privacy',
+    '/terms',
     '/services#web-development',
     '/services#digital-marketing',
     '/services#it-support'
@@ -16,12 +18,14 @@ export const validateLinks = () => {
     'https://www.instagram.com/aurabyt.inc',
     'https://www.linkedin.com/company/aurabyt',
     'tel:+14379252744',
-    'mailto:connect@aurabyt.com'
+    'mailto:connect@aurabyt.com',
+    'mailto:privacy@aurabyt.com',
+    'mailto:legal@aurabyt.com'
   ];
 
   // Check if all internal routes are properly defined
   const checkInternalLinks = () => {
-    const validRoutes = ['/', '/about', '/services', '/contact', '/thank-you'];
+    const validRoutes = ['/', '/about', '/services', '/contact', '/privacy', '/terms', '/thank-you'];
     const invalidLinks = internalLinks.filter(link => {
       const basePath = link.split('#')[0];
       return !validRoutes.includes(basePath);
