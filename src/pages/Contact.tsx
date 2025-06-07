@@ -52,20 +52,20 @@ const Contact = () => {
       
       {/* Content overlay with proper z-index */}
       <div className="relative z-10">
-        {/* Hero Section - Transparent background */}
-        <section className="pt-32 pb-12 overflow-hidden">
+        {/* Hero Section - Shortened padding */}
+        <section className="pt-24 pb-8 overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 border border-primary/20 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4 border border-primary/20 backdrop-blur-sm">
                 <Send size={16} />
                 Let's Connect
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">
                 Ready to Build Something <span className="gradient-text">Amazing</span>?
               </h1>
               
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
+              <p className="text-lg md:text-xl text-muted-foreground mb-6 animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
                 Transform your ideas into reality with our expert team. Fill out the form below to get started.
               </p>
             </div>
