@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight, Code, Shield, ExternalLink } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight, Code, Shield } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -139,15 +140,6 @@ const Footer = () => {
               <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors duration-300">
                 Terms of Service
               </Link>
-              <a 
-                href="https://aurabyt.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center"
-              >
-                Visit Main Site
-                <ExternalLink size={12} className="ml-1" />
-              </a>
             </div>
           </div>
         </div>
