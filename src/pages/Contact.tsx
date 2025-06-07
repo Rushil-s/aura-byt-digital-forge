@@ -4,6 +4,7 @@ import { Mail, Phone, Clock, MapPin, Send, MessageCircle, Calendar } from 'lucid
 import { AnimatedShaderBackground } from '@/components/ui/animated-shader-background';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 import { HoverButton } from '@/components/ui/hover-glow-button';
+import { Faq3 } from '@/components/ui/faq3';
 import SEO from '@/components/SEO';
 
 const Contact = () => {
@@ -296,63 +297,17 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="relative py-20">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Frequently Asked <span className="gradient-text">Questions</span>
-              </h2>
-              <p className="text-xl text-muted-foreground">
-                Get quick answers to common questions about our services
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  question: "How quickly can you start my project?",
-                  answer: "We can typically begin new projects within 1-2 weeks, depending on scope and current workload. Rush projects can often be accommodated."
-                },
-                {
-                  question: "What's included in your support?",
-                  answer: "Our support includes bug fixes, security updates, performance monitoring, and technical assistance. We offer various support packages to fit your needs."
-                },
-                {
-                  question: "Do you work with international clients?",
-                  answer: "Yes! While we're based in Toronto, we work with clients globally. We're experienced in remote collaboration and different time zones."
-                },
-                {
-                  question: "What's your project process like?",
-                  answer: "We follow an agile approach: discovery, planning, design, development, testing, and launch. You'll have regular updates and input throughout."
-                }
-              ].map((faq, index) => (
-                <div key={index} className="relative group">
-                  <div className="relative h-full rounded-xl border border-border p-2">
-                    <GlowingEffect
-                      spread={25}
-                      glow={true}
-                      disabled={false}
-                      proximity={60}
-                      inactiveZone={0.1}
-                      borderWidth={1}
-                      movementDuration={1.2}
-                    />
-                    
-                    <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/80 backdrop-blur-sm p-6 shadow-sm">
-                      <h3 className="text-lg font-bold mb-3 group-hover:text-primary transition-colors">
-                        {faq.question}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* FAQ Section with new accordion style */}
+      <section className="relative">
+        <div className="relative z-10">
+          <Faq3
+            heading="Frequently Asked Questions"
+            description="Get quick answers to common questions about our services and process."
+            supportHeading="Still have questions?"
+            supportDescription="Our team is here to help with any additional questions or to discuss your specific project needs."
+            supportButtonText="Contact Our Team"
+            supportButtonUrl="/contact"
+          />
         </div>
       </section>
     </div>
