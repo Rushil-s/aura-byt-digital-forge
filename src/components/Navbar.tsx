@@ -100,7 +100,7 @@ const Navbar = () => {
               <span className="font-bold text-xl gradient-text">
                 AuraByt
               </span>
-              <span className="text-xs text-muted-foreground -mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="text-xs text-muted-foreground -mt-1">
                 IT Consultancy
               </span>
             </div>
