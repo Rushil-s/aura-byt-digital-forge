@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck, Server, Headphones, Settings, Cpu, CheckCircle, Users, MonitorSmartphone, Coffee, Cloud, Share2, TrendingUp, LineChart, Youtube, Instagram, Palette, FileCode } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
+import { HoverButton } from '@/components/ui/hover-glow-button';
 import SEO from '@/components/SEO';
 
 // Enhanced service item with wave animation and glowing effect
@@ -469,22 +470,49 @@ const Services = () => {
         ))}
       </div>
 
-      {/* CTA Section */}
-      <section className="py-12 md:py-16 bg-primary text-primary-foreground relative overflow-hidden">
-        {/* Background animation elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-1/2 h-1/3 bg-white/5 blur-3xl rounded-full animate-pulse-slow"></div>
+      {/* CTA Section - Updated with transparent style like About page */}
+      <section className="py-20 bg-background relative overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-primary/5 blur-3xl rounded-full" />
+          <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Ready to Get Started?</h2>
-            <p className="text-lg md:text-xl mb-6 md:mb-8">
-              Contact us today to discuss how we can help your business grow.
-            </p>
-            <Link to="/contact" className="inline-block px-6 py-3 md:px-8 md:py-4 bg-background text-primary rounded-lg font-bold hover:bg-background/90 transition-colors">
-              Contact Us
-            </Link>
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              <div className="relative h-full rounded-xl border border-border/30 p-2">
+                <GlowingEffect
+                  spread={40}
+                  glow={true}
+                  disabled={false}
+                  proximity={100}
+                  inactiveZone={0.05}
+                  borderWidth={2}
+                  movementDuration={2}
+                />
+                
+                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-md p-12 shadow-sm text-center">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                    Ready to Get <span className="gradient-text">Started</span>?
+                  </h2>
+                  <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
+                    Contact us today to discuss how we can help your business grow with our comprehensive digital solutions.
+                  </p>
+                  
+                  <div className="flex justify-center">
+                    <HoverButton
+                      href="/contact"
+                      variant="primary"
+                      glowColor="hsl(217, 91%, 60%)"
+                      className="shadow-lg hover:shadow-primary/25"
+                    >
+                      Start Your Project Today
+                    </HoverButton>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
