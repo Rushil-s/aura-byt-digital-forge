@@ -57,8 +57,8 @@ export default function SchemaCard({
       const width = canvas.offsetWidth;
       const height = canvas.offsetHeight;
       
-      // Clear with dark background
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.95)'; // slate-900 with opacity
+      // Clear with dark background matching your theme
+      ctx.fillStyle = 'hsl(222, 84%, 4.9%)'; // Your background color
       ctx.fillRect(0, 0, width, height);
 
       waveData.forEach((data, i) => {
@@ -72,13 +72,13 @@ export default function SchemaCard({
           x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
         }
         const intensity = Math.min(1, freq * 0.3);
-        // Use your primary color (blue) with variations
-        const r = 59 + intensity * 100;  // Primary blue variations
-        const g = 130 + intensity * 100;
-        const b = 246;
+        // Use your primary color (217 91% 60%)
+        const hue = 217;
+        const saturation = 91;
+        const lightness = 60 + intensity * 20;
         ctx.lineWidth = 1 + i * 0.3;
-        ctx.strokeStyle = `rgba(${r},${g},${b},0.6)`;
-        ctx.shadowColor = `rgba(${r},${g},${b},0.5)`;
+        ctx.strokeStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, 0.6)`;
+        ctx.shadowColor = `hsla(${hue}, ${saturation}%, ${lightness}%, 0.5)`;
         ctx.shadowBlur = 5;
         ctx.stroke();
         ctx.shadowBlur = 0;
@@ -110,9 +110,9 @@ export default function SchemaCard({
 
   return (
     <div className={cn("relative w-full max-w-xs mx-auto", className)}>
-      <div className="relative card-border overflow-hidden rounded-2xl flex flex-col animate-float bg-card/80 backdrop-blur-sm border border-border shadow-2xl">
-        <div className="p-4 flex justify-center relative">
-          <div className="w-full h-48 rounded-xl gradient-border inner-glow overflow-hidden relative bg-slate-900/50">
+      <div className="relative professional-card overflow-hidden rounded-2xl flex flex-col animate-float">
+        <div className="p-6 flex justify-center relative">
+          <div className="w-full h-48 rounded-xl border border-primary/30 overflow-hidden relative bg-background/50 backdrop-blur-sm">
             {/* Animated wave canvas */}
             <canvas 
               ref={canvasRef} 
@@ -120,34 +120,26 @@ export default function SchemaCard({
               style={{ width: '100%', height: '100%' }}
             />
             
-            {/* Animated grid overlay */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none">
-              <div 
-                className="w-full h-full animate-pulse" 
-                style={{ 
-                  backgroundImage: 'linear-gradient(90deg, rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px)', 
-                  backgroundSize: '15px 15px' 
-                }} 
-              />
-            </div>
+            {/* Tech grid overlay matching your existing style */}
+            <div className="absolute inset-0 tech-grid opacity-20 pointer-events-none" />
             
             {/* Database schema visualization overlay */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-20">
+            <div className="absolute inset-0 flex items-center justify-center opacity-30">
               <div className="grid grid-cols-2 gap-2 text-xs text-primary">
-                <div className="bg-primary/20 p-2 rounded border border-primary/30">
-                  <div className="font-mono">users</div>
+                <div className="bg-primary/10 p-2 rounded border border-primary/30 backdrop-blur-sm">
+                  <div className="font-mono font-semibold">users</div>
                   <div className="text-[10px] opacity-70">id, name, email</div>
                 </div>
-                <div className="bg-primary/20 p-2 rounded border border-primary/30">
-                  <div className="font-mono">orders</div>
+                <div className="bg-primary/10 p-2 rounded border border-primary/30 backdrop-blur-sm">
+                  <div className="font-mono font-semibold">orders</div>
                   <div className="text-[10px] opacity-70">id, user_id, total</div>
                 </div>
-                <div className="bg-primary/20 p-2 rounded border border-primary/30">
-                  <div className="font-mono">products</div>
+                <div className="bg-primary/10 p-2 rounded border border-primary/30 backdrop-blur-sm">
+                  <div className="font-mono font-semibold">products</div>
                   <div className="text-[10px] opacity-70">id, name, price</div>
                 </div>
-                <div className="bg-primary/20 p-2 rounded border border-primary/30">
-                  <div className="font-mono">analytics</div>
+                <div className="bg-primary/10 p-2 rounded border border-primary/30 backdrop-blur-sm">
+                  <div className="font-mono font-semibold">analytics</div>
                   <div className="text-[10px] opacity-70">metrics, data</div>
                 </div>
               </div>
@@ -157,22 +149,24 @@ export default function SchemaCard({
         
         <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         
-        <div className="p-4">
-          <span className="inline-block px-3 py-1 glass text-primary rounded-full text-xs font-medium mb-3 border border-primary/30 bg-primary/10">
+        <div className="p-6">
+          <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium mb-4 border border-primary/30">
             {badge}
           </span>
-          <h3 className="text-lg font-medium text-foreground mb-2">{title}</h3>
-          <p className="text-muted-foreground mb-4 leading-relaxed text-xs">
+          <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+            {title}
+          </h3>
+          <p className="text-muted-foreground mb-6 leading-relaxed">
             {description}
           </p>
           <div className="flex justify-between items-center">
-            <button className="text-primary hover:text-primary/80 transition flex items-center text-xs font-medium glass px-3 py-1.5 rounded-lg border border-primary/30 bg-primary/5 hover:bg-primary/10">
+            <button className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors group/link">
               {actionText}
-              <svg className="w-3 h-3 ml-1" viewBox="0 0 24 24" fill="none">
+              <svg className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none">
                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
-            <span className="text-muted-foreground text-xs glass px-2 py-1 rounded-full border border-border/50 bg-card/50">
+            <span className="text-muted-foreground text-xs px-3 py-1 rounded-full border border-border bg-card/50">
               {statusText}
             </span>
           </div>

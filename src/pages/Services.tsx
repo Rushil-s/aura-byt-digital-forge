@@ -341,7 +341,7 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Schema Card Showcase */}
+      {/* Schema Card Showcase - Integrated into the flow */}
       <section className="py-16 bg-card/20 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-12">
@@ -355,8 +355,8 @@ const Services = () => {
           
           <div className="flex justify-center">
             <SchemaCard 
-              title="Real-time Analytics"
-              description="Monitor your database performance with live metrics and intelligent insights powered by AI."
+              title="Real-time Analytics Dashboard"
+              description="Monitor your database performance with live metrics and intelligent insights powered by AI-driven analytics."
               badge="Analytics"
               actionText="Explore"
               statusText="Active"
