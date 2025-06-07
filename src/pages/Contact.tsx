@@ -34,7 +34,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-background overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
       <SEO 
         title="Contact AuraByt - Get In Touch With Our Team" 
         description="Contact AuraByt for all your web development, digital marketing and IT support needs. Our team is ready to help your business grow."
@@ -52,7 +52,7 @@ const Contact = () => {
       
       {/* Content overlay with proper z-index */}
       <div className="relative z-10">
-        {/* Hero Section - Smaller and cleaner */}
+        {/* Hero Section - Transparent background */}
         <section className="pt-32 pb-12 overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
@@ -72,14 +72,14 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Main Contact Section */}
+        {/* Main Contact Section - Transparent cards */}
         <section className="py-16" id="contact-form">
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 {/* Contact Form */}
                 <div className="relative">
-                  <div className="relative h-full rounded-xl border border-border p-2">
+                  <div className="relative h-full rounded-xl border border-border/30 p-2">
                     <GlowingEffect
                       spread={40}
                       glow={true}
@@ -90,7 +90,7 @@ const Contact = () => {
                       movementDuration={2}
                     />
                     
-                    <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/95 backdrop-blur-md p-8 shadow-sm">
+                    <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-md p-8 shadow-sm">
                       <div className="mb-8">
                         <h2 className="text-3xl font-bold mb-4">
                           Send Us a <span className="gradient-text">Message</span>
@@ -119,7 +119,7 @@ const Contact = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {contactInfo.map((item, index) => (
                       <div key={index} className="relative group">
-                        <div className="relative h-full rounded-xl border border-border p-2">
+                        <div className="relative h-full rounded-xl border border-border/30 p-2">
                           <GlowingEffect
                             spread={25}
                             glow={true}
@@ -130,7 +130,7 @@ const Contact = () => {
                             movementDuration={1.2}
                           />
                           
-                          <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-6 shadow-sm">
+                          <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-6 shadow-sm">
                             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primary group-hover:scale-110 transition-transform border border-primary/20">
                               {item.icon}
                             </div>
@@ -154,7 +154,7 @@ const Contact = () => {
                   
                   {/* Additional Info */}
                   <div className="relative">
-                    <div className="relative h-full rounded-xl border border-border p-2">
+                    <div className="relative h-full rounded-xl border border-border/30 p-2">
                       <GlowingEffect
                         spread={30}
                         glow={true}
@@ -165,7 +165,7 @@ const Contact = () => {
                         movementDuration={1.8}
                       />
                       
-                      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-8 shadow-sm">
+                      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-8 shadow-sm">
                         <h3 className="text-xl font-bold mb-4">
                           Why Choose <span className="gradient-text">AuraByt</span>?
                         </h3>
@@ -197,7 +197,7 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* FAQ Section - Simple version without support section */}
+        {/* FAQ Section - Transparent cards */}
         <section className="py-20">
           <div className="container space-y-16">
             <div className="mx-auto flex max-w-3xl flex-col text-left md:text-center">
@@ -238,7 +238,7 @@ const Contact = () => {
                   }
                 ].map((faq, index) => (
                   <div key={index} className="relative">
-                    <div className="relative h-full rounded-xl border border-border p-2">
+                    <div className="relative h-full rounded-xl border border-border/30 p-2">
                       <GlowingEffect
                         spread={20}
                         glow={true}
@@ -249,7 +249,7 @@ const Contact = () => {
                         movementDuration={1}
                       />
                       
-                      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border bg-card/90 backdrop-blur-sm p-6 shadow-sm">
+                      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-6 shadow-sm">
                         <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
                         <p className="text-muted-foreground">{faq.answer}</p>
                       </div>
