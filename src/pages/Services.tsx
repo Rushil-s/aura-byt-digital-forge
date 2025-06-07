@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck, Server, Headphones, Settings, Cpu, CheckCircle, Users, MonitorSmartphone, Coffee, Cloud, Share2, TrendingUp, LineChart, Youtube, Instagram, Palette, FileCode, ArrowRight, Zap, Star, Award, Target } from 'lucide-react';
+import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck, Server, Headphones, Settings, Cpu, CheckCircle, Users, MonitorSmartphone, Coffee, Cloud, Share2, TrendingUp, LineChart, Youtube, Instagram, Palette, FileCode, ArrowRight, Zap, Star, Award, Target, Shield } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 import { HoverButton } from '@/components/ui/hover-glow-button';
