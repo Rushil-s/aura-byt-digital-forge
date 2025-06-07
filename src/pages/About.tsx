@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { CheckCircle, Users, Target, Lightbulb, Heart, MapPin, Calendar, Award, Zap, Globe, Code, BarChart3, Shield, Rocket, Star, TrendingUp } from 'lucide-react';
+import { CheckCircle, Users, Target, Lightbulb, Heart, MapPin, Calendar, Award, Zap, Globe, Code, BarChart3, Shield, Rocket, Star, TrendingUp, Sparkles } from 'lucide-react';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 import { HoverButton } from '@/components/ui/hover-glow-button';
+import { SpiralAnimation } from '@/components/ui/spiral-animation';
 import SEO from '@/components/SEO';
 
 const About = () => {
@@ -188,8 +189,70 @@ const About = () => {
         </div>
       </section>
 
+      {/* Spiral Animation Section */}
+      <section className="py-20 bg-card/20 relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16 animate-on-scroll">
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20">
+                <Sparkles size={16} />
+                Innovation in Motion
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Where Art Meets <span className="gradient-text">Technology</span>
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                Experience the beauty of mathematical precision and creative design working in harmony.
+              </p>
+            </div>
+
+            <div className="relative">
+              <div className="relative h-full rounded-xl border border-border/30 p-2">
+                <GlowingEffect
+                  spread={40}
+                  glow={true}
+                  disabled={false}
+                  proximity={100}
+                  inactiveZone={0.05}
+                  borderWidth={2}
+                  movementDuration={2}
+                />
+                
+                <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm shadow-sm">
+                  <div className="h-[500px] flex items-center justify-center">
+                    <SpiralAnimation 
+                      totalDots={400}
+                      size={400}
+                      dotRadius={1.5}
+                      duration={5}
+                      dotColor="hsl(217, 91%, 60%)"
+                      backgroundColor="transparent"
+                    />
+                  </div>
+                  
+                  <div className="p-8 text-center border-t border-border/30">
+                    <h3 className="text-xl font-bold mb-3">Golden Ratio Spiral</h3>
+                    <p className="text-muted-foreground mb-4">
+                      This mesmerizing pattern demonstrates our commitment to precision, beauty, and mathematical elegance in everything we create.
+                    </p>
+                    <HoverButton
+                      href="/demo/spiral"
+                      variant="secondary"
+                      glowColor="hsl(217, 91%, 60%)"
+                      className="shadow-lg"
+                    >
+                      View Full Demo
+                    </HoverButton>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
-      <section className="py-16 bg-card/20">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
