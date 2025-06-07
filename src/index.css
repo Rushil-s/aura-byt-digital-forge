@@ -56,7 +56,8 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary bg-[length:200%_auto] animate-gradient;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary bg-[length:200%_auto];
+    animation: gradient 8s ease infinite;
   }
 
   .btn-primary {
@@ -135,6 +136,42 @@
     @apply bg-card/80 backdrop-blur-sm border border-border rounded-xl p-8
            hover:bg-card hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10
            transition-all duration-300 hover:-translate-y-1;
+    will-change: transform;
+  }
+
+  /* Optimized scroll animations */
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-animate.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-title {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .section-title.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .service-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+  }
+
+  .service-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -160,6 +197,7 @@
   }
 }
 
+/* Optimized keyframe animations */
 @keyframes gradient {
   0%, 100% {
     background-position: 0% 50%;
@@ -181,7 +219,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -189,31 +227,11 @@
   }
 }
 
-@keyframes dataStream {
-  0% {
-    stroke-dashoffset: 20;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes schemaPulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.02);
-    opacity: 1;
-  }
-}
-
 .animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
-/* Enhanced scrollbar styling for dark theme */
+/* Optimized scrollbar styling */
 ::-webkit-scrollbar {
   @apply w-2;
 }
@@ -226,7 +244,7 @@
   @apply bg-primary/30 rounded-full hover:bg-primary/50 transition-colors;
 }
 
-/* Loading animation */
+/* Optimized loading animation */
 .loading-animation {
   display: flex;
   justify-content: center;
@@ -254,25 +272,26 @@
   }
 }
 
-/* Improved focus states */
+/* Enhanced focus states */
 .focus-ring {
   @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
 }
 
-/* Enhanced card animations */
+/* Optimized card animations */
 .card-3d {
   transform-style: preserve-3d;
   transition: transform 0.3s ease;
+  will-change: transform;
 }
 
 .card-3d:hover {
-  transform: rotateY(2deg) rotateX(2deg) translateZ(20px);
+  transform: rotateY(2deg) rotateX(2deg) translateZ(10px);
 }
 
-/* Improved text animations */
+/* Optimized text animations */
 .text-reveal {
   opacity: 0;
-  animation: textReveal 0.8s ease-out forwards;
+  animation: textReveal 0.6s ease-out forwards;
 }
 
 .text-reveal-delay-1 {
@@ -286,7 +305,7 @@
 @keyframes textReveal {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(15px);
   }
   to {
     opacity: 1;
@@ -294,18 +313,22 @@
   }
 }
 
-/* Responsive improvements */
-@media (max-width: 768px) {
-  .container {
-    @apply px-4;
-  }
-  
-  .section-padding {
-    @apply py-16;
-  }
+/* Mouse follower optimization */
+.mouse-follower {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.04) 50%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform;
 }
 
-/* Accessibility improvements */
+/* Performance optimizations */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -314,16 +337,36 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .gradient-text {
-    @apply text-primary;
-    background: none;
+  
+  .mouse-follower {
+    display: none !important;
   }
   
-  .btn-primary {
-    @apply border-2 border-primary;
+  .scroll-animate,
+  .service-card,
+  .section-title {
+    opacity: 1 !important;
+    transform: none !important;
   }
+}
+
+/* GPU acceleration for better performance */
+.professional-card,
+.service-card,
+.scroll-animate {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Reduce layout thrashing */
+.container {
+  contain: layout style;
+}
+
+/* Optimize font rendering */
+body {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

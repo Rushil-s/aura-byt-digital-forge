@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
 import ProductCard from '@/components/ProductCard';
@@ -7,25 +7,55 @@ import { HoverButton } from '@/components/ui/hover-glow-button';
 import { Code, BarChart3, ServerCog, ArrowRight, Shield, Zap, Globe, Users, Cpu, Database } from 'lucide-react';
 
 const Index = () => {
-  useEffect(() => {
-    // Initialize scroll animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const animatedElementsRef = useRef<Set<Element>>(new Set());
 
-    document.querySelectorAll('.scroll-animate').forEach((el) => {
-      observer.observe(el);
+  // Optimized scroll animation handler
+  const initializeScrollAnimations = useCallback(() => {
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    const observerOptions = {
+      threshold: [0.1],
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    observerRef.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !animatedElementsRef.current.has(entry.target)) {
+          // Use requestAnimationFrame for smooth animations
+          requestAnimationFrame(() => {
+            entry.target.classList.add('is-visible');
+            animatedElementsRef.current.add(entry.target);
+          });
+          
+          // Unobserve after animation to improve performance
+          observerRef.current?.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Batch DOM queries for better performance
+    const elementsToAnimate = document.querySelectorAll('.scroll-animate');
+    elementsToAnimate.forEach((el) => {
+      if (!animatedElementsRef.current.has(el)) {
+        observerRef.current?.observe(el);
+      }
     });
-
-    return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    // Delay initialization to avoid blocking initial render
+    const timer = setTimeout(initializeScrollAnimations, 100);
+    
+    return () => {
+      clearTimeout(timer);
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [initializeScrollAnimations]);
 
   const services = [
     {
@@ -247,7 +277,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section - Single focused CTA */}
+      {/* CTA Section */}
       <section className="py-24 bg-card/20 text-foreground relative overflow-hidden">
         {/* Background effects */}
         <div className="absolute inset-0">

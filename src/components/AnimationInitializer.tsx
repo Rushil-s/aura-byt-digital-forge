@@ -1,129 +1,181 @@
-// src/components/AnimationInitializer.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 
-// This component handles global animation effects
+// Optimized Animation Initializer with performance improvements
 const AnimationInitializer: React.FC = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const animationFrameRef = useRef<number>();
+  const lastUpdateRef = useRef<number>(0);
+  const isReducedMotion = useRef(false);
   
   useEffect(() => {
-    // Create the mouse follower element
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    isReducedMotion.current = mediaQuery.matches;
+    
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      isReducedMotion.current = e.matches;
+    };
+    
+    mediaQuery.addEventListener('change', handleMotionChange);
+    
+    return () => {
+      mediaQuery.removeEventListener('change', handleMotionChange);
+    };
+  }, []);
+  
+  useEffect(() => {
+    if (isReducedMotion.current) return;
+    
+    // Create optimized mouse follower
     const mouseFollower = document.createElement('div');
     mouseFollower.className = 'mouse-follower';
+    mouseFollower.style.cssText = `
+      position: fixed;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.04) 50%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      will-change: transform;
+    `;
     document.body.appendChild(mouseFollower);
     
-    // Handle mouse movement
+    // Throttled mouse movement handler
     const handleMouseMove = (e: MouseEvent) => {
-      const x = e.clientX;
-      const y = e.clientY;
+      const now = performance.now();
+      if (now - lastUpdateRef.current < 16) return; // Limit to ~60fps
       
-      // Update state for React-based animations
-      setMousePos({ x, y });
+      lastUpdateRef.current = now;
       
-      // Update follower position with requestAnimationFrame for performance
-      requestAnimationFrame(() => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      
+      animationFrameRef.current = requestAnimationFrame(() => {
+        const x = e.clientX;
+        const y = e.clientY;
+        
+        setMousePos({ x, y });
+        
         mouseFollower.style.opacity = '1';
-        mouseFollower.style.left = `${x}px`;
-        mouseFollower.style.top = `${y}px`;
+        mouseFollower.style.transform = `translate(${x - 100}px, ${y - 100}px)`;
       });
     };
     
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    // Initialize tech lines
-    initTechLines();
+    // Passive event listener for better performance
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
       if (mouseFollower && mouseFollower.parentNode) {
         mouseFollower.parentNode.removeChild(mouseFollower);
       }
     };
   }, []);
   
-  // Initialize tech line animations for a tech company feel
-  const initTechLines = () => {
-    const techLines = document.createElement('div');
-    techLines.className = 'tech-lines';
-    document.body.appendChild(techLines);
-    
-    // Create multiple lines with different animation delays
-    for (let i = 0; i < 5; i++) {
-      const line = document.createElement('div');
-      line.className = 'tech-line';
-      line.style.top = `${Math.random() * 100}%`;
-      line.style.animationDelay = `${i * 1.5}s`;
-      line.style.animationDuration = `${8 + Math.random() * 4}s`;
-      techLines.appendChild(line);
-    }
-  };
-  
-  // Initialize scroll animations
+  // Optimized scroll animations with Intersection Observer
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+    if (isReducedMotion.current) return;
+    
+    const observerOptions = {
+      threshold: [0.1, 0.3],
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Use requestAnimationFrame for smooth animations
+          requestAnimationFrame(() => {
             entry.target.classList.add('is-visible');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+          });
+          
+          // Unobserve after animation to improve performance
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Batch DOM queries for better performance
+    const elementsToAnimate = document.querySelectorAll(
+      '.reveal-section, .hover-card, .service-card, .scroll-animate, .section-title'
     );
     
-    // Target all elements that should animate on scroll
-    document.querySelectorAll('.reveal-section, .hover-card, .service-card, .scroll-animate').forEach((el) => {
+    elementsToAnimate.forEach((el) => {
       observer.observe(el);
     });
     
     return () => {
-      document.querySelectorAll('.reveal-section, .hover-card, .service-card, .scroll-animate').forEach((el) => {
-        observer.unobserve(el);
-      });
+      observer.disconnect();
     };
   }, []);
   
-  // Add tilt effect to cards
+  // Optimized tilt effect with debouncing
   useEffect(() => {
-    const cards = document.querySelectorAll('.tilt-card');
+    if (isReducedMotion.current) return;
     
-    const handleMouseMove = (e: MouseEvent, card: Element) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const moveX = (x - centerX) / 20;
-      const moveY = (y - centerY) / 20;
-      
-      const inner = card.querySelector('.tilt-card-inner') as HTMLElement;
-      if (inner) {
-        inner.style.transform = `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg) translateZ(10px)`;
-      }
-    };
+    const cards = document.querySelectorAll('.tilt-card, .professional-card');
+    let tiltTimeout: NodeJS.Timeout;
     
-    const handleMouseLeave = (card: Element) => {
+    const handleMouseMove = useCallback((e: MouseEvent, card: Element) => {
+      if (tiltTimeout) clearTimeout(tiltTimeout);
+      
+      tiltTimeout = setTimeout(() => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const moveX = (x - centerX) / 30; // Reduced intensity
+        const moveY = (y - centerY) / 30;
+        
+        const inner = card.querySelector('.tilt-card-inner') as HTMLElement;
+        if (inner) {
+          inner.style.transform = `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg) translateZ(5px)`;
+        } else {
+          (card as HTMLElement).style.transform = `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg) translateZ(5px)`;
+        }
+      }, 10); // Debounce for smoother performance
+    }, []);
+    
+    const handleMouseLeave = useCallback((card: Element) => {
+      if (tiltTimeout) clearTimeout(tiltTimeout);
+      
       const inner = card.querySelector('.tilt-card-inner') as HTMLElement;
       if (inner) {
         inner.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px)`;
+      } else {
+        (card as HTMLElement).style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px)`;
       }
-    };
+    }, []);
     
     cards.forEach((card) => {
-      card.addEventListener('mousemove', (e) => handleMouseMove(e as MouseEvent, card));
-      card.addEventListener('mouseleave', () => handleMouseLeave(card));
+      const mouseMoveHandler = (e: Event) => handleMouseMove(e as MouseEvent, card);
+      const mouseLeaveHandler = () => handleMouseLeave(card);
+      
+      card.addEventListener('mousemove', mouseMoveHandler, { passive: true });
+      card.addEventListener('mouseleave', mouseLeaveHandler, { passive: true });
     });
     
     return () => {
+      if (tiltTimeout) clearTimeout(tiltTimeout);
       cards.forEach((card) => {
-        card.removeEventListener('mousemove', (e) => handleMouseMove(e as MouseEvent, card));
+        card.removeEventListener('mousemove', (e: Event) => handleMouseMove(e as MouseEvent, card));
         card.removeEventListener('mouseleave', () => handleMouseLeave(card));
       });
     };
   }, []);
   
-  return null; // This component doesn't render anything visible
+  return null;
 };
 
 export default AnimationInitializer;
