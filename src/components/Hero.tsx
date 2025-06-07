@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { HoverButton } from '@/components/ui/hover-glow-button';
@@ -67,13 +66,6 @@ const Hero = () => {
                   alt="AuraByt Logo" 
                   className="h-full w-auto object-contain relative z-10 drop-shadow-2xl group-hover:scale-110 transition-transform duration-700" 
                 />
-                
-                {/* Permanent "IT Consultancy" text */}
-                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                  <span className="text-sm md:text-base text-muted-foreground font-medium tracking-wider uppercase opacity-80">
-                    IT Consultancy
-                  </span>
-                </div>
               </div>
             </div>
           </div>
