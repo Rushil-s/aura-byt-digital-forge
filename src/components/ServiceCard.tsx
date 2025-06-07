@@ -16,7 +16,7 @@ const ServiceCard = ({ title, description, icon, delay = 0, link }: ServiceCardP
   
   return (
     <div 
-      className="professional-card group animate-fade-in is-visible"
+      className="professional-card group"
       style={{ animationDelay: `${delay}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

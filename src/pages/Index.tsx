@@ -1,61 +1,18 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+
+import React, { useEffect } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
 import ProductCard from '@/components/ProductCard';
 import FeatureShowcase from '@/components/FeatureShowcase';
 import { HoverButton } from '@/components/ui/hover-glow-button';
-import { Code, BarChart3, ServerCog, ArrowRight, Shield, Zap, Globe, Users, Cpu, Database } from 'lucide-react';
+import { Code, BarChart3, ServerCog, ArrowRight, Shield, Zap, Cpu, Database, Globe } from 'lucide-react';
+import { initializeScrollAnimations } from '@/utils/animations';
 
 const Index = () => {
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const animatedElementsRef = useRef<Set<Element>>(new Set());
-
-  // Optimized scroll animation handler
-  const initializeScrollAnimations = useCallback(() => {
-    if (observerRef.current) {
-      observerRef.current.disconnect();
-    }
-
-    const observerOptions = {
-      threshold: [0.1],
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    observerRef.current = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !animatedElementsRef.current.has(entry.target)) {
-          // Use requestAnimationFrame for smooth animations
-          requestAnimationFrame(() => {
-            entry.target.classList.add('is-visible');
-            animatedElementsRef.current.add(entry.target);
-          });
-          
-          // Unobserve after animation to improve performance
-          observerRef.current?.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    // Batch DOM queries for better performance
-    const elementsToAnimate = document.querySelectorAll('.scroll-animate');
-    elementsToAnimate.forEach((el) => {
-      if (!animatedElementsRef.current.has(el)) {
-        observerRef.current?.observe(el);
-      }
-    });
-  }, []);
-
   useEffect(() => {
-    // Delay initialization to avoid blocking initial render
-    const timer = setTimeout(initializeScrollAnimations, 100);
-    
-    return () => {
-      clearTimeout(timer);
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, [initializeScrollAnimations]);
+    const cleanup = initializeScrollAnimations();
+    return cleanup;
+  }, []);
 
   const services = [
     {
@@ -127,22 +84,18 @@ const Index = () => {
         description="AuraByt is a Toronto-based enterprise IT consultancy specializing in software development, digital transformation, and infrastructure solutions." 
       />
       
-      {/* Hero Section */}
       <Hero />
-      
-      {/* Feature Showcase Section */}
       <FeatureShowcase />
       
       {/* Services Section */}
       <section className="section-padding bg-background relative overflow-hidden">
-        {/* Background decoration */}
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full" />
           <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-primary/5 blur-3xl rounded-full" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center max-w-4xl mx-auto mb-20 scroll-animate opacity-0">
+          <div className="text-center max-w-4xl mx-auto mb-20 scroll-animate">
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20">
               <Shield size={16} />
               Enterprise Solutions
@@ -160,40 +113,38 @@ const Index = () => {
             {services.map((service, index) => (
               <div 
                 key={index}
-                className="group relative scroll-animate opacity-0"
+                className="group relative scroll-animate"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <div className="professional-card h-full group">
-                  <div className="relative z-10">
-                    <div className="w-20 h-20 rounded-lg bg-primary/10 flex items-center justify-center mb-8 text-primary group-hover:scale-110 transition-transform duration-300">
-                      {service.icon}
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold mb-6 group-hover:text-primary transition-colors duration-300">
-                      {service.title}
-                    </h3>
-                    
-                    <p className="text-muted-foreground mb-8 leading-relaxed text-lg">
-                      {service.description}
-                    </p>
-                    
-                    <div className="space-y-3 mb-10">
-                      {service.features.map((feature, i) => (
-                        <div key={i} className="flex items-center text-sm text-muted-foreground">
-                          <div className="w-2 h-2 bg-primary rounded-full mr-4" />
-                          {feature}
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <a 
-                      href="/services" 
-                      className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors group/link text-lg"
-                    >
-                      Learn more 
-                      <ArrowRight size={20} className="ml-3 group-hover/link:translate-x-1 transition-transform" />
-                    </a>
+                <div className="professional-card h-full">
+                  <div className="w-20 h-20 rounded-lg bg-primary/10 flex items-center justify-center mb-8 text-primary group-hover:scale-110 transition-transform duration-300">
+                    {service.icon}
                   </div>
+                  
+                  <h3 className="text-2xl font-bold mb-6 group-hover:text-primary transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  
+                  <p className="text-muted-foreground mb-8 leading-relaxed text-lg">
+                    {service.description}
+                  </p>
+                  
+                  <div className="space-y-3 mb-10">
+                    {service.features.map((feature, i) => (
+                      <div key={i} className="flex items-center text-sm text-muted-foreground">
+                        <div className="w-2 h-2 bg-primary rounded-full mr-4" />
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <a 
+                    href="/services" 
+                    className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors group/link text-lg"
+                  >
+                    Learn more 
+                    <ArrowRight size={20} className="ml-3 group-hover/link:translate-x-1 transition-transform" />
+                  </a>
                 </div>
               </div>
             ))}
@@ -204,7 +155,7 @@ const Index = () => {
       {/* Technology Stack Section */}
       <section className="py-20 bg-card/20 relative">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 scroll-animate opacity-0">
+          <div className="text-center max-w-3xl mx-auto mb-16 scroll-animate">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Powered by <span className="gradient-text">Modern</span> Technology
             </h2>
@@ -217,7 +168,7 @@ const Index = () => {
             {technologies.map((tech, index) => (
               <div 
                 key={index}
-                className="group p-6 rounded-lg bg-card/30 backdrop-blur-sm border border-border hover:bg-card/50 hover:border-primary/30 transition-all duration-300 hover:scale-105 text-center scroll-animate opacity-0"
+                className="group p-6 rounded-lg bg-card/30 backdrop-blur-sm border border-border hover:bg-card/50 hover:border-primary/30 transition-all duration-300 hover:scale-105 text-center scroll-animate"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-center justify-center mb-4 text-primary group-hover:text-primary/80 transition-colors duration-300">
@@ -233,7 +184,7 @@ const Index = () => {
       {/* Products Section */}
       <section className="section-padding bg-background relative">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center max-w-4xl mx-auto mb-20 scroll-animate opacity-0">
+          <div className="text-center max-w-4xl mx-auto mb-20 scroll-animate">
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 border border-primary/20">
               <Zap size={16} />
               Innovation Portfolio
@@ -248,10 +199,10 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.slice(0, 6).map((product, index) => (
+            {products.map((product, index) => (
               <div 
                 key={index}
-                className="scroll-animate opacity-0"
+                className="scroll-animate"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <ProductCard 
@@ -263,7 +214,7 @@ const Index = () => {
             ))}
           </div>
           
-          <div className="text-center mt-16 scroll-animate opacity-0">
+          <div className="text-center mt-16 scroll-animate">
             <HoverButton
               href="/services"
               variant="secondary"
@@ -279,14 +230,13 @@ const Index = () => {
 
       {/* CTA Section */}
       <section className="py-24 bg-card/20 text-foreground relative overflow-hidden">
-        {/* Background effects */}
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-primary/5 blur-3xl rounded-full" />
           <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center scroll-animate opacity-0">
+          <div className="max-w-4xl mx-auto text-center scroll-animate">
             <h2 className="text-5xl md:text-6xl font-bold mb-8">
               Ready to Transform Your <span className="gradient-text">Business</span>?
             </h2>
