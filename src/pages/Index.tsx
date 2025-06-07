@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
 import ProductCard from '@/components/ProductCard';
+import FeatureShowcase from '@/components/FeatureShowcase';
 import { Code, BarChart3, ServerCog, ArrowRight, Shield, Zap, Globe, Users, Cpu, Database } from 'lucide-react';
 
 const Index = () => {
@@ -97,6 +98,9 @@ const Index = () => {
       
       {/* Hero Section */}
       <Hero />
+      
+      {/* Feature Showcase Section */}
+      <FeatureShowcase />
       
       {/* Services Section */}
       <section className="section-padding bg-background relative overflow-hidden">
