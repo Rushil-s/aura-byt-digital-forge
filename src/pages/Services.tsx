@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck, Server, Headphones, Settings, Cpu, CheckCircle, Users, MonitorSmartphone, Coffee, Cloud, Share2, TrendingUp, LineChart, Youtube, Instagram, Palette, FileCode } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import SEO from '@/components/SEO';
+import SchemaCard from '@/components/ui/schema-card-with-animated-wave-visualizer';
 
 // Memoize service components for performance
 const ServiceCategory = memo(({ 
@@ -336,6 +337,30 @@ const Services = () => {
                 </button>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Schema Card Showcase */}
+      <section className="py-16 bg-card/20 relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Advanced <span className="gradient-text">Database</span> Solutions
+            </h2>
+            <p className="text-xl text-muted-foreground mb-8">
+              Experience our cutting-edge database management and schema visualization tools
+            </p>
+          </div>
+          
+          <div className="flex justify-center">
+            <SchemaCard 
+              title="Real-time Analytics"
+              description="Monitor your database performance with live metrics and intelligent insights powered by AI."
+              badge="Analytics"
+              actionText="Explore"
+              statusText="Active"
+            />
           </div>
         </div>
       </section>
