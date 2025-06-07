@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Code, Shield, Zap, Globe } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { HoverButton } from '@/components/ui/hover-glow-button';
 
 const Hero = () => {
@@ -114,29 +113,16 @@ const Hero = () => {
             We architect the future of business technology.
           </p>
           
-          {/* CTA buttons with hover glow effect */}
-          <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-            <HoverButton
-              href="/services"
-              glowColor="hsl(217, 91%, 60%)"
-              backgroundColor="hsl(217, 91%, 60%)"
-              textColor="hsl(var(--primary-foreground))"
-              hoverTextColor="hsl(var(--primary-foreground))"
-              className="shadow-lg hover:shadow-primary/25"
-            >
-              Explore Solutions
-              <ArrowRight className="ml-3" size={24} />
-            </HoverButton>
-            
+          {/* Single CTA button - no redundancy */}
+          <div className="flex justify-center">
             <HoverButton
               href="/contact"
+              variant="primary"
               glowColor="hsl(217, 91%, 60%)"
-              backgroundColor="transparent"
-              textColor="hsl(217, 91%, 60%)"
-              hoverTextColor="hsl(var(--primary-foreground))"
-              className="shadow-lg"
+              className="shadow-lg hover:shadow-primary/25"
             >
-              Schedule Consultation
+              Start Your Project
+              <ArrowRight className="ml-3" size={24} />
             </HoverButton>
           </div>
         </div>

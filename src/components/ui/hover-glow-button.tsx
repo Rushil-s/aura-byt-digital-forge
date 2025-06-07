@@ -1,4 +1,5 @@
 import React, { useRef, useState, MouseEvent, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps {
   children: ReactNode;
@@ -10,6 +11,7 @@ interface ButtonProps {
   textColor?: string;
   hoverTextColor?: string;
   href?: string;
+  variant?: 'primary' | 'secondary';
 }
 
 const HoverButton: React.FC<ButtonProps> = ({ 
@@ -18,10 +20,11 @@ const HoverButton: React.FC<ButtonProps> = ({
   className = '', 
   disabled = false,
   glowColor = 'hsl(217, 91%, 60%)',
-  backgroundColor = 'hsl(var(--background))',
-  textColor = 'hsl(var(--primary))',
+  backgroundColor = 'hsl(217, 91%, 60%)',
+  textColor = 'hsl(var(--primary-foreground))',
   hoverTextColor = 'hsl(var(--primary-foreground))',
-  href
+  href,
+  variant = 'primary'
 }) => {
   const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const [glowPosition, setGlowPosition] = useState({ x: 50, y: 50 });
@@ -44,31 +47,45 @@ const HoverButton: React.FC<ButtonProps> = ({
     setIsHovered(false);
   };
 
+  // Determine styles based on variant
+  const getVariantStyles = () => {
+    if (variant === 'secondary') {
+      return {
+        backgroundColor: isHovered ? glowColor : 'transparent',
+        color: isHovered ? hoverTextColor : glowColor,
+        borderColor: glowColor,
+      };
+    }
+    
+    // Primary variant
+    return {
+      backgroundColor: isHovered ? `hsl(217, 91%, 70%)` : backgroundColor,
+      color: textColor,
+      borderColor: glowColor,
+    };
+  };
+
   const commonProps = {
     ref: buttonRef as any,
     onMouseMove: handleMouseMove,
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,
     className: `
-      relative inline-flex items-center justify-center px-8 py-4 border-2 border-primary
-      cursor-pointer overflow-hidden transition-all duration-300 
+      relative inline-flex items-center justify-center px-8 py-4 
+      border-2 cursor-pointer overflow-hidden transition-all duration-300 
       text-lg rounded-lg font-semibold backdrop-blur-sm
-      ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105 active:scale-95'}
+      ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105 active:scale-95 hover:shadow-xl'}
       ${className}
     `,
-    style: {
-      backgroundColor: isHovered ? glowColor : backgroundColor,
-      color: isHovered ? hoverTextColor : textColor,
-      borderColor: glowColor,
-    }
+    style: getVariantStyles()
   };
 
   const glowElement = (
     <div
       className={`
-        absolute w-[300px] h-[300px] rounded-full opacity-30 pointer-events-none 
-        transition-all duration-500 ease-out -translate-x-1/2 -translate-y-1/2
-        ${isHovered ? 'scale-100' : 'scale-0'}
+        absolute rounded-full pointer-events-none 
+        transition-all duration-300 ease-out -translate-x-1/2 -translate-y-1/2
+        ${isHovered ? 'w-[200px] h-[200px] opacity-40' : 'w-0 h-0 opacity-0'}
       `}
       style={{
         left: `${glowPosition.x}px`,
@@ -82,15 +99,15 @@ const HoverButton: React.FC<ButtonProps> = ({
   const content = (
     <>
       {glowElement}
-      <span className="relative z-10">{children}</span>
+      <span className="relative z-10 flex items-center gap-3">{children}</span>
     </>
   );
 
   if (href) {
     return (
-      <a {...commonProps} href={href}>
+      <Link to={href} {...commonProps}>
         {content}
-      </a>
+      </Link>
     );
   }
 

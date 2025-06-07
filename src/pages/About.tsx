@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import { HoverButton } from '@/components/ui/hover-glow-button';
 import SEO from '@/components/SEO';
@@ -62,7 +61,7 @@ const About = () => {
           <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-primary/5 blur-3xl animate-float animation-delay-300"></div>
         </div>
         
-        <div className="container mx-auto px-4 relative z-20">
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
               About <span className="gradient-text">AuraByt</span>
@@ -175,16 +174,6 @@ const About = () => {
               <p className="opacity-80 mb-8">
                 Our Toronto roots influence our approach to business - innovative, diverse, and forward-thinking. We leverage the city's vibrant tech community to stay at the cutting edge of digital trends and technologies.
               </p>
-              <HoverButton
-                href="/contact"
-                glowColor="hsl(217, 91%, 60%)"
-                backgroundColor="hsl(217, 91%, 60%)"
-                textColor="hsl(var(--primary-foreground))"
-                hoverTextColor="hsl(var(--primary-foreground))"
-                className="shadow-lg hover:shadow-primary/25"
-              >
-                Connect With Us
-              </HoverButton>
             </div>
             <div className="relative animate-on-scroll">
               <div className="rounded-lg overflow-hidden shadow-xl">
@@ -202,7 +191,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Single focused CTA */}
       <section className="py-16 bg-card/20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center animate-on-scroll">
@@ -212,10 +201,8 @@ const About = () => {
             </p>
             <HoverButton
               href="/contact"
+              variant="primary"
               glowColor="hsl(217, 91%, 60%)"
-              backgroundColor="hsl(217, 91%, 60%)"
-              textColor="hsl(var(--primary-foreground))"
-              hoverTextColor="hsl(var(--primary-foreground))"
               className="shadow-lg hover:shadow-primary/25"
             >
               Get in Touch

@@ -236,11 +236,9 @@ const Index = () => {
           <div className="text-center mt-16 scroll-animate opacity-0">
             <HoverButton
               href="/services"
+              variant="secondary"
               glowColor="hsl(217, 91%, 60%)"
-              backgroundColor="hsl(217, 91%, 60%)"
-              textColor="hsl(var(--primary-foreground))"
-              hoverTextColor="hsl(var(--primary-foreground))"
-              className="shadow-lg hover:shadow-primary/25"
+              className="shadow-lg"
             >
               View All Solutions
               <ArrowRight size={24} className="ml-3" />
@@ -249,7 +247,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Single focused CTA */}
       <section className="py-24 bg-card/20 text-foreground relative overflow-hidden">
         {/* Background effects */}
         <div className="absolute inset-0">
@@ -267,30 +265,15 @@ const Index = () => {
               through innovative technology solutions and strategic consulting.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-8 justify-center">
-              <HoverButton
-                href="/contact"
-                glowColor="hsl(217, 91%, 60%)"
-                backgroundColor="hsl(217, 91%, 60%)"
-                textColor="hsl(var(--primary-foreground))"
-                hoverTextColor="hsl(var(--primary-foreground))"
-                className="shadow-lg hover:shadow-primary/25"
-              >
-                Start Your Project
-                <ArrowRight size={24} className="ml-3" />
-              </HoverButton>
-              
-              <HoverButton
-                href="/services"
-                glowColor="hsl(217, 91%, 60%)"
-                backgroundColor="transparent"
-                textColor="hsl(217, 91%, 60%)"
-                hoverTextColor="hsl(var(--primary-foreground))"
-                className="shadow-lg"
-              >
-                Explore Services
-              </HoverButton>
-            </div>
+            <HoverButton
+              href="/contact"
+              variant="primary"
+              glowColor="hsl(217, 91%, 60%)"
+              className="shadow-lg hover:shadow-primary/25"
+            >
+              Get Started Today
+              <ArrowRight size={24} className="ml-3" />
+            </HoverButton>
           </div>
         </div>
       </section>
