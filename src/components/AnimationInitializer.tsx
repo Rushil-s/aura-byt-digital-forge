@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 // Optimized Animation Initializer with performance improvements
 const AnimationInitializer: React.FC = () => {
@@ -124,7 +124,7 @@ const AnimationInitializer: React.FC = () => {
     const cards = document.querySelectorAll('.tilt-card, .professional-card');
     let tiltTimeout: NodeJS.Timeout;
     
-    const handleMouseMove = useCallback((e: MouseEvent, card: Element) => {
+    const handleMouseMove = (e: MouseEvent, card: Element) => {
       if (tiltTimeout) clearTimeout(tiltTimeout);
       
       tiltTimeout = setTimeout(() => {
@@ -145,9 +145,9 @@ const AnimationInitializer: React.FC = () => {
           (card as HTMLElement).style.transform = `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg) translateZ(5px)`;
         }
       }, 10); // Debounce for smoother performance
-    }, []);
+    };
     
-    const handleMouseLeave = useCallback((card: Element) => {
+    const handleMouseLeave = (card: Element) => {
       if (tiltTimeout) clearTimeout(tiltTimeout);
       
       const inner = card.querySelector('.tilt-card-inner') as HTMLElement;
@@ -156,7 +156,7 @@ const AnimationInitializer: React.FC = () => {
       } else {
         (card as HTMLElement).style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px)`;
       }
-    }, []);
+    };
     
     cards.forEach((card) => {
       const mouseMoveHandler = (e: Event) => handleMouseMove(e as MouseEvent, card);
