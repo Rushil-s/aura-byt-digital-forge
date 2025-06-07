@@ -62,7 +62,6 @@ const SEO: React.FC<SEOProps> = ({
     updateMetaTag('keywords', keywords);
     updateMetaTag('author', 'AuraByt');
     updateMetaTag('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
-    updateMetaTag('viewport', 'width=device-width, initial-scale=1.0, viewport-fit=cover');
     
     // Open Graph meta tags
     updateMetaTag('og:title', title, true);
@@ -95,13 +94,9 @@ const SEO: React.FC<SEOProps> = ({
     updateMetaTag('application-name', 'AuraByt');
     updateMetaTag('format-detection', 'telephone=no');
     
-    // Performance hints
-    updateMetaTag('dns-prefetch', 'https://fonts.googleapis.com');
-    updateMetaTag('preconnect', 'https://fonts.gstatic.com');
-    
     // Schema.org structured data
     if (schema) {
-      let schemaScript = document.querySelector('script[type="application/ld+json"]');
+      let schemaScript = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
       if (schemaScript) {
         schemaScript.textContent = JSON.stringify(schema);
       } else {
