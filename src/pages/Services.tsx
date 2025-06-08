@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useCallback, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck, Server, Headphones, Settings, Cpu, CheckCircle, Users, MonitorSmartphone, Coffee, Cloud, Share2, TrendingUp, LineChart, Youtube, Instagram, Palette, FileCode, ArrowRight, Zap, Star, Award, Target, Shield } from 'lucide-react';
@@ -176,6 +177,19 @@ const Services = () => {
   const servicesRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
+    // Scroll to section if hash is present in URL
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          const yOffset = -100;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 100);
+    }
+    
     // Optimized scroll animations
     const observerOptions = {
       threshold: [0.1, 0.3],

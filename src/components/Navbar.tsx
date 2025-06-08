@@ -46,12 +46,14 @@ const Navbar = () => {
       
       if (location.pathname === route) {
         // Already on services page, just scroll to section
-        const element = document.getElementById(section);
-        if (element) {
-          const yOffset = -100;
-          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
+        setTimeout(() => {
+          const element = document.getElementById(section);
+          if (element) {
+            const yOffset = -100;
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 100);
       } else {
         // Navigate to services page first, then scroll
         navigate(route);
@@ -62,7 +64,7 @@ const Navbar = () => {
             const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
             window.scrollTo({ top: y, behavior: 'smooth' });
           }
-        }, 100);
+        }, 500);
       }
     } else {
       navigate(path);
@@ -165,7 +167,7 @@ const Navbar = () => {
                     
                     {/* Desktop Dropdown Menu */}
                     {activeDropdown === link.name && (
-                      <div className="absolute top-full left-0 mt-3 w-80 bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border py-3 animate-in fade-in-0 zoom-in-95 duration-200">
+                      <div className="absolute top-full left-0 mt-3 w-80 bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border py-3 animate-in fade-in-0 zoom-in-95 duration-200 z-50">
                         {link.dropdown.map((item) => (
                           <button
                             key={item.name}
@@ -207,7 +209,7 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <button
-            className="lg:hidden p-2 sm:p-3 rounded-lg bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 border border-border/50"
+            className="lg:hidden p-2 sm:p-3 rounded-lg bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 border border-border/50 z-50"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isOpen}
@@ -218,7 +220,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden pb-4 animate-in slide-in-from-top-2 duration-300">
+          <div className="lg:hidden pb-4 animate-in slide-in-from-top-2 duration-300 relative z-40">
             <div className="bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border p-3 sm:p-4 space-y-1 sm:space-y-2 mt-2">
               {navLinks.map((link, idx) => (
                 <div key={link.name}>
@@ -246,7 +248,7 @@ const Navbar = () => {
                             <button
                               key={item.name}
                               onClick={() => handleServiceNavigation(item.path)}
-                              className="flex items-center px-3 sm:px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg w-full text-left"
+                              className="flex items-center px-3 sm:px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg w-full text-left touch-manipulation"
                             >
                               <span className="mr-2 sm:mr-3 text-primary flex-shrink-0">{item.icon}</span>
                               <span className="text-xs sm:text-sm">{item.name}</span>
@@ -258,7 +260,7 @@ const Navbar = () => {
                   ) : (
                     <Link
                       to={link.path}
-                      className={`block px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${
+                      className={`block px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg touch-manipulation ${
                         location.pathname === link.path
                           ? 'text-primary bg-primary/10'
                           : 'text-foreground hover:text-primary hover:bg-primary/5'
