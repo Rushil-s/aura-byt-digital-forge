@@ -8,6 +8,7 @@ const Hero = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const textRef = useRef<HTMLSpanElement>(null);
   const heroRef = useRef<HTMLElement>(null);
+  const firstRender = useRef(true);
 
   useEffect(() => {
     // Set up text rotation interval
@@ -28,7 +29,11 @@ const Hero = () => {
   useEffect(() => {
     const chars = textRef.current?.querySelectorAll('.char');
     if (chars) {
-      chars.forEach((char) => char.classList.remove('visible'));
+      if (!firstRender.current) {
+        chars.forEach((char) => char.classList.remove('visible'));
+      } else {
+        firstRender.current = false;
+      }
       chars.forEach((char, i) => {
         setTimeout(() => char.classList.add('visible'), 50 * i);
       });
@@ -96,7 +101,7 @@ const Hero = () => {
                     className="inline-block"
                   >
                     {businessTexts[currentTextIndex].split('').map((char, i) => (
-                      <span key={i} className="char inline-block transition-all duration-300 transform">{char}</span>
+                      <span key={i} className="char visible inline-block transition-all duration-300 transform">{char}</span>
                     ))}
                   </span>
                 </div>
