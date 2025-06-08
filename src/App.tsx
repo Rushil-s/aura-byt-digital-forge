@@ -13,9 +13,9 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
 
 import Index from "./pages/Index";
+import Services from "./pages/Services";
 import ThankYou from "./pages/ThankYou";
 
-const Services = lazy(() => import("./pages/Services"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Privacy = lazy(() => import("./pages/Privacy"));
@@ -33,6 +33,7 @@ const PageLoader = () => (
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
+    console.log('Route changed to:', pathname);
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;

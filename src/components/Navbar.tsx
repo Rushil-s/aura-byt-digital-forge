@@ -37,12 +37,10 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleServiceNavigation = (path: string) => {
-    console.log('Service navigation clicked:', path);
+  const handleServiceNavigation = () => {
+    console.log('Service navigation clicked - navigating to /services');
     setIsOpen(false);
     setActiveDropdown(null);
-    
-    // Navigate to services page directly
     navigate('/services');
   };
 
@@ -54,19 +52,16 @@ const Navbar = () => {
       dropdown: [
         { 
           name: 'Software Development', 
-          path: '/services',
           icon: <Code size={16} />,
           description: 'Custom web applications & enterprise software'
         },
         { 
           name: 'Digital Marketing', 
-          path: '/services',
           icon: <BarChart3 size={16} />,
           description: 'SEO, social media & growth strategies'
         },
         { 
           name: 'IT Infrastructure', 
-          path: '/services',
           icon: <Headphones size={16} />,
           description: 'Cloud solutions & technical support'
         }
@@ -146,7 +141,7 @@ const Navbar = () => {
                         {link.dropdown.map((item) => (
                           <button
                             key={item.name}
-                            onClick={() => handleServiceNavigation(item.path)}
+                            onClick={handleServiceNavigation}
                             className="flex items-start px-4 py-4 text-sm hover:bg-primary/10 transition-all duration-200 mx-2 rounded-lg group w-full text-left"
                           >
                             <div className="flex-shrink-0 w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center mr-3 group-hover:bg-primary/20 transition-colors duration-200">
@@ -224,7 +219,7 @@ const Navbar = () => {
                               key={item.name}
                               onClick={() => {
                                 console.log('Mobile service item clicked:', item.name);
-                                handleServiceNavigation(item.path);
+                                handleServiceNavigation();
                               }}
                               className="flex items-center px-3 sm:px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg w-full text-left touch-manipulation"
                             >
