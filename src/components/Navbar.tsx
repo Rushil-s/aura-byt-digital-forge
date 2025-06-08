@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown, Code, BarChart3, Headphones } from 'lucide-react';
 
 const Navbar = () => {
@@ -8,6 +8,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const navbarRef = useRef<HTMLElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -36,6 +37,38 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const handleServiceNavigation = (path: string) => {
+    setIsOpen(false);
+    setActiveDropdown(null);
+    
+    if (path.includes('#')) {
+      const [route, section] = path.split('#');
+      
+      if (location.pathname === route) {
+        // Already on services page, just scroll to section
+        const element = document.getElementById(section);
+        if (element) {
+          const yOffset = -100;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      } else {
+        // Navigate to services page first, then scroll
+        navigate(route);
+        setTimeout(() => {
+          const element = document.getElementById(section);
+          if (element) {
+            const yOffset = -100;
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    } else {
+      navigate(path);
+    }
+  };
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { 
@@ -44,19 +77,19 @@ const Navbar = () => {
       dropdown: [
         { 
           name: 'Software Development', 
-          path: '/services#web-development',
+          path: '/services#development',
           icon: <Code size={16} />,
           description: 'Custom web applications & enterprise software'
         },
         { 
           name: 'Digital Marketing', 
-          path: '/services#digital-marketing',
+          path: '/services#marketing',
           icon: <BarChart3 size={16} />,
           description: 'SEO, social media & growth strategies'
         },
         { 
           name: 'IT Infrastructure', 
-          path: '/services#it-support',
+          path: '/services#infrastructure',
           icon: <Headphones size={16} />,
           description: 'Cloud solutions & technical support'
         }
@@ -134,11 +167,10 @@ const Navbar = () => {
                     {activeDropdown === link.name && (
                       <div className="absolute top-full left-0 mt-3 w-80 bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border py-3 animate-in fade-in-0 zoom-in-95 duration-200">
                         {link.dropdown.map((item) => (
-                          <Link
+                          <button
                             key={item.name}
-                            to={item.path}
-                            className="flex items-start px-4 py-4 text-sm hover:bg-primary/10 transition-all duration-200 mx-2 rounded-lg group"
-                            onClick={handleLinkClick}
+                            onClick={() => handleServiceNavigation(item.path)}
+                            className="flex items-start px-4 py-4 text-sm hover:bg-primary/10 transition-all duration-200 mx-2 rounded-lg group w-full text-left"
                           >
                             <div className="flex-shrink-0 w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center mr-3 group-hover:bg-primary/20 transition-colors duration-200">
                               <span className="text-primary">{item.icon}</span>
@@ -151,7 +183,7 @@ const Navbar = () => {
                                 {item.description}
                               </div>
                             </div>
-                          </Link>
+                          </button>
                         ))}
                       </div>
                     )}
@@ -211,15 +243,14 @@ const Navbar = () => {
                       {activeDropdown === link.name && (
                         <div className="mt-2 ml-2 sm:ml-4 space-y-1 animate-in slide-in-from-top-1 duration-200">
                           {link.dropdown.map((item) => (
-                            <Link
+                            <button
                               key={item.name}
-                              to={item.path}
-                              className="flex items-center px-3 sm:px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg"
-                              onClick={handleLinkClick}
+                              onClick={() => handleServiceNavigation(item.path)}
+                              className="flex items-center px-3 sm:px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg w-full text-left"
                             >
                               <span className="mr-2 sm:mr-3 text-primary flex-shrink-0">{item.icon}</span>
                               <span className="text-xs sm:text-sm">{item.name}</span>
-                            </Link>
+                            </button>
                           ))}
                         </div>
                       )}
