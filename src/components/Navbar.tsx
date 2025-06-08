@@ -118,8 +118,9 @@ const Navbar = () => {
               <div key={link.name} className="relative" ref={link.dropdown ? dropdownRef : undefined}>
                 {link.dropdown ? (
                   <div className="relative">
-                    <button
-                      onClick={() => handleDropdownToggle(link.name)}
+                    <Link
+                      to={link.path}
+                      onClick={handleLinkClick}
                       className={`flex items-center px-6 py-3 text-sm font-medium transition-all duration-300 rounded-lg hover:bg-primary/10 hover:text-primary relative group ${
                         location.pathname === link.path || location.pathname.startsWith('/services')
                           ? 'text-primary bg-primary/10'
@@ -127,11 +128,17 @@ const Navbar = () => {
                       }`}
                     >
                       {link.name}
-                      <ChevronDown 
-                        size={16} 
+                    </Link>
+                    <button
+                      onClick={() => handleDropdownToggle(link.name)}
+                      className="absolute inset-y-0 right-2 flex items-center"
+                      aria-label="Toggle services menu"
+                    >
+                      <ChevronDown
+                        size={16}
                         className={`ml-2 transition-transform duration-300 ${
                           activeDropdown === link.name ? 'rotate-180' : ''
-                        }`} 
+                        }`}
                       />
                     </button>
                     
@@ -196,22 +203,31 @@ const Navbar = () => {
                 <div key={link.name}>
                   {link.dropdown ? (
                     <div>
-                      <button
-                        onClick={() => handleDropdownToggle(link.name)}
-                        className={`w-full flex items-center justify-between px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${
+                      <div className={`w-full flex items-center justify-between px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${
                           location.pathname === link.path || location.pathname.startsWith('/services')
                             ? 'text-primary bg-primary/10'
                             : 'text-foreground hover:text-primary hover:bg-primary/5'
                         }`}
                       >
-                        {link.name}
-                        <ChevronDown 
-                          size={16} 
-                          className={`transition-transform duration-300 ${
-                            activeDropdown === link.name ? 'rotate-180' : ''
-                          }`} 
-                        />
-                      </button>
+                        <Link
+                          to={link.path}
+                          className="flex-grow text-left"
+                          onClick={handleLinkClick}
+                        >
+                          {link.name}
+                        </Link>
+                        <button
+                          onClick={() => handleDropdownToggle(link.name)}
+                          aria-label="Toggle services menu"
+                        >
+                          <ChevronDown
+                            size={16}
+                            className={`transition-transform duration-300 ${
+                              activeDropdown === link.name ? 'rotate-180' : ''
+                            }`}
+                          />
+                        </button>
+                      </div>
                       {activeDropdown === link.name && (
                         <div className="mt-2 ml-2 sm:ml-4 space-y-1 animate-in slide-in-from-top-1 duration-200">
                           {link.dropdown.map((item) => (
