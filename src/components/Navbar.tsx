@@ -1,20 +1,16 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, Code, BarChart3, Headphones } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
-  const navigate = useNavigate();
   const navbarRef = useRef<HTMLElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsOpen(false);
-    setActiveDropdown(null);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -25,63 +21,20 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setActiveDropdown(null);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleServiceNavigation = () => {
-    setIsOpen(false);
-    setActiveDropdown(null);
-    navigate('/services');
-  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { 
-      name: 'Services', 
-      path: '/services',
-      dropdown: [
-        { 
-          name: 'Software Development', 
-          icon: <Code size={16} />,
-          description: 'Custom web applications & enterprise software'
-        },
-        { 
-          name: 'Digital Marketing', 
-          icon: <BarChart3 size={16} />,
-          description: 'SEO, social media & growth strategies'
-        },
-        { 
-          name: 'IT Infrastructure', 
-          icon: <Headphones size={16} />,
-          description: 'Cloud solutions & technical support'
-        }
-      ]
-    },
+    { name: 'Services', path: '/services' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
 
-  const handleDropdownToggle = (linkName: string) => {
-    setActiveDropdown(activeDropdown === linkName ? null : linkName);
-  };
-
   const handleLinkClick = () => {
     setIsOpen(false);
-    setActiveDropdown(null);
   };
 
   const handleMobileMenuToggle = () => {
     setIsOpen(!isOpen);
-    setActiveDropdown(null);
   };
 
   return (
@@ -119,74 +72,16 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-2">
             {navLinks.map((link) => (
-              <div key={link.name} className="relative" ref={link.dropdown ? dropdownRef : undefined}>
-                {link.dropdown ? (
-                  <div className="relative">
-                    <div className="flex items-center">
-                      <Link
-                        to={link.path}
-                        onClick={handleLinkClick}
-                        className={`flex items-center px-6 py-3 text-sm font-medium transition-all duration-300 rounded-lg hover:bg-primary/10 hover:text-primary relative group ${
-                          location.pathname === link.path || location.pathname.startsWith('/services')
-                            ? 'text-primary bg-primary/10'
-                            : 'text-foreground hover:text-primary'
-                        }`}
-                      >
-                        {link.name}
-                      </Link>
-                      <button
-                        onClick={() => handleDropdownToggle(link.name)}
-                        className="ml-1 p-1 rounded hover:bg-primary/10 transition-colors duration-200"
-                        aria-label="Toggle services menu"
-                      >
-                        <ChevronDown
-                          size={16}
-                          className={`transition-transform duration-300 ${
-                            activeDropdown === link.name ? 'rotate-180' : ''
-                          }`}
-                        />
-                      </button>
-                    </div>
-                    
-                    {/* Desktop Dropdown Menu */}
-                    {activeDropdown === link.name && (
-                      <div className="absolute top-full left-0 mt-3 w-80 bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border py-3 animate-in fade-in-0 zoom-in-95 duration-200 z-50">
-                        {link.dropdown.map((item) => (
-                          <button
-                            key={item.name}
-                            onClick={handleServiceNavigation}
-                            className="flex items-start px-4 py-4 text-sm hover:bg-primary/10 transition-all duration-200 mx-2 rounded-lg group w-full text-left"
-                          >
-                            <div className="flex-shrink-0 w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center mr-3 group-hover:bg-primary/20 transition-colors duration-200">
-                              <span className="text-primary">{item.icon}</span>
-                            </div>
-                            <div>
-                              <div className="font-medium text-foreground group-hover:text-primary transition-colors duration-200">
-                                {item.name}
-                              </div>
-                              <div className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                                {item.description}
-                              </div>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <Link
-                    to={link.path}
-                    className={`px-6 py-3 text-sm font-medium transition-all duration-300 rounded-lg hover:bg-primary/10 hover:text-primary relative group ${
-                      location.pathname === link.path
-                        ? 'text-primary bg-primary/10'
-                        : 'text-foreground hover:text-primary'
-                    }`}
-                    onClick={handleLinkClick}
-                  >
-                    {link.name}
-                  </Link>
-                )}
-              </div>
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`px-6 py-3 text-sm font-medium transition-all duration-300 rounded-lg hover:bg-primary/10 hover:text-primary relative group ${
+                  location.pathname === link.path ? 'text-primary bg-primary/10' : 'text-foreground hover:text-primary'
+                }`}
+                onClick={handleLinkClick}
+              >
+                {link.name}
+              </Link>
             ))}
           </nav>
 
@@ -206,64 +101,19 @@ const Navbar = () => {
           <div className="lg:hidden pb-4 animate-in slide-in-from-top-2 duration-300 relative z-40">
             <div className="bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border p-3 sm:p-4 space-y-1 sm:space-y-2 mt-2">
               {navLinks.map((link, idx) => (
-                <div key={link.name}>
-                  {link.dropdown ? (
-                    <div>
-                      <div className="w-full flex items-center justify-between">
-                        <Link
-                          to={link.path}
-                          className={`flex-grow px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${
-                            location.pathname === link.path || location.pathname.startsWith('/services')
-                              ? 'text-primary bg-primary/10'
-                              : 'text-foreground hover:text-primary hover:bg-primary/5'
-                          }`}
-                          onClick={handleLinkClick}
-                        >
-                          {link.name}
-                        </Link>
-                        <button
-                          onClick={() => handleDropdownToggle(link.name)}
-                          className="p-2 rounded-lg hover:bg-primary/10 transition-colors duration-200"
-                          aria-label="Toggle services menu"
-                        >
-                          <ChevronDown
-                            size={16}
-                            className={`transition-transform duration-300 ${
-                              activeDropdown === link.name ? 'rotate-180' : ''
-                            }`}
-                          />
-                        </button>
-                      </div>
-                      {activeDropdown === link.name && (
-                        <div className="mt-2 ml-2 sm:ml-4 space-y-1 animate-in slide-in-from-top-1 duration-200">
-                          {link.dropdown.map((item) => (
-                            <button
-                              key={item.name}
-                              onClick={handleServiceNavigation}
-                              className="flex items-center px-3 sm:px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg w-full text-left"
-                            >
-                              <span className="mr-2 sm:mr-3 text-primary flex-shrink-0">{item.icon}</span>
-                              <span className="text-xs sm:text-sm">{item.name}</span>
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <Link
-                      to={link.path}
-                      className={`block px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${
-                        location.pathname === link.path
-                          ? 'text-primary bg-primary/10'
-                          : 'text-foreground hover:text-primary hover:bg-primary/5'
-                      }`}
-                      style={{ animationDelay: `${idx * 50}ms` }}
-                      onClick={handleLinkClick}
-                    >
-                      {link.name}
-                    </Link>
-                  )}
-                </div>
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`block px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${
+                    location.pathname === link.path
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary hover:bg-primary/5'
+                  }`}
+                  style={{ animationDelay: `${idx * 50}ms` }}
+                  onClick={handleLinkClick}
+                >
+                  {link.name}
+                </Link>
               ))}
             </div>
           </div>
