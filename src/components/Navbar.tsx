@@ -38,7 +38,6 @@ const Navbar = () => {
   }, []);
 
   const handleServiceNavigation = () => {
-    console.log('Service navigation clicked - navigating to /services');
     setIsOpen(false);
     setActiveDropdown(null);
     navigate('/services');
@@ -80,6 +79,11 @@ const Navbar = () => {
     setActiveDropdown(null);
   };
 
+  const handleMobileMenuToggle = () => {
+    setIsOpen(!isOpen);
+    setActiveDropdown(null);
+  };
+
   return (
     <header
       ref={navbarRef}
@@ -118,29 +122,31 @@ const Navbar = () => {
               <div key={link.name} className="relative" ref={link.dropdown ? dropdownRef : undefined}>
                 {link.dropdown ? (
                   <div className="relative">
-                    <Link
-                      to={link.path}
-                      onClick={handleLinkClick}
-                      className={`flex items-center px-6 py-3 text-sm font-medium transition-all duration-300 rounded-lg hover:bg-primary/10 hover:text-primary relative group ${
-                        location.pathname === link.path || location.pathname.startsWith('/services')
-                          ? 'text-primary bg-primary/10'
-                          : 'text-foreground hover:text-primary'
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                    <button
-                      onClick={() => handleDropdownToggle(link.name)}
-                      className="absolute inset-y-0 right-2 flex items-center"
-                      aria-label="Toggle services menu"
-                    >
-                      <ChevronDown
-                        size={16}
-                        className={`ml-2 transition-transform duration-300 ${
-                          activeDropdown === link.name ? 'rotate-180' : ''
+                    <div className="flex items-center">
+                      <Link
+                        to={link.path}
+                        onClick={handleLinkClick}
+                        className={`flex items-center px-6 py-3 text-sm font-medium transition-all duration-300 rounded-lg hover:bg-primary/10 hover:text-primary relative group ${
+                          location.pathname === link.path || location.pathname.startsWith('/services')
+                            ? 'text-primary bg-primary/10'
+                            : 'text-foreground hover:text-primary'
                         }`}
-                      />
-                    </button>
+                      >
+                        {link.name}
+                      </Link>
+                      <button
+                        onClick={() => handleDropdownToggle(link.name)}
+                        className="ml-1 p-1 rounded hover:bg-primary/10 transition-colors duration-200"
+                        aria-label="Toggle services menu"
+                      >
+                        <ChevronDown
+                          size={16}
+                          className={`transition-transform duration-300 ${
+                            activeDropdown === link.name ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </button>
+                    </div>
                     
                     {/* Desktop Dropdown Menu */}
                     {activeDropdown === link.name && (
@@ -186,8 +192,8 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <button
-            className="lg:hidden p-2 sm:p-3 rounded-lg bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 border border-border/50 z-50"
-            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden p-2 sm:p-3 rounded-lg bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 border border-border/50 z-50 relative"
+            onClick={handleMobileMenuToggle}
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isOpen}
           >
@@ -203,21 +209,21 @@ const Navbar = () => {
                 <div key={link.name}>
                   {link.dropdown ? (
                     <div>
-                      <div className={`w-full flex items-center justify-between px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${
-                          location.pathname === link.path || location.pathname.startsWith('/services')
-                            ? 'text-primary bg-primary/10'
-                            : 'text-foreground hover:text-primary hover:bg-primary/5'
-                        }`}
-                      >
+                      <div className="w-full flex items-center justify-between">
                         <Link
                           to={link.path}
-                          className="flex-grow text-left"
+                          className={`flex-grow px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${
+                            location.pathname === link.path || location.pathname.startsWith('/services')
+                              ? 'text-primary bg-primary/10'
+                              : 'text-foreground hover:text-primary hover:bg-primary/5'
+                          }`}
                           onClick={handleLinkClick}
                         >
                           {link.name}
                         </Link>
                         <button
                           onClick={() => handleDropdownToggle(link.name)}
+                          className="p-2 rounded-lg hover:bg-primary/10 transition-colors duration-200"
                           aria-label="Toggle services menu"
                         >
                           <ChevronDown
@@ -233,11 +239,8 @@ const Navbar = () => {
                           {link.dropdown.map((item) => (
                             <button
                               key={item.name}
-                              onClick={() => {
-                                console.log('Mobile service item clicked:', item.name);
-                                handleServiceNavigation();
-                              }}
-                              className="flex items-center px-3 sm:px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg w-full text-left touch-manipulation"
+                              onClick={handleServiceNavigation}
+                              className="flex items-center px-3 sm:px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg w-full text-left"
                             >
                               <span className="mr-2 sm:mr-3 text-primary flex-shrink-0">{item.icon}</span>
                               <span className="text-xs sm:text-sm">{item.name}</span>
@@ -249,7 +252,7 @@ const Navbar = () => {
                   ) : (
                     <Link
                       to={link.path}
-                      className={`block px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg touch-manipulation ${
+                      className={`block px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${
                         location.pathname === link.path
                           ? 'text-primary bg-primary/10'
                           : 'text-foreground hover:text-primary hover:bg-primary/5'
