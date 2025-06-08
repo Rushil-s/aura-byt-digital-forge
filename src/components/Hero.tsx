@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { HoverButton } from '@/components/ui/hover-glow-button';
 
@@ -23,6 +23,15 @@ const Hero = () => {
       clearInterval(interval);
     };
   }, [businessTexts.length]);
+
+  useLayoutEffect(() => {
+    const chars = textRef.current?.querySelectorAll('.char');
+    if (chars) {
+      chars.forEach((char, i) => {
+        setTimeout(() => char.classList.add('visible'), 50 * i);
+      });
+    }
+  }, []);
 
   // Update character animations whenever the current text changes
   useEffect(() => {
@@ -96,7 +105,7 @@ const Hero = () => {
                     className="inline-block"
                   >
                     {businessTexts[currentTextIndex].split('').map((char, i) => (
-                      <span key={i} className="char inline-block transition-all duration-300 transform">{char}</span>
+                      <span key={i} className="char visible inline-block transition-all duration-300 transform">{char}</span>
                     ))}
                   </span>
                 </div>

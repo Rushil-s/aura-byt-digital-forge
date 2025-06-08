@@ -68,6 +68,16 @@
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary bg-[length:200%_auto];
     animation: gradient 8s ease infinite;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Characters used in typewriter animations */
+  .char {
+    @apply opacity-0 translate-y-1 transition-all duration-300;
+  }
+
+  .char.visible {
+    @apply opacity-100 translate-y-0;
   }
 
   .btn-primary {
