@@ -34,7 +34,7 @@
   html {
     @apply antialiased font-inter scroll-smooth;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-    scroll-padding-top: 100px;
+    scroll-padding-top: 80px;
     font-size: 16px;
   }
 
@@ -45,6 +45,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
+    -webkit-tap-highlight-color: transparent;
   }
 
   ::selection {
@@ -55,6 +56,12 @@
   *:focus-visible {
     @apply outline-2 outline-primary outline-offset-2;
   }
+
+  /* Improved touch targets for mobile */
+  button, a, [role="button"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 @layer components {
@@ -64,33 +71,36 @@
   }
 
   .btn-primary {
-    @apply px-6 py-3 sm:px-8 sm:py-4 bg-primary text-primary-foreground font-semibold rounded-lg 
+    @apply px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 bg-primary text-primary-foreground font-semibold rounded-lg 
            hover:bg-primary/90 transition-all duration-300 
            hover:scale-105 active:scale-95 disabled:opacity-50
            relative overflow-hidden shadow-lg hover:shadow-primary/25
            inline-flex items-center justify-center text-sm sm:text-base
-           focus:ring-2 focus:ring-primary focus:ring-offset-2;
+           focus:ring-2 focus:ring-primary focus:ring-offset-2
+           touch-manipulation;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 sm:px-8 sm:py-4 border border-primary/30 text-primary font-semibold rounded-lg 
+    @apply px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 border border-primary/30 text-primary font-semibold rounded-lg 
            hover:bg-primary/10 hover:border-primary transition-all duration-300 
            hover:scale-105 active:scale-95 backdrop-blur-sm
            inline-flex items-center justify-center text-sm sm:text-base
-           focus:ring-2 focus:ring-primary focus:ring-offset-2;
+           focus:ring-2 focus:ring-primary focus:ring-offset-2
+           touch-manipulation;
   }
 
   .professional-card {
-    @apply bg-card/80 backdrop-blur-sm border border-border rounded-xl p-6 sm:p-8
+    @apply bg-card/80 backdrop-blur-sm border border-border rounded-xl p-4 sm:p-6 md:p-8
            hover:bg-card hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10
-           transition-all duration-300 hover:-translate-y-1 relative overflow-hidden;
+           transition-all duration-300 hover:-translate-y-1 relative overflow-hidden
+           touch-manipulation;
     transform: translateZ(0);
     backface-visibility: hidden;
     will-change: transform;
   }
 
   .section-padding {
-    @apply py-16 sm:py-20 md:py-24;
+    @apply py-12 sm:py-16 md:py-20 lg:py-24;
   }
 
   .scroll-animate {
@@ -172,15 +182,27 @@
 /* Enhanced mobile optimizations */
 @media (max-width: 640px) {
   .container {
-    @apply px-4;
+    @apply px-3;
   }
   
   html {
     font-size: 14px;
+    scroll-padding-top: 70px;
   }
   
   .professional-card {
-    @apply p-6;
+    @apply p-4;
+  }
+
+  /* Improve touch targets on mobile */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better spacing for mobile */
+  .section-padding {
+    @apply py-8;
   }
 }
 
@@ -192,6 +214,20 @@
   
   .professional-card:hover {
     transform: none;
+    background: hsl(var(--card));
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  /* Ensure dropdown menus work well on touch devices */
+  .group:hover .group-hover\:scale-110 {
+    transform: scale(1.05);
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1023px) {
+  html {
+    scroll-padding-top: 90px;
   }
 }
 
