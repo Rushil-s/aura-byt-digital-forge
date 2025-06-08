@@ -38,37 +38,12 @@ const Navbar = () => {
   }, []);
 
   const handleServiceNavigation = (path: string) => {
+    console.log('Service navigation clicked:', path);
     setIsOpen(false);
     setActiveDropdown(null);
     
-    if (path.includes('#')) {
-      const [route, section] = path.split('#');
-      
-      if (location.pathname === route) {
-        // Already on services page, just scroll to section
-        setTimeout(() => {
-          const element = document.getElementById(section);
-          if (element) {
-            const yOffset = -100;
-            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-          }
-        }, 100);
-      } else {
-        // Navigate to services page first, then scroll
-        navigate(route);
-        setTimeout(() => {
-          const element = document.getElementById(section);
-          if (element) {
-            const yOffset = -100;
-            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-          }
-        }, 500);
-      }
-    } else {
-      navigate(path);
-    }
+    // Navigate to services page directly
+    navigate('/services');
   };
 
   const navLinks = [
@@ -79,19 +54,19 @@ const Navbar = () => {
       dropdown: [
         { 
           name: 'Software Development', 
-          path: '/services#development',
+          path: '/services',
           icon: <Code size={16} />,
           description: 'Custom web applications & enterprise software'
         },
         { 
           name: 'Digital Marketing', 
-          path: '/services#marketing',
+          path: '/services',
           icon: <BarChart3 size={16} />,
           description: 'SEO, social media & growth strategies'
         },
         { 
           name: 'IT Infrastructure', 
-          path: '/services#infrastructure',
+          path: '/services',
           icon: <Headphones size={16} />,
           description: 'Cloud solutions & technical support'
         }
@@ -247,7 +222,10 @@ const Navbar = () => {
                           {link.dropdown.map((item) => (
                             <button
                               key={item.name}
-                              onClick={() => handleServiceNavigation(item.path)}
+                              onClick={() => {
+                                console.log('Mobile service item clicked:', item.name);
+                                handleServiceNavigation(item.path);
+                              }}
                               className="flex items-center px-3 sm:px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 rounded-lg w-full text-left touch-manipulation"
                             >
                               <span className="mr-2 sm:mr-3 text-primary flex-shrink-0">{item.icon}</span>
