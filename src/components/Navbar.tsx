@@ -60,6 +60,7 @@ const Navbar = () => {
           ? 'bg-background/98 backdrop-blur-xl shadow-2xl border-b border-primary/30'
           : 'bg-background/80 backdrop-blur-xl border-b border-border/50'
       }`}
+      aria-label="Main navigation"
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16 sm:h-20">
@@ -69,17 +70,20 @@ const Navbar = () => {
             className="flex items-center space-x-2 sm:space-x-3 group relative z-10"
             onClick={handleLinkClick}
             tabIndex={0}
+            aria-label="AuraByt Home"
           >
             <div className="relative">
               <div className="h-10 w-10 sm:h-12 sm:w-12 relative flex items-center justify-center overflow-hidden rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 border border-primary/20">
                 <img
-                  alt="AuraByt Logo"
-                  className="h-6 w-6 sm:h-8 sm:w-8 object-contain relative z-10 filter brightness-110 group-hover:scale-110 transition-transform duration-300"
                   src="/assets/aurabytlogo.png"
+                  alt="AuraByt logo, an abstract blue/yellow/white glyph, enterprise IT consultancy"
+                  className="h-6 w-6 sm:h-8 sm:w-8 object-contain relative z-10 filter brightness-110 group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col" aria-label="Site Title">
               <span className="font-bold text-lg sm:text-xl gradient-text">
                 AuraByt
               </span>
@@ -89,7 +93,7 @@ const Navbar = () => {
             </div>
           </Link>
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-2">
+          <nav className="hidden lg:flex items-center space-x-2" aria-label="Desktop navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -101,6 +105,7 @@ const Navbar = () => {
                 }`}
                 onClick={handleLinkClick}
                 aria-current={location.pathname === link.path ? "page" : undefined}
+                aria-label={link.name}
               >
                 {link.name}
               </Link>
@@ -133,6 +138,7 @@ const Navbar = () => {
             {/* Drawer */}
             <nav
               id="mobile-nav-menu"
+              aria-label="Mobile navigation"
               className="relative ml-auto bg-card/98 backdrop-blur-xl rounded-l-xl shadow-2xl border-l border-border w-64 max-w-[85vw] h-full p-5 z-[70] flex flex-col"
             >
               <button
@@ -154,6 +160,7 @@ const Navbar = () => {
                     }`}
                     onClick={handleLinkClick}
                     aria-current={location.pathname === link.path ? "page" : undefined}
+                    aria-label={link.name}
                   >
                     {link.name}
                   </Link>
@@ -168,3 +175,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
