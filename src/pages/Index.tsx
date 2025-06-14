@@ -8,6 +8,29 @@ import { Code, BarChart3, ServerCog, ArrowRight, Shield, Zap, Cpu, Database, Glo
 import { initializeScrollAnimations } from '@/utils/animations';
 import { Link } from 'react-router-dom';
 
+const whatWeBuild = [
+  {
+    icon: <Code size={32} />,
+    title: "Custom Software",
+    description: "Web and mobile platforms built for massive scale, performance, and real business outcomes."
+  },
+  {
+    icon: <ServerCog size={32} />,
+    title: "Cloud Solutions",
+    description: "End-to-end cloud architecture, DevOps, and security for hybrid/global teams."
+  },
+  {
+    icon: <BarChart3 size={32} />,
+    title: "Data Intelligence",
+    description: "Real-time analytics, AI-driven automation, and actionable enterprise insights."
+  },
+  {
+    icon: <Shield size={32} />,
+    title: "Security & Compliance",
+    description: "Protect your IP and customer data, ensure compliance, and reduce risk."
+  }
+];
+
 const Index = () => {
   useEffect(() => {
     const cleanup = initializeScrollAnimations();
@@ -124,6 +147,37 @@ const Index = () => {
       />
       
       <Hero />
+      {/* WHAT WE BUILD SECTION */}
+      <section className="py-20 md:py-28 bg-background border-b border-border/20" id="what-we-build">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <span className="inline-flex items-center text-primary/80 bg-primary/10 rounded-full px-6 py-3 text-sm font-semibold mb-6 border border-primary/20 gap-2">
+              <Code size={16} />
+              What We Build
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-bold mb-4 gradient-text">Technology that Drives Results</h2>
+            <p className="text-lg text-muted-foreground mb-2">
+              We architect, engineer, and deliver solutions for modern enterprises—future-ready and tailored to your industry.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mb-10">
+            {whatWeBuild.map((item, idx) => (
+              <div key={idx} className="group p-7 rounded-xl bg-card border border-border/80 shadow-md hover:bg-primary/5 transition-all flex flex-col items-center text-center space-y-5 scroll-animate" style={{ animationDelay: `${50*idx}ms` }}>
+                <div className="text-primary">{item.icon}</div>
+                <h3 className="text-lg font-bold">{item.title}</h3>
+                <p className="text-muted-foreground text-base">{item.description}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <a href="#portfolio" className="text-primary font-medium text-base underline hover:no-underline inline-block mt-2">
+              See our portfolio
+            </a>
+          </div>
+        </div>
+      </section>
+      {/* END WHAT WE BUILD */}
+      
       <FeatureShowcase />
       
       {/* Services Section */}

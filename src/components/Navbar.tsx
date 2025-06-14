@@ -35,6 +35,8 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { name: 'Services', path: '/services' },
     { name: 'About', path: '/about' },
+    { name: 'Portfolio', path: '/#portfolio' },
+    { name: 'Careers', path: '/careers' },                                           // added Career link
     { name: 'Contact', path: '/contact' },
   ];
 
