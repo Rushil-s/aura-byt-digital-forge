@@ -1,6 +1,4 @@
-
 import React from "react";
-import { Helmet } from "react-helmet";
 import { Briefcase, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -29,13 +27,27 @@ const jobs = [
 ];
 
 export default function Careers() {
+  // Set document title & meta description for SEO without Helmet
+  React.useEffect(() => {
+    document.title = "Careers – Join Our Team | AuraByt";
+    const description = document.querySelector("meta[name='description']");
+    if (description) {
+      description.setAttribute(
+        "content",
+        "Work with AuraByt – an enterprise IT consultancy in Toronto. Open tech roles, team values, and growth opportunities."
+      );
+    } else {
+      const meta = document.createElement("meta");
+      meta.name = "description";
+      meta.content =
+        "Work with AuraByt – an enterprise IT consultancy in Toronto. Open tech roles, team values, and growth opportunities.";
+      document.head.appendChild(meta);
+    }
+  }, []);
+
   return (
     <section className="bg-background min-h-screen pt-24 pb-20">
-      <Helmet>
-        <title>Careers – Join Our Team | AuraByt</title>
-        <meta name="description" content="Work with AuraByt – an enterprise IT consultancy in Toronto. Open tech roles, team values, and growth opportunities." />
-        <meta name="keywords" content="IT Careers, Software Jobs, Toronto, Cloud, Consulting, AuraByt, Enterprise IT, Open Positions, Join Team" />
-      </Helmet>
+      {/* SEO handled in useEffect for document title / meta desc */}
       <div className="container mx-auto max-w-3xl px-4">
         <div className="mb-10 text-center">
           <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold">
