@@ -9,18 +9,27 @@ const Navbar = () => {
   const location = useLocation();
   const navbarRef = useRef<HTMLElement>(null);
 
+  // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
+  // Set scrolled state
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent body scrolling when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; }
+  }, [isOpen]);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -29,13 +38,19 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
+  // Handle any link click
   const handleLinkClick = () => {
     setIsOpen(false);
   };
 
-  const handleMobileMenuToggle = () => {
-    setIsOpen(!isOpen);
-  };
+  // Keyboard accessibility: close menu with Escape
+  useEffect(() => {
+    const onEsc = (e: KeyboardEvent) => {
+      if (isOpen && e.key === 'Escape') setIsOpen(false);
+    };
+    window.addEventListener('keydown', onEsc);
+    return () => window.removeEventListener('keydown', onEsc);
+  }, [isOpen]);
 
   return (
     <header
@@ -49,7 +64,12 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group relative z-10" onClick={handleLinkClick}>
+          <Link
+            to="/"
+            className="flex items-center space-x-2 sm:space-x-3 group relative z-10"
+            onClick={handleLinkClick}
+            tabIndex={0}
+          >
             <div className="relative">
               <div className="h-10 w-10 sm:h-12 sm:w-12 relative flex items-center justify-center overflow-hidden rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 border border-primary/20">
                 <img
@@ -68,7 +88,6 @@ const Navbar = () => {
               </span>
             </div>
           </Link>
-
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-2">
             {navLinks.map((link) => (
@@ -76,46 +95,71 @@ const Navbar = () => {
                 key={link.name}
                 to={link.path}
                 className={`px-6 py-3 text-sm font-medium transition-all duration-300 rounded-lg hover:bg-primary/10 hover:text-primary relative group ${
-                  location.pathname === link.path ? 'text-primary bg-primary/10' : 'text-foreground hover:text-primary'
+                  location.pathname === link.path
+                    ? 'text-primary bg-primary/10'
+                    : 'text-foreground hover:text-primary'
                 }`}
                 onClick={handleLinkClick}
+                aria-current={location.pathname === link.path ? "page" : undefined}
               >
                 {link.name}
               </Link>
             ))}
           </nav>
-
           {/* Mobile menu button */}
           <button
             className="lg:hidden p-2 sm:p-3 rounded-lg bg-card/50 backdrop-blur-sm hover:bg-card/80 transition-all duration-300 border border-border/50 z-50 relative"
-            onClick={handleMobileMenuToggle}
+            onClick={() => setIsOpen((val) => !val)}
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isOpen}
+            aria-controls="mobile-nav-menu"
           >
             {isOpen ? <X size={20} className="sm:w-6 sm:h-6 text-primary" /> : <Menu size={20} className="sm:w-6 sm:h-6 text-foreground" />}
           </button>
         </div>
-
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation (Drawer-style) */}
         {isOpen && (
-          <div className="lg:hidden pb-4 animate-in slide-in-from-top-2 duration-300 relative z-40">
-            <div className="bg-card/98 backdrop-blur-xl rounded-lg shadow-2xl border border-border p-3 sm:p-4 space-y-1 sm:space-y-2 mt-2">
-              {navLinks.map((link, idx) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`block px-3 sm:px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg ${
-                    location.pathname === link.path
-                      ? 'text-primary bg-primary/10'
-                      : 'text-foreground hover:text-primary hover:bg-primary/5'
-                  }`}
-                  style={{ animationDelay: `${idx * 50}ms` }}
-                  onClick={handleLinkClick}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
+          <div
+            className="fixed inset-0 z-[60] flex"
+            aria-modal="true"
+            role="dialog"
+          >
+            {/* Overlay */}
+            <div
+              className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[60] transition-opacity"
+              onClick={() => setIsOpen(false)}
+              aria-label="Close navigation menu"
+            />
+            {/* Drawer */}
+            <nav
+              id="mobile-nav-menu"
+              className="relative ml-auto bg-card/98 backdrop-blur-xl rounded-l-xl shadow-2xl border-l border-border w-64 max-w-[85vw] h-full p-5 z-[70] flex flex-col"
+            >
+              <button
+                className="ml-auto mb-4 p-2 rounded hover:bg-card/80 transition"
+                aria-label="Close menu"
+                onClick={() => setIsOpen(false)}
+              >
+                <X size={20} className="sm:w-6 sm:h-6 text-foreground" />
+              </button>
+              <div className="flex flex-col space-y-2">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`block px-3 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
+                      location.pathname === link.path
+                        ? 'text-primary bg-primary/10'
+                        : 'text-foreground hover:text-primary hover:bg-primary/5'
+                    }`}
+                    onClick={handleLinkClick}
+                    aria-current={location.pathname === link.path ? "page" : undefined}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </nav>
           </div>
         )}
       </div>

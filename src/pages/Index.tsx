@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
@@ -7,6 +6,7 @@ import FeatureShowcase from '@/components/FeatureShowcase';
 import { HoverButton } from '@/components/ui/hover-glow-button';
 import { Code, BarChart3, ServerCog, ArrowRight, Shield, Zap, Cpu, Database, Globe } from 'lucide-react';
 import { initializeScrollAnimations } from '@/utils/animations';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   useEffect(() => {
@@ -177,13 +177,14 @@ const Index = () => {
                     ))}
                   </div>
                   
-                  <a 
-                    href="/services" 
+                  {/* Changed Learn more to use Link */}
+                  <Link 
+                    to="/services" 
                     className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors group/link text-base sm:text-lg"
                   >
                     Learn more 
                     <ArrowRight size={18} className="ml-2 sm:ml-3 group-hover/link:translate-x-1 transition-transform flex-shrink-0" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
