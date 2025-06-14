@@ -39,10 +39,30 @@ const features = [
 export default function FeatureShowcase() {
 	return (
 		<section className="py-20 md:py-32 bg-background relative overflow-hidden">
-			{/* Background decoration */}
-			<div className="absolute inset-0">
-				<div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full" />
-				<div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-primary/5 blur-3xl rounded-full" />
+			{/* Background decoration - fixed for flicker */}
+			<div
+				className="absolute inset-0 pointer-events-none select-none z-0"
+				aria-hidden="true"
+				style={{
+					// Modern browsers: use gpu-acceleration for smoother blur
+					willChange: 'transform',
+					contain: 'paint',
+				}}
+			>
+				<div
+					className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 blur-3xl rounded-full"
+					style={{
+						transition: 'none', // Disable any transitions to prevent flicker
+						willChange: 'transform',
+					}}
+				/>
+				<div
+					className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-primary/5 blur-3xl rounded-full"
+					style={{
+						transition: 'none',
+						willChange: 'transform',
+					}}
+				/>
 			</div>
 			
 			<div className="mx-auto w-full max-w-7xl space-y-16 px-4 relative z-10">
