@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PortfolioItem from './PortfolioItem';
 import { portfolioProjects } from '../data/portfolioData';
@@ -24,13 +23,17 @@ const Portfolio = () => {
   useParallaxMouse();
 
   return (
-    <section ref={sectionRef} className="py-16 relative overflow-hidden scroll-animate opacity-0 translate-y-8 transition-all duration-700">
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50/80 to-white"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30"></div>
-      
+    <section
+      ref={sectionRef}
+      className="py-16 relative overflow-hidden scroll-animate opacity-0 translate-y-8 transition-all duration-700"
+    >
+      {/* Use a theme-respecting subtle overlay, and keep radial dot grid for texture */}
+      <div className="absolute inset-0 bg-background/95 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(theme(colors.aurabyt.purple)/10_1px,transparent_1px)] [background-size:20px_20px] opacity-20 dark:opacity-25 pointer-events-none"></div>
+      {/* Colorful gradients for visual effect */}
       <div className="absolute top-0 right-0 w-1/3 h-1/2 bg-gradient-radial from-aurabyt-purple/5 to-transparent opacity-70 blur-3xl animate-pulse-slow"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-radial from-aurabyt-blue/5 to-transparent opacity-70 blur-3xl animate-pulse-slow" style={{ animationDelay: '1.5s' }}></div>
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-block">
