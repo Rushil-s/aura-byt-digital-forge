@@ -56,6 +56,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        aurabyt: {
+          purple: "#8B5CF6",
+          indigo: "#6366F1",
+          blue: "#3B82F6",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -87,6 +92,10 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        "pulse-slow": {
+          "0%, 100%": { opacity: "0.7" },
+          "50%": { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -95,6 +104,7 @@ export default {
         "fade-out": "fade-out 0.5s ease-out",
         "slide-up": "slide-up 0.7s ease-out forwards",
         "float": "float 6s infinite ease-in-out",
+        "pulse-slow": "pulse-slow 3s infinite ease-in-out",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
