@@ -1,8 +1,10 @@
+
 import React, { useEffect } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
 import ProductCard from '@/components/ProductCard';
 import FeatureShowcase from '@/components/FeatureShowcase';
+import Portfolio from '@/components/Portfolio';
 import { HoverButton } from '@/components/ui/hover-glow-button';
 import { Code, BarChart3, ServerCog, ArrowRight, Shield, Zap, Cpu, Database, Globe } from 'lucide-react';
 import { initializeScrollAnimations } from '@/utils/animations';
@@ -170,9 +172,9 @@ const Index = () => {
             ))}
           </div>
           <div className="text-center">
-            <a href="#portfolio" className="text-primary font-medium text-base underline hover:no-underline inline-block mt-2">
+            <Link to="/portfolio" className="text-primary font-medium text-base underline hover:no-underline inline-block mt-2">
               See our portfolio
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -281,13 +283,13 @@ const Index = () => {
           <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20 scroll-animate">
             <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-primary/20">
               <Zap size={14} className="sm:w-4 sm:h-4" />
-              Innovation Portfolio
+              Built by AuraByt
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 leading-tight">
-              Our <span className="gradient-text">Product</span> Ecosystem
+              Our <span className="gradient-text">Product</span> Portfolio
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-              Innovative digital solutions designed to solve complex business challenges 
+              Innovative digital solutions we've built to solve complex business challenges 
               and drive meaningful results across industries.
             </p>
           </div>
@@ -321,6 +323,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Portfolio Section */}
+      <Portfolio />
 
       {/* CTA Section */}
       <section className="py-20 sm:py-24 bg-card/20 text-foreground relative overflow-hidden">
