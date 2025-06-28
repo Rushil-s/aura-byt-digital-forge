@@ -1,221 +1,261 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Hero from '@/components/Hero';
-import { ServiceShowcase } from '@/components/ui/service-showcase';
-import { TechStack } from '@/components/ui/tech-stack';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Zap, Target, Users, Award } from 'lucide-react';
-import { GlassCard } from '@/components/ui/glass-card';
-import { MagneticButton } from '@/components/ui/magnetic-button';
-import { FloatingElements } from '@/components/ui/floating-elements';
 import SEO from '@/components/SEO';
+import { Link } from 'react-router-dom';
+import { 
+  Code, 
+  BarChart3, 
+  ServerCog, 
+  ArrowRight, 
+  Shield, 
+  Zap, 
+  Database,
+  CheckCircle,
+  Users,
+  Award,
+  Clock,
+  Star,
+  Quote
+} from 'lucide-react';
 
 const Index = () => {
-  const stats = [
-    { icon: <Target className="w-8 h-8" />, number: "500+", label: "Projects Revolutionized", color: "from-blue-500 to-cyan-400" },
-    { icon: <Users className="w-8 h-8" />, number: "99.9%", label: "Client Satisfaction", color: "from-purple-500 to-pink-400" },
-    { icon: <Award className="w-8 h-8" />, number: "24/7", label: "Innovation Engine", color: "from-green-500 to-emerald-400" },
-    { icon: <Zap className="w-8 h-8" />, number: "∞", label: "Possibilities Unlocked", color: "from-yellow-500 to-orange-400" }
+  const services = [
+    {
+      icon: <Code size={32} />,
+      title: "Software Development",
+      description: "Custom web applications, mobile apps, and enterprise software solutions built with modern technologies and best practices.",
+      features: ["React & Next.js", "Node.js & Python", "Cloud Architecture", "API Development"],
+    },
+    {
+      icon: <BarChart3 size={32} />,
+      title: "Digital Transformation",
+      description: "Strategic digital initiatives that modernize your business processes and accelerate growth through technology.",
+      features: ["Process Automation", "Data Analytics", "Digital Strategy", "Performance Optimization"],
+    },
+    {
+      icon: <ServerCog size={32} />,
+      title: "Infrastructure & Support",
+      description: "Reliable cloud infrastructure, cybersecurity, and 24/7 technical support to keep your business running smoothly.",
+      features: ["Cloud Migration", "Security Audits", "DevOps", "24/7 Monitoring"],
+    }
+  ];
+
+  const technologies = [
+    { name: "React", category: "Frontend" },
+    { name: "Node.js", category: "Backend" },
+    { name: "AWS", category: "Cloud" },
+    { name: "Docker", category: "DevOps" },
+    { name: "PostgreSQL", category: "Database" },
+    { name: "Python", category: "Backend" }
   ];
 
   const testimonials = [
     {
-      quote: "AuraByt didn't just build our platform—they architected our future. The AI-driven solutions have transformed how we operate.",
-      author: "Sarah Chen",
-      role: "CTO, NeuralTech Industries",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"
+      quote: "AuraByt transformed our legacy systems into a modern, scalable platform. Their expertise and professionalism exceeded our expectations.",
+      author: "Sarah Johnson",
+      role: "CTO, TechCorp Inc.",
+      rating: 5
     },
     {
-      quote: "Working with AuraByt feels like collaborating with time travelers. They see possibilities we never imagined.",
-      author: "Marcus Rodriguez",
-      role: "Founder, Quantum Dynamics",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+      quote: "The team's attention to detail and commitment to quality is outstanding. They delivered our project on time and within budget.",
+      author: "Michael Chen",
+      role: "CEO, Innovate Solutions",
+      rating: 5
     },
     {
-      quote: "The quantum security implementation exceeded every expectation. Our data has never been more protected.",
-      author: "Dr. Elena Vasquez",
-      role: "Head of Security, CyberCore",
-      avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop&crop=face"
+      quote: "Working with AuraByt has been a game-changer for our business. Their solutions are robust, secure, and perfectly tailored to our needs.",
+      author: "Emily Rodriguez",
+      role: "Operations Manager, Global Enterprises",
+      rating: 5
     }
   ];
 
+  const stats = [
+    { icon: <Users size={24} />, number: "100+", label: "Clients Served" },
+    { icon: <Award size={24} />, number: "500+", label: "Projects Delivered" },
+    { icon: <Clock size={24} />, number: "99%", label: "On-Time Delivery" },
+    { icon: <Shield size={24} />, number: "24/7", label: "Support Available" }
+  ];
+
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="w-full">
       <SEO 
-        title="AuraByt – Architecting Tomorrow's Digital Reality"
-        description="Revolutionary IT consultancy pushing the boundaries of what's possible. We don't just build software—we craft the future."
-        keywords="revolutionary IT, quantum computing, AI development, future technology, digital transformation"
+        title="AuraByt – Professional IT Consultancy & Software Development"
+        description="Professional IT consultancy services including software development, digital transformation, and infrastructure solutions. Based in Toronto, serving clients globally."
+        keywords="IT consultancy, software development, digital transformation, web development, cloud solutions, Toronto"
       />
       
       <Hero />
-      <ServiceShowcase />
-      <TechStack />
+
+      {/* Services Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-6 border border-blue-200">
+              <Zap size={16} />
+              Our Services
+            </div>
+            <h2 className="text-4xl font-bold text-slate-900 mb-6">
+              Comprehensive IT Solutions
+            </h2>
+            <p className="text-lg text-slate-600 leading-relaxed">
+              We provide end-to-end technology services that help businesses modernize, 
+              scale, and succeed in the digital age.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <div 
+                key={index}
+                className="bg-white border border-slate-200 rounded-xl p-8 hover:shadow-lg transition-shadow duration-300"
+              >
+                <div className="w-16 h-16 bg-blue-50 rounded-lg flex items-center justify-center mb-6 text-blue-600 border border-blue-100">
+                  {service.icon}
+                </div>
+                
+                <h3 className="text-xl font-bold text-slate-900 mb-4">
+                  {service.title}
+                </h3>
+                
+                <p className="text-slate-600 mb-6 leading-relaxed">
+                  {service.description}
+                </p>
+                
+                <div className="space-y-2 mb-8">
+                  {service.features.map((feature, i) => (
+                    <div key={i} className="flex items-center text-sm text-slate-600">
+                      <CheckCircle size={16} className="text-blue-600 mr-3 flex-shrink-0" />
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+                
+                <Link 
+                  to="/services" 
+                  className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                >
+                  Learn more 
+                  <ArrowRight size={16} className="ml-2" />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Technology Stack Section */}
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-6">
+              Modern Technology Stack
+            </h2>
+            <p className="text-lg text-slate-600">
+              We use proven, industry-standard technologies to build reliable and scalable solutions.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {technologies.map((tech, index) => (
+              <div 
+                key={index}
+                className="bg-white border border-slate-200 rounded-lg p-6 text-center hover:shadow-md transition-shadow"
+              >
+                <div className="text-lg font-semibold text-slate-900 mb-2">{tech.name}</div>
+                <div className="text-sm text-slate-500">{tech.category}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Stats Section */}
-      <section className="py-32 relative overflow-hidden bg-gradient-to-b from-slate-900 to-black">
-        <FloatingElements count={15} />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-5xl md:text-7xl font-black mb-6">
-              <span className="text-white">Impact </span>
-              <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Metrics
-              </span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Numbers that tell the story of transformation, innovation, and limitless potential.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="py-20 bg-blue-600">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50, scale: 0.8 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: index * 0.1, duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <GlassCard className="text-center group cursor-default">
-                  <div className={`w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-r ${stat.color} p-0.5 group-hover:scale-110 transition-transform duration-300`}>
-                    <div className="w-full h-full bg-black rounded-2xl flex items-center justify-center text-white">
-                      {stat.icon}
-                    </div>
-                  </div>
-                  <div className="text-4xl md:text-5xl font-black mb-3 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    {stat.number}
-                  </div>
-                  <div className="text-gray-400 font-medium">
-                    {stat.label}
-                  </div>
-                </GlassCard>
-              </motion.div>
+              <div key={index} className="text-center text-white">
+                <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  {stat.icon}
+                </div>
+                <div className="text-3xl font-bold mb-2">{stat.number}</div>
+                <div className="text-blue-100">{stat.label}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 relative overflow-hidden bg-gradient-to-b from-black to-slate-900">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-5xl md:text-7xl font-black mb-6">
-              <span className="text-white">Client </span>
-              <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Voices
-              </span>
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-6">
+              What Our Clients Say
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Hear from visionaries who've experienced the AuraByt difference.
+            <p className="text-lg text-slate-600">
+              Don't just take our word for it. Here's what our clients have to say about working with us.
             </p>
-          </motion.div>
-
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <motion.div
+              <div 
                 key={index}
-                initial={{ opacity: 0, y: 50, rotateY: -15 }}
-                whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.8 }}
-                viewport={{ once: true }}
+                className="bg-slate-50 border border-slate-200 rounded-xl p-8"
               >
-                <GlassCard className="h-full">
-                  <div className="space-y-6">
-                    <div className="text-gray-300 text-lg leading-relaxed italic">
-                      "{testimonial.quote}"
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <img
-                        src={testimonial.avatar}
-                        alt={testimonial.author}
-                        className="w-12 h-12 rounded-full border-2 border-blue-500/30"
-                      />
-                      <div>
-                        <div className="font-bold text-white">{testimonial.author}</div>
-                        <div className="text-gray-400 text-sm">{testimonial.role}</div>
-                      </div>
-                    </div>
-                  </div>
-                </GlassCard>
-              </motion.div>
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} size={16} className="text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                
+                <Quote size={24} className="text-slate-400 mb-4" />
+                
+                <p className="text-slate-700 mb-6 leading-relaxed italic">
+                  "{testimonial.quote}"
+                </p>
+                
+                <div>
+                  <div className="font-semibold text-slate-900">{testimonial.author}</div>
+                  <div className="text-sm text-slate-600">{testimonial.role}</div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 relative overflow-hidden bg-gradient-to-b from-slate-900 to-black">
-        <FloatingElements count={25} />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="text-center max-w-5xl mx-auto"
-          >
-            <GlassCard className="p-16">
-              <div className="space-y-8">
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full border border-blue-500/30">
-                  <Sparkles className="w-5 h-5 text-blue-400" />
-                  <span className="text-blue-400 font-semibold">Ready to Transform?</span>
-                </div>
-
-                <h2 className="text-5xl md:text-7xl font-black">
-                  <span className="text-white">Let's Build </span>
-                  <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                    Tomorrow
-                  </span>
-                </h2>
-
-                <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-                  Your vision. Our innovation. Unlimited possibilities. 
-                  Join the revolution and create something extraordinary.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-                  <MagneticButton
-                    href="/contact"
-                    variant="primary"
-                    size="lg"
-                    className="group"
-                  >
-                    <Zap className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-                    Start Your Revolution
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                  </MagneticButton>
-
-                  <MagneticButton
-                    href="/portfolio"
-                    variant="secondary"
-                    size="lg"
-                    className="group"
-                  >
-                    <Sparkles className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                    Explore Our Universe
-                  </MagneticButton>
-                </div>
-              </div>
-            </GlassCard>
-          </motion.div>
+      <section className="py-20 bg-slate-900">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-6">
+              Ready to Transform Your Business?
+            </h2>
+            <p className="text-xl text-slate-300 mb-10 leading-relaxed">
+              Let's discuss how we can help you achieve your technology goals 
+              and drive your business forward.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Get Started Today
+                <ArrowRight size={20} className="ml-2" />
+              </Link>
+              
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-slate-600 text-slate-300 font-semibold rounded-lg hover:border-slate-500 hover:bg-slate-800 transition-all"
+              >
+                View Our Work
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>
