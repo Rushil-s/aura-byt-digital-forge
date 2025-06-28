@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Hero from '@/components/Hero';
 import SEO from '@/components/SEO';
+import { TubelightNavBarDemo } from '@/components/ui/tubelight-navbar-demo';
 import { Link } from 'react-router-dom';
 import { 
   Code, 
@@ -84,6 +85,9 @@ const Index = () => {
         description="Professional IT consultancy services including software development, digital transformation, and infrastructure solutions. Based in Toronto, serving clients globally."
         keywords="IT consultancy, software development, digital transformation, web development, cloud solutions, Toronto"
       />
+      
+      {/* Add the Tubelight Navbar */}
+      <TubelightNavBarDemo />
       
       <Hero />
 
