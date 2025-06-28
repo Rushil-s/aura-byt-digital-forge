@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Footer from "./components/Footer";
-import { TubelightNavBarDemo } from "./components/ui/tubelight-navbar-demo";
+import { TubelightTopNavBarDemo } from "./components/ui/tubelight-navbar-top-demo";
 import AnimationInitializer from "./components/AnimationInitializer";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -44,7 +44,9 @@ const AppRoutes = () => {
       <AnimationInitializer />
 
       <div className="min-h-screen flex flex-col bg-background">
-        <main className="flex-grow">
+        <TubelightTopNavBarDemo />
+        
+        <main className="flex-grow pt-16 lg:pt-20">
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -62,7 +64,6 @@ const AppRoutes = () => {
         </main>
         
         <Footer />
-        <TubelightNavBarDemo />
       </div>
     </ErrorBoundary>
   );

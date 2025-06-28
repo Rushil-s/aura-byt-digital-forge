@@ -46,7 +46,6 @@
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
     -webkit-tap-highlight-color: transparent;
-    padding-bottom: 100px; /* Space for tubelight navbar */
   }
 
   ::selection {
@@ -130,9 +129,5 @@
 
   .section-padding {
     @apply py-12;
-  }
-
-  body {
-    padding-bottom: 120px; /* More space on mobile for tubelight navbar */
   }
 }

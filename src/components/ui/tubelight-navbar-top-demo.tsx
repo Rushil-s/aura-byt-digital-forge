@@ -1,7 +1,7 @@
 import { Home, User, Briefcase, FileText, Phone } from 'lucide-react'
-import { TubelightNavBar } from "@/components/ui/tubelight-navbar"
+import { TubelightTopNavBar } from "@/components/ui/tubelight-navbar-top"
 
-export function TubelightNavBarDemo() {
+export function TubelightTopNavBarDemo() {
   const navItems = [
     { name: 'Home', url: '/', icon: Home },
     { name: 'About', url: '/about', icon: User },
@@ -10,5 +10,5 @@ export function TubelightNavBarDemo() {
     { name: 'Contact', url: '/contact', icon: Phone }
   ]
 
-  return <TubelightNavBar items={navItems} />
+  return <TubelightTopNavBar items={navItems} />
 }
