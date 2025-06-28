@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { TubelightNavBarDemo } from "./components/ui/tubelight-navbar-demo";
 import AnimationInitializer from "./components/AnimationInitializer";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { SpeedInsights } from "@vercel/speed-insights/react";
@@ -24,17 +25,14 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
 
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="loading-animation">
-      <div></div><div></div><div></div><div></div>
-    </div>
+  <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
-    console.log('Route changed to:', pathname);
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
@@ -46,8 +44,9 @@ const AppRoutes = () => {
       <ScrollToTop />
       <AnimationInitializer />
 
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-background">
         <Navbar />
+        <TubelightNavBarDemo />
         
         <main className="flex-grow pt-20">
           <Suspense fallback={<PageLoader />}>

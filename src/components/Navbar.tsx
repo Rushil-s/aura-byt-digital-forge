@@ -29,8 +29,8 @@ const Navbar = () => {
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-slate-200'
-          : 'bg-white/80 backdrop-blur-md'
+          ? 'bg-background/95 backdrop-blur-md shadow-lg border-b border-border'
+          : 'bg-background/80 backdrop-blur-md'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -40,7 +40,7 @@ const Navbar = () => {
             to="/"
             className="flex items-center space-x-3 group"
           >
-            <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center border border-blue-100 group-hover:bg-blue-100 transition-colors">
+            <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center border border-primary/20 group-hover:bg-primary/20 transition-colors">
               <img
                 src="/assets/aurabytlogo.png"
                 alt="AuraByt"
@@ -48,10 +48,10 @@ const Navbar = () => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-lg text-slate-900">
+              <span className="font-bold text-lg text-foreground">
                 AuraByt
               </span>
-              <span className="text-xs text-slate-500 -mt-1">
+              <span className="text-xs text-muted-foreground -mt-1">
                 IT Consultancy
               </span>
             </div>
@@ -65,8 +65,8 @@ const Navbar = () => {
                 to={link.path}
                 className={`px-4 py-2 text-sm font-medium transition-colors rounded-lg ${
                   location.pathname === link.path
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
+                    ? 'text-primary bg-primary/10'
+                    : 'text-foreground hover:text-primary hover:bg-card/50'
                 }`}
               >
                 {link.name}
@@ -78,7 +78,7 @@ const Navbar = () => {
           <div className="hidden lg:block">
             <Link
               to="/contact"
-              className="inline-flex items-center px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center px-6 py-2 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
             >
               Get Quote
             </Link>
@@ -86,16 +86,16 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <button
-            className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-card/50 transition-colors"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X size={24} className="text-slate-700" /> : <Menu size={24} className="text-slate-700" />}
+            {isOpen ? <X size={24} className="text-foreground" /> : <Menu size={24} className="text-foreground" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden py-4 border-t border-slate-200 bg-white">
+          <div className="lg:hidden py-4 border-t border-border bg-background/95 backdrop-blur-md">
             <div className="space-y-2">
               {navLinks.map((link) => (
                 <Link
@@ -103,8 +103,8 @@ const Navbar = () => {
                   to={link.path}
                   className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
                     location.pathname === link.path
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
+                      ? 'text-primary bg-primary/10'
+                      : 'text-foreground hover:text-primary hover:bg-card/50'
                   }`}
                 >
                   {link.name}
@@ -112,7 +112,7 @@ const Navbar = () => {
               ))}
               <Link
                 to="/contact"
-                className="block px-4 py-3 mt-4 bg-blue-600 text-white font-medium rounded-lg text-center hover:bg-blue-700 transition-colors"
+                className="block px-4 py-3 mt-4 bg-primary text-primary-foreground font-medium rounded-lg text-center hover:bg-primary/90 transition-colors"
               >
                 Get Quote
               </Link>
