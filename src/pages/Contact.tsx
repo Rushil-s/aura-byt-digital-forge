@@ -3,6 +3,7 @@ import ContactForm from '@/components/ContactForm';
 import { Mail, Phone, Clock, MapPin, Send } from 'lucide-react';
 import { AnimatedShaderBackground } from '@/components/ui/animated-shader-background';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
+import { FaqSection } from '@/components/ui/faq';
 import SEO from '@/components/SEO';
 
 const Contact = () => {
@@ -33,8 +34,43 @@ const Contact = () => {
     }
   ];
 
+  const faqItems = [
+    {
+      question: "What types of businesses do you work with?",
+      answer: "We work with businesses of all sizes across various industries, including e-commerce, healthcare, finance, education, and more. Our solutions are tailored to meet the specific needs of each client."
+    },
+    {
+      question: "How long does a typical web development project take?",
+      answer: "The timeline varies depending on the scope and complexity of the project. A simple website might take 4-6 weeks, while a complex web application could take 3-6 months. We'll provide a detailed timeline during our initial consultation."
+    },
+    {
+      question: "Do you offer ongoing support after project completion?",
+      answer: "Yes, we provide ongoing support and maintenance for all our projects. We offer various support packages to ensure your digital assets continue to perform optimally."
+    },
+    {
+      question: "What is your approach to digital marketing?",
+      answer: "We take a data-driven approach to digital marketing, focusing on strategies that deliver measurable results. We start by understanding your business goals and target audience, then develop a customized strategy to reach and engage them effectively."
+    },
+    {
+      question: "How quickly can you start my project?",
+      answer: "We can typically begin new projects within 1-2 weeks, depending on scope and current workload. Rush projects can often be accommodated with proper planning."
+    },
+    {
+      question: "Do you work with international clients?",
+      answer: "Yes! While we're based in Toronto, we work with clients globally. We're experienced in remote collaboration and different time zones."
+    }
+  ];
+
+  const handleContactSupport = () => {
+    // Scroll to contact form
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden page-content">
       <SEO 
         title="Contact AuraByt - Get In Touch With Our Team" 
         description="Contact AuraByt for all your web development, digital marketing and IT support needs. Our team is ready to help your business grow."
@@ -52,8 +88,8 @@ const Contact = () => {
       
       {/* Content overlay with proper z-index */}
       <div className="relative z-10">
-        {/* Hero Section - Shortened padding */}
-        <section className="pt-24 pb-8 overflow-hidden">
+        {/* Hero Section */}
+        <section className="pt-16 pb-8 overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4 border border-primary/20 backdrop-blur-sm">
@@ -72,7 +108,7 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Main Contact Section - Transparent cards */}
+        {/* Main Contact Section */}
         <section className="py-16" id="contact-form">
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
@@ -197,69 +233,18 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* FAQ Section - Transparent cards */}
-        <section className="py-20">
-          <div className="container space-y-16">
-            <div className="mx-auto flex max-w-3xl flex-col text-left md:text-center">
-              <h2 className="mb-3 text-3xl font-semibold md:mb-4 lg:mb-6 lg:text-4xl">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-muted-foreground lg:text-lg">
-                Get quick answers to common questions about our services and process.
-              </p>
-            </div>
-            
-            <div className="mx-auto w-full lg:max-w-3xl">
-              <div className="space-y-4">
-                {[
-                  {
-                    question: "What types of businesses do you work with?",
-                    answer: "We work with businesses of all sizes across various industries, including e-commerce, healthcare, finance, education, and more. Our solutions are tailored to meet the specific needs of each client."
-                  },
-                  {
-                    question: "How long does a typical web development project take?",
-                    answer: "The timeline varies depending on the scope and complexity of the project. A simple website might take 4-6 weeks, while a complex web application could take 3-6 months. We'll provide a detailed timeline during our initial consultation."
-                  },
-                  {
-                    question: "Do you offer ongoing support after project completion?",
-                    answer: "Yes, we provide ongoing support and maintenance for all our projects. We offer various support packages to ensure your digital assets continue to perform optimally."
-                  },
-                  {
-                    question: "What is your approach to digital marketing?",
-                    answer: "We take a data-driven approach to digital marketing, focusing on strategies that deliver measurable results. We start by understanding your business goals and target audience, then develop a customized strategy to reach and engage them effectively."
-                  },
-                  {
-                    question: "How quickly can you start my project?",
-                    answer: "We can typically begin new projects within 1-2 weeks, depending on scope and current workload. Rush projects can often be accommodated with proper planning."
-                  },
-                  {
-                    question: "Do you work with international clients?",
-                    answer: "Yes! While we're based in Toronto, we work with clients globally. We're experienced in remote collaboration and different time zones."
-                  }
-                ].map((faq, index) => (
-                  <div key={index} className="relative">
-                    <div className="relative h-full rounded-xl border border-border/30 p-2">
-                      <GlowingEffect
-                        spread={20}
-                        glow={true}
-                        disabled={false}
-                        proximity={50}
-                        inactiveZone={0.1}
-                        borderWidth={1}
-                        movementDuration={1}
-                      />
-                      
-                      <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/20 backdrop-blur-sm p-6 shadow-sm">
-                        <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
-                        <p className="text-muted-foreground">{faq.answer}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* FAQ Section with Collapsible Component */}
+        <FaqSection
+          title="Frequently Asked Questions"
+          description="Get quick answers to common questions about our services and process."
+          items={faqItems}
+          contactInfo={{
+            title: "Still have questions?",
+            description: "We're here to help you with any questions or concerns.",
+            buttonText: "Contact Support",
+            onContact: handleContactSupport
+          }}
+        />
       </div>
     </div>
   );
