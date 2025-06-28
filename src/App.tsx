@@ -46,9 +46,8 @@ const AppRoutes = () => {
 
       <div className="min-h-screen flex flex-col bg-background">
         <Navbar />
-        <TubelightNavBarDemo />
         
-        <main className="flex-grow pt-20">
+        <main className="flex-grow">
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -66,6 +65,7 @@ const AppRoutes = () => {
         </main>
         
         <Footer />
+        <TubelightNavBarDemo />
       </div>
     </ErrorBoundary>
   );

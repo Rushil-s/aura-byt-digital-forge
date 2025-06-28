@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Link, useLocation } from "react-router-dom"
-import { DivideIcon as LucideIcon } from "lucide-react"
+import { LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface NavItem {
@@ -43,11 +43,11 @@ export function TubelightNavBar({ items, className }: NavBarProps) {
   return (
     <div
       className={cn(
-        "fixed bottom-6 sm:top-6 left-1/2 -translate-x-1/2 z-40",
+        "fixed bottom-6 left-1/2 -translate-x-1/2 z-40",
         className,
       )}
     >
-      <div className="flex items-center gap-1 bg-background/90 border border-border backdrop-blur-lg py-2 px-2 rounded-full shadow-lg">
+      <div className="flex items-center gap-1 bg-background/95 border border-border backdrop-blur-lg py-2 px-2 rounded-full shadow-xl">
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
