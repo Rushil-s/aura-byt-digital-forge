@@ -1,146 +1,199 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { HoverButton } from '@/components/ui/hover-glow-button';
+import React, { useRef, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, Sparkles, Zap } from 'lucide-react';
+import { MagneticButton } from '@/components/ui/magnetic-button';
+import { FloatingElements } from '@/components/ui/floating-elements';
+import { NeuralNetwork } from '@/components/ui/neural-network';
+import { MorphingText } from '@/components/ui/morphing-text';
 
 const Hero = () => {
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const businessTexts = ['innovation', 'transformation', 'excellence', 'growth', 'success'];
-  const [isAnimating, setIsAnimating] = useState(false);
-  const textRef = useRef<HTMLSpanElement>(null);
-  const heroRef = useRef<HTMLElement>(null);
-  const firstRender = useRef(true);
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
 
-  useEffect(() => {
-    // Set up text rotation interval
-    const interval = setInterval(() => {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrentTextIndex((prev) => (prev + 1) % businessTexts.length);
-        setIsAnimating(false);
-      }, 500);
-    }, 3000);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [businessTexts.length]);
-
-  useLayoutEffect(() => {
-    const chars = textRef.current?.querySelectorAll('.char');
-    if (chars) {
-      chars.forEach((char, i) => {
-        setTimeout(() => char.classList.add('visible'), 50 * i);
-      });
-    }
-  }, []);
-
-  // Update character animations whenever the current text changes
-  useEffect(() => {
-    const chars = textRef.current?.querySelectorAll('.char');
-    if (chars) {
-      if (!firstRender.current) {
-        chars.forEach((char) => char.classList.remove('visible'));
-      } else {
-        firstRender.current = false;
-      }
-      chars.forEach((char, i) => {
-        setTimeout(() => char.classList.add('visible'), 50 * i);
-      });
-    }
-  }, [currentTextIndex]);
+  const morphingTexts = [
+    "Digital Excellence",
+    "Innovation Unleashed", 
+    "Future-Ready Solutions",
+    "Transformative Technology",
+    "Limitless Possibilities"
+  ];
 
   return (
     <section 
-      ref={heroRef} 
-      className="relative min-h-screen flex items-center py-20 overflow-hidden bg-background"
+      ref={containerRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
     >
-      {/* Tech grid background */}
-      <div className="tech-grid" />
-      
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-96 h-96 rounded-full bg-primary/10 blur-3xl animate-float top-10 right-10" />
-        <div className="absolute w-80 h-80 rounded-full bg-primary/5 blur-3xl animate-float bottom-20 left-5 animation-delay-300" />
-        <div className="absolute w-64 h-64 rounded-full bg-primary/5 blur-3xl animate-float top-60 right-1/3 animation-delay-500" />
+      {/* Animated background */}
+      <div className="absolute inset-0">
+        <NeuralNetwork className="opacity-30" />
+        <FloatingElements count={30} />
+        
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-transparent to-purple-600/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-slate-900/50 to-slate-900" />
       </div>
-      
-      <div className="container mx-auto px-4 z-10 relative">
-        <div className="max-w-6xl mx-auto text-center">
-          {/* Logo with enhanced animation */}
-          <div className="flex justify-center mb-12">
-            <div className="relative group">
-              <div className="h-40 md:h-48 w-auto relative">
-                {/* Glow effects */}
-                <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full animate-pulse" />
-                <div className="absolute inset-0 bg-primary/10 blur-xl rounded-full opacity-60" />
-                
-                {/* Logo */}
+
+      <motion.div 
+        style={{ y, opacity }}
+        className="relative z-10 container mx-auto px-6 text-center"
+      >
+        {/* Logo with advanced animation */}
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 100, 
+            damping: 20,
+            duration: 1.5 
+          }}
+          className="mb-12 flex justify-center"
+        >
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500 scale-150" />
+            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1">
+              <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">
                 <img 
                   src="/assets/aurabytlogo.png"
                   alt="AuraByt Logo" 
-                  className="h-full w-auto object-contain relative z-10 drop-shadow-2xl group-hover:scale-110 transition-transform duration-700" 
+                  className="w-20 h-20 md:w-24 md:h-24 object-contain filter brightness-110" 
                 />
               </div>
             </div>
           </div>
-          
-          {/* Main heading */}
-          <div className="mb-12 space-y-6">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-none">
-              <span className="text-foreground">Aura</span>
-              <span className="gradient-text">Byt</span>
-            </h1>
-            
-            {/* Fixed typewriter section */}
-            <div className="text-2xl md:text-3xl lg:text-4xl font-light text-muted-foreground">
-              <div className="flex flex-col items-center justify-center space-y-2">
-                <span className="block">Driving digital</span>
-                <div 
-                  className={`relative inline-block font-medium gradient-text transition-opacity duration-500 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}
-                  style={{ 
-                    minWidth: '280px',
-                    minHeight: '1.2em',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
-                  <span 
-                    ref={textRef}
-                    className="inline-block"
-                  >
-                    {businessTexts[currentTextIndex].split('').map((char, i) => (
-                      <span key={i} className="char visible inline-block transition-all duration-300 transform">{char}</span>
-                    ))}
-                  </span>
-                </div>
-              </div>
-            </div>
+        </motion.div>
+
+        {/* Main heading with staggered animation */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="mb-8"
+        >
+          <motion.h1 
+            className="text-6xl md:text-8xl lg:text-9xl font-black mb-6"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.8, ease: "easeOut" }}
+          >
+            <span className="text-white">Aura</span>
+            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              Byt
+            </span>
+          </motion.h1>
+
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-300 mb-4"
+          >
+            Architecting Tomorrow's
+          </motion.div>
+
+          <div className="text-3xl md:text-5xl lg:text-6xl font-bold h-20 flex items-center justify-center">
+            <MorphingText 
+              texts={morphingTexts}
+              className="text-4xl md:text-6xl lg:text-7xl font-black"
+            />
           </div>
-          
-          {/* Description */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-16 max-w-4xl mx-auto leading-relaxed">
-            Enterprise-grade IT consultancy specializing in{' '}
-            <span className="font-semibold text-primary">software development</span>,{' '}
-            <span className="font-semibold text-primary">digital transformation</span>, and{' '}
-            <span className="font-semibold text-primary">infrastructure solutions</span>.{' '}
-            We architect the future of business technology.
-          </p>
-          
-          {/* Single CTA button - no redundancy */}
-          <div className="flex justify-center">
-            <HoverButton
-              href="/contact"
-              variant="primary"
-              glowColor="hsl(217, 91%, 60%)"
-              className="shadow-lg hover:shadow-primary/25"
+        </motion.div>
+
+        {/* Description with reveal animation */}
+        <motion.p
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+          className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
+        >
+          We don't just build software—we craft digital experiences that 
+          <span className="text-blue-400 font-semibold"> revolutionize industries</span>, 
+          <span className="text-purple-400 font-semibold"> amplify human potential</span>, and 
+          <span className="text-pink-400 font-semibold"> shape the future</span>.
+        </motion.p>
+
+        {/* CTA Buttons with magnetic effect */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 2, duration: 0.8 }}
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+        >
+          <MagneticButton
+            href="/contact"
+            variant="primary"
+            size="lg"
+            className="group"
+          >
+            <Zap className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+            Start Your Revolution
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+          </MagneticButton>
+
+          <MagneticButton
+            href="/services"
+            variant="secondary"
+            size="lg"
+            className="group"
+          >
+            <Sparkles className="w-6 h-6 group-hover:scale-110 transition-transform" />
+            Explore Possibilities
+          </MagneticButton>
+        </motion.div>
+
+        {/* Floating stats */}
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 2.5, duration: 1 }}
+          className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
+        >
+          {[
+            { number: "500+", label: "Projects Launched" },
+            { number: "99.9%", label: "Success Rate" },
+            { number: "24/7", label: "Innovation Mode" }
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.1, y: -5 }}
+              className="text-center group cursor-default"
             >
-              Start Your Project
-              <ArrowRight className="ml-3" size={24} />
-            </HoverButton>
-          </div>
-        </div>
-      </div>
+              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent group-hover:from-purple-400 group-hover:to-pink-500 transition-all duration-300">
+                {stat.number}
+              </div>
+              <div className="text-gray-400 text-sm md:text-base mt-2">
+                {stat.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 3, duration: 1 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
+        >
+          <motion.div
+            animate={{ y: [0, 16, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-1 h-3 bg-white/60 rounded-full mt-2"
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
