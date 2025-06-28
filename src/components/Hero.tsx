@@ -20,7 +20,7 @@ const Hero = () => {
   }, [businessTexts.length]);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 pb-20 overflow-hidden bg-background">
+    <section className="relative min-h-screen flex items-center py-20 overflow-hidden bg-background">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{

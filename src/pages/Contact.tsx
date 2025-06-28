@@ -70,7 +70,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden page-content">
+    <div className="relative min-h-screen overflow-hidden">
       <SEO 
         title="Contact AuraByt - Get In Touch With Our Team" 
         description="Contact AuraByt for all your web development, digital marketing and IT support needs. Our team is ready to help your business grow."

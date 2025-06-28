@@ -46,6 +46,7 @@
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
     -webkit-tap-highlight-color: transparent;
+    padding-bottom: 100px; /* Space for tubelight navbar */
   }
 
   ::selection {
@@ -82,16 +83,6 @@
 
   .section-padding {
     @apply py-16 sm:py-20 lg:py-24;
-  }
-
-  /* Ensure proper spacing for pages with fixed header */
-  .page-content {
-    @apply pt-20;
-  }
-
-  /* Ensure tubelight navbar doesn't interfere with content */
-  .content-with-tubelight {
-    @apply pb-20;
   }
 }
 
@@ -141,21 +132,7 @@
     @apply py-12;
   }
 
-  .page-content {
-    @apply pt-16;
-  }
-}
-
-/* Hide tubelight navbar on desktop, show regular navbar */
-@media (min-width: 1024px) {
-  .tubelight-navbar {
-    @apply hidden;
-  }
-}
-
-/* Hide regular navbar on mobile, show tubelight navbar */
-@media (max-width: 1023px) {
-  .desktop-navbar {
-    @apply hidden;
+  body {
+    padding-bottom: 120px; /* More space on mobile for tubelight navbar */
   }
 }
