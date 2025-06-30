@@ -26,13 +26,15 @@ const HoverButton: React.FC<ButtonProps> = ({
   href,
   variant = 'primary'
 }) => {
-  const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const linkRef = useRef<HTMLAnchorElement>(null);
   const [glowPosition, setGlowPosition] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
+    const element = href ? linkRef.current : buttonRef.current;
+    if (element) {
+      const rect = element.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       setGlowPosition({ x, y });
@@ -66,7 +68,6 @@ const HoverButton: React.FC<ButtonProps> = ({
   };
 
   const commonProps = {
-    ref: buttonRef as any,
     onMouseMove: handleMouseMove,
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,
@@ -105,14 +106,14 @@ const HoverButton: React.FC<ButtonProps> = ({
 
   if (href) {
     return (
-      <Link to={href} {...commonProps}>
+      <Link ref={linkRef} to={href} {...commonProps}>
         {content}
       </Link>
     );
   }
 
   return (
-    <button {...commonProps} onClick={onClick} disabled={disabled}>
+    <button ref={buttonRef} {...commonProps} onClick={onClick} disabled={disabled}>
       {content}
     </button>
   );

@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -8,6 +7,9 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    hmr: {
+      overlay: false,
+    },
   },
   plugins: [
     react(),
@@ -20,11 +22,18 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: true,
+    target: "esnext",
+    minify: "esbuild",
     rollupOptions: {
       output: {
         manualChunks: {
+          // Core React libraries
           react: ["react", "react-dom"],
+          
+          // Router
           router: ["react-router-dom"],
+          
+          // UI framework - Radix components
           radix: [
             "@radix-ui/react-accordion",
             "@radix-ui/react-alert-dialog",
@@ -54,11 +63,42 @@ export default defineConfig(({ mode }) => ({
             "@radix-ui/react-toggle-group",
             "@radix-ui/react-tooltip"
           ],
+          
+          // Animation libraries
+          animation: ["framer-motion", "three"],
+          
+          // Data fetching and state management
+          query: ["@tanstack/react-query"],
+          
+          // Form handling
+          forms: ["react-hook-form", "@hookform/resolvers", "zod"],
+          
+          // Utilities
+          utils: ["clsx", "class-variance-authority", "tailwind-merge", "date-fns"],
+          
+          // Analytics
+          analytics: ["@vercel/analytics", "@vercel/speed-insights"],
         },
       },
     },
   },
   optimizeDeps: {
-    include: ["react", "react-dom", "react-router-dom"],
+    include: [
+      "react", 
+      "react-dom", 
+      "react-router-dom",
+      "framer-motion",
+      "@tanstack/react-query",
+      "lucide-react",
+    ],
+    force: false,
+  },
+  esbuild: {
+    logOverride: { "this-is-undefined-in-esm": "silent" },
+    target: "esnext",
+  },
+  preview: {
+    port: 8080,
+    host: "::",
   },
 }));

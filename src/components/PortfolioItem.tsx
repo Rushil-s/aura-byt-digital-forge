@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { ExternalLink } from 'lucide-react';
 
@@ -31,13 +30,14 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
       { threshold: 0.1 }
     );
     
-    if (itemRef.current) {
-      observer.observe(itemRef.current);
+    const element = itemRef.current;
+    if (element) {
+      observer.observe(element);
     }
     
     return () => {
-      if (itemRef.current) {
-        observer.unobserve(itemRef.current);
+      if (element) {
+        observer.unobserve(element);
       }
     };
   }, []);
