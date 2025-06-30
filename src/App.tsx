@@ -10,6 +10,7 @@ import AnimationInitializer from "./components/AnimationInitializer";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
+import { usePerformanceOptimization } from "./hooks/use-performance";
 
 import Index from "./pages/Index";
 import Services from "./pages/Services";
@@ -38,10 +39,12 @@ const ScrollToTop = () => {
 };
 
 const AppRoutes = () => {
+  const performanceSettings = usePerformanceOptimization();
+
   return (
     <ErrorBoundary>
       <ScrollToTop />
-      <AnimationInitializer />
+      {!performanceSettings.reduceAnimations && <AnimationInitializer />}
 
       <div className="min-h-screen flex flex-col bg-background">
         <TubelightTopNavBarDemo />

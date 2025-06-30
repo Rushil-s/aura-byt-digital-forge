@@ -24,6 +24,8 @@ export default defineConfig(({ mode }) => ({
     sourcemap: true,
     target: "esnext",
     minify: "esbuild",
+    // Optimize chunks for better loading performance
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -64,8 +66,9 @@ export default defineConfig(({ mode }) => ({
             "@radix-ui/react-tooltip"
           ],
           
-          // Animation libraries
-          animation: ["framer-motion", "three"],
+          // Animation libraries (separate for lazy loading)
+          "framer-motion": ["framer-motion"],
+          "three": ["three"],
           
           // Data fetching and state management
           query: ["@tanstack/react-query"],
@@ -76,8 +79,11 @@ export default defineConfig(({ mode }) => ({
           // Utilities
           utils: ["clsx", "class-variance-authority", "tailwind-merge", "date-fns"],
           
-          // Analytics
+          // Analytics (separate chunk for better caching)
           analytics: ["@vercel/analytics", "@vercel/speed-insights"],
+          
+          // Icons (separate for better caching)
+          icons: ["lucide-react"],
         },
       },
     },
@@ -87,18 +93,28 @@ export default defineConfig(({ mode }) => ({
       "react", 
       "react-dom", 
       "react-router-dom",
-      "framer-motion",
       "@tanstack/react-query",
       "lucide-react",
     ],
+    // Exclude heavy animation libraries from pre-bundling
+    exclude: ["framer-motion", "three"],
     force: false,
   },
   esbuild: {
     logOverride: { "this-is-undefined-in-esm": "silent" },
     target: "esnext",
+    // Drop console logs in production
+    drop: mode === "production" ? ["console", "debugger"] : [],
   },
   preview: {
     port: 8080,
     host: "::",
+  },
+  // Enable CSS code splitting
+  css: {
+    devSourcemap: true,
+    modules: {
+      localsConvention: "camelCase",
+    },
   },
 }));

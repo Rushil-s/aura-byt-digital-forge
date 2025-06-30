@@ -1,0 +1,126 @@
+/* Performance optimizations for better Core Web Vitals */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Disable transforms that can cause reflows */
+  .tilt-card,
+  .professional-card,
+  .hover-card {
+    transform: none !important;
+  }
+  
+  /* Disable mouse follower */
+  .mouse-follower {
+    display: none !important;
+  }
+}
+
+/* GPU acceleration for animations */
+.tilt-card,
+.professional-card,
+.hover-card {
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Optimize scroll performance */
+.scroll-animate {
+  contain: layout style paint;
+}
+
+/* Reduce paint operations */
+.service-card,
+.professional-card {
+  contain: layout style;
+}
+
+/* Optimize mouse follower performance */
+.mouse-follower {
+  contain: strict;
+  will-change: transform;
+  transform: translate3d(0, 0, 0); /* Force GPU layer */
+}
+
+/* Lightweight alternatives for low-end devices */
+@media (max-width: 768px) {
+  /* Disable 3D transforms on mobile */
+  .tilt-card,
+  .professional-card {
+    transform: none !important;
+  }
+  
+  /* Simplify animations */
+  .fade-in,
+  .slide-up {
+    animation-duration: 0.2s;
+  }
+}
+
+/* Connection-aware optimizations */
+@media (prefers-reduced-data: reduce) {
+  /* Disable non-essential animations */
+  .mouse-follower,
+  .glow-effect {
+    display: none;
+  }
+  
+  /* Reduce animation complexity */
+  .parallax-card,
+  .spiral-background {
+    animation: none;
+  }
+}
+
+/* High refresh rate optimizations */
+@media (min-resolution: 120dpi) {
+  .smooth-animation {
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Performance-aware visibility */
+.performance-hidden {
+  display: none;
+}
+
+/* Optimize intersection observer animations */
+.is-visible {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Lightweight hover effects */
+.lightweight-hover {
+  transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.lightweight-hover:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-1px);
+}
+
+/* Optimize glowing effects */
+.glow-effect {
+  will-change: opacity;
+  contain: layout style paint;
+}
