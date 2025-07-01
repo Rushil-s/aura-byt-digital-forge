@@ -87,34 +87,34 @@
   }
 
   .service-card {
-    @apply group relative bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-lg 
+    @apply relative bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-lg 
            border border-border/50 rounded-2xl p-8 hover:border-primary/30 
            transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2
            overflow-hidden;
   }
 
   .tech-card {
-    @apply group bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-6 text-center 
+    @apply bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-6 text-center 
            hover:shadow-xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 
            hover:bg-card/80 cursor-pointer;
   }
 
   .testimonial-card {
-    @apply group bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-lg 
+    @apply bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-lg 
            border border-border/50 rounded-2xl p-8 hover:border-primary/30 
            transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 
            relative overflow-hidden;
   }
 
   .cta-button {
-    @apply group inline-flex items-center justify-center px-10 py-5 bg-primary 
+    @apply inline-flex items-center justify-center px-10 py-5 bg-primary 
            text-primary-foreground font-bold rounded-xl hover:bg-primary/90 
            transition-all duration-300 shadow-2xl hover:shadow-primary/25 
            transform hover:-translate-y-1;
   }
 
   .cta-button-secondary {
-    @apply group inline-flex items-center justify-center px-10 py-5 border-2 border-border 
+    @apply inline-flex items-center justify-center px-10 py-5 border-2 border-border 
            text-foreground font-bold rounded-xl hover:border-primary/30 hover:bg-card/50 
            transition-all duration-300 backdrop-blur-sm;
   }
