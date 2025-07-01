@@ -354,27 +354,21 @@ const Index = () => {
               </Link>
             </div>
             
-            {/* Additional trust indicators */}
-            <div className="mt-16 pt-12 border-t border-border/50">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                  <div className="text-3xl font-bold text-primary mb-2">50+</div>
-                  <div className="text-sm text-muted-foreground">Happy Clients</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary mb-2">100+</div>
-                  <div className="text-sm text-muted-foreground">Projects Completed</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary mb-2">99%</div>
-                  <div className="text-sm text-muted-foreground">Success Rate</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary mb-2">24/7</div>
-                  <div className="text-sm text-muted-foreground">Support Available</div>
-                </div>
-              </div>
-            </div>
+                         {/* Simple trust statement */}
+             <div className="mt-16 pt-12 border-t border-border/50">
+               <div className="text-center">
+                 <p className="text-lg text-muted-foreground mb-4">
+                   Trusted by businesses across North America
+                 </p>
+                 <div className="flex justify-center items-center gap-6">
+                   <div className="text-sm text-muted-foreground font-medium">Enterprise-grade</div>
+                   <div className="w-2 h-2 bg-primary rounded-full"></div>
+                   <div className="text-sm text-muted-foreground font-medium">Secure</div>
+                   <div className="w-2 h-2 bg-primary rounded-full"></div>
+                   <div className="text-sm text-muted-foreground font-medium">Scalable</div>
+                 </div>
+               </div>
+             </div>
           </div>
         </div>
       </section>

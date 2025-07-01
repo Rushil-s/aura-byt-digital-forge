@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { ArrowRight, CheckCircle, Play, Star, Users, Award } from 'lucide-react';
+import { ArrowRight, CheckCircle, Play, Star, Users, Award, Zap, Shield, Code2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
@@ -19,10 +19,22 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [businessTexts.length]);
 
-  const stats = [
-    { icon: <Users size={20} />, number: "50+", label: "Clients Served" },
-    { icon: <Award size={20} />, number: "100+", label: "Projects Delivered" },
-    { icon: <Star size={20} />, number: "99%", label: "Client Satisfaction" }
+  const keyFeatures = [
+    {
+      icon: <Code2 size={20} className="text-blue-400" />,
+      title: "Custom Development",
+      description: "Tailored solutions for your unique business needs"
+    },
+    {
+      icon: <Zap size={20} className="text-yellow-400" />,
+      title: "Rapid Deployment",
+      description: "Fast implementation with proven methodologies"
+    },
+    {
+      icon: <Shield size={20} className="text-green-400" />,
+      title: "Enterprise Security",
+      description: "Bank-level security and compliance standards"
+    }
   ];
 
   return (
@@ -102,38 +114,42 @@ const Hero = () => {
                 </Link>
               </div>
               
-              {/* Enhanced Trust Indicators with Stats */}
-              <div className="space-y-6 pt-8">
-                <div className="grid grid-cols-3 gap-6">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center space-y-2">
-                      <div className="flex justify-center text-primary">
-                        {stat.icon}
+              {/* Key Features */}
+              <div className="space-y-4 pt-8">
+                <div className="text-sm text-muted-foreground mb-4">Why choose AuraByt:</div>
+                <div className="space-y-3">
+                  {keyFeatures.map((feature, index) => (
+                    <div key={index} className="flex items-start gap-4 p-4 bg-card/30 backdrop-blur-sm rounded-lg border border-border/50 hover:border-primary/30 transition-all duration-300">
+                      <div className="flex-shrink-0 w-10 h-10 bg-background/80 rounded-lg flex items-center justify-center border border-border">
+                        {feature.icon}
                       </div>
-                      <div className="text-2xl font-bold text-foreground">{stat.number}</div>
-                      <div className="text-sm text-muted-foreground">{stat.label}</div>
+                      <div>
+                        <div className="font-semibold text-foreground text-sm">{feature.title}</div>
+                        <div className="text-sm text-muted-foreground">{feature.description}</div>
+                      </div>
                     </div>
                   ))}
                 </div>
-                
-                <div className="flex items-center gap-4 pt-4 border-t border-border">
-                  <div className="flex -space-x-2">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-8 h-8 bg-gradient-to-br from-primary/20 to-blue-500/20 border-2 border-background rounded-full flex items-center justify-center">
-                        <div className="w-4 h-4 bg-primary/30 rounded-full" />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Toronto-based</span> • Serving clients globally
-                  </div>
+              </div>
+              
+              {/* Simple Trust Indicator */}
+              <div className="flex items-center gap-4 pt-4 border-t border-border">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="w-8 h-8 bg-gradient-to-br from-primary/20 to-blue-500/20 border-2 border-background rounded-full flex items-center justify-center">
+                      <div className="w-4 h-4 bg-primary/30 rounded-full" />
+                    </div>
+                  ))}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  <span className="font-semibold text-foreground">Toronto-based</span> • Serving clients globally
                 </div>
               </div>
             </div>
             
-            {/* Right Column - Enhanced Visual */}
+            {/* Right Column - Simplified Visual */}
             <div className="relative">
-              {/* Main Card with enhanced design */}
+              {/* Main Card with clean design */}
               <div className="relative bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-lg rounded-3xl shadow-2xl p-10 border border-border/50 overflow-hidden">
                 {/* Floating background elements */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-blue-500/10 rounded-full blur-3xl" />
@@ -150,39 +166,32 @@ const Hero = () => {
                   </div>
                 </div>
                 
-                {/* Services Preview with enhanced cards */}
-                <div className="space-y-6 relative">
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold text-foreground mb-2">Our Expertise</h3>
-                    <p className="text-sm text-muted-foreground">Enterprise-grade solutions</p>
+                {/* Company Info */}
+                <div className="text-center space-y-6 relative">
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground mb-2">AuraByt Inc.</h3>
+                    <p className="text-muted-foreground">Enterprise IT Consultancy</p>
                   </div>
                   
                   <div className="space-y-4">
-                    {[
-                      { name: 'Software Development', progress: 95 },
-                      { name: 'Digital Transformation', progress: 88 }, 
-                      { name: 'Cloud Infrastructure', progress: 92 },
-                      { name: 'IT Consulting', progress: 90 }
-                    ].map((service, index) => (
-                      <div key={service.name} className="group p-4 bg-background/50 rounded-xl border border-border/50 hover:border-primary/30 transition-all duration-300 hover:bg-background/80">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-foreground">{service.name}</span>
-                          <span className="text-xs text-primary font-semibold">{service.progress}%</span>
-                        </div>
-                        <div className="w-full bg-border/50 rounded-full h-2">
-                          <div 
-                            className="bg-gradient-to-r from-primary to-blue-500 h-2 rounded-full transition-all duration-1000 ease-out"
-                            style={{ width: `${service.progress}%` }}
-                          />
-                        </div>
-                      </div>
-                    ))}
+                    <div className="flex items-center justify-between p-4 bg-background/50 rounded-xl border border-border/50">
+                      <span className="text-sm font-medium text-foreground">Established</span>
+                      <span className="text-sm text-primary font-semibold">2020</span>
+                    </div>
+                    <div className="flex items-center justify-between p-4 bg-background/50 rounded-xl border border-border/50">
+                      <span className="text-sm font-medium text-foreground">Headquarters</span>
+                      <span className="text-sm text-primary font-semibold">Toronto, CA</span>
+                    </div>
+                    <div className="flex items-center justify-between p-4 bg-background/50 rounded-xl border border-border/50">
+                      <span className="text-sm font-medium text-foreground">Specialization</span>
+                      <span className="text-sm text-primary font-semibold">Enterprise Solutions</span>
+                    </div>
                   </div>
                 </div>
                 
                 {/* Enhanced Technologies */}
                 <div className="mt-10 pt-8 border-t border-border/50 relative">
-                  <div className="text-sm text-muted-foreground mb-4 text-center">Technologies we master:</div>
+                  <div className="text-sm text-muted-foreground mb-4 text-center">Core Technologies:</div>
                   <div className="grid grid-cols-3 gap-3">
                     {['React', 'Node.js', 'AWS', 'Docker', 'Python', 'PostgreSQL'].map((tech) => (
                       <div key={tech} className="group text-center">
