@@ -6,10 +6,11 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Footer from "./components/Footer";
 import { TubelightTopNavBarDemo } from "./components/ui/tubelight-navbar-top-demo";
-import AnimationInitializer from "./components/AnimationInitializer";
+// import AnimationInitializer from "./components/AnimationInitializer";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
+import { usePerformanceOptimization } from "./hooks/use-performance";
 
 import Index from "./pages/Index";
 import Services from "./pages/Services";
@@ -38,10 +39,13 @@ const ScrollToTop = () => {
 };
 
 const AppRoutes = () => {
+  const performanceSettings = usePerformanceOptimization();
+
   return (
     <ErrorBoundary>
       <ScrollToTop />
-      <AnimationInitializer />
+      {/* Temporarily disabled all animations */}
+      {/* {!performanceSettings.reduceAnimations && <AnimationInitializer />} */}
 
       <div className="min-h-screen flex flex-col bg-background">
         <TubelightTopNavBarDemo />

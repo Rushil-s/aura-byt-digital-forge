@@ -1,30 +1,49 @@
-
 import React, { useEffect, useRef, useCallback, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Code, Database, Globe, Smartphone, BarChart, Search, Mail, ShieldCheck, Server, Headphones, Settings, Cpu, CheckCircle, Users, MonitorSmartphone, Coffee, Cloud, Share2, TrendingUp, LineChart, Youtube, Instagram, Palette, FileCode, ArrowRight, Zap, Star, Award, Target, Shield } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { GlowingEffect } from '@/components/ui/glowing-effect';
+// import { GlowingEffect } from '@/components/ui/glowing-effect';
 import { HoverButton } from '@/components/ui/hover-glow-button';
-import { SpiralBackground } from '@/components/ui/spiral-background';
+// import { SpiralBackground } from '@/components/ui/spiral-background';
 import SEO from '@/components/SEO';
 
+// Type definitions for better type safety
+interface ServiceFeature {
+  name: string;
+  icon: React.ReactNode;
+}
+
+interface ServiceItem {
+  category: string;
+  title: string;
+  description: string;
+  features: ServiceFeature[];
+  technologies: string[];
+  icon: React.ReactNode;
+}
+
+interface ServiceStat {
+  value: string;
+  label: string;
+}
+
+interface ServiceCategory {
+  id: string;
+  category: string;
+  description: string;
+  stats?: ServiceStat[];
+  items: ServiceItem[];
+}
+
 // Enhanced service card with better visual hierarchy
-const ServiceCard = memo(({ service, index }: { service: any; index: number }) => {
+const ServiceCard = memo(({ service, index }: { service: ServiceItem; index: number }) => {
   return (
     <div 
       className="relative service-card group overflow-hidden" 
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       <div className="relative h-full rounded-xl border border-border/30 p-2">
-        <GlowingEffect
-          spread={30}
-          glow={true}
-          disabled={false}
-          proximity={80}
-          inactiveZone={0.01}
-          borderWidth={2}
-          movementDuration={1.5}
-        />
+        {/* Temporarily disabled for performance testing */}
         
         <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-lg border bg-card/80 backdrop-blur-sm p-8 shadow-sm min-h-[400px]">
           {/* Header */}
@@ -55,7 +74,7 @@ const ServiceCard = memo(({ service, index }: { service: any; index: number }) =
               What You Get
             </h4>
             <div className="grid grid-cols-2 gap-3">
-              {service.features.slice(0, 4).map((feature: any, i: number) => (
+              {service.features.slice(0, 4).map((feature: ServiceFeature, i: number) => (
                 <div key={i} className="flex items-center space-x-2 text-sm">
                   <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0" />
                   <span className="text-muted-foreground">{feature.name}</span>
@@ -100,7 +119,7 @@ const ServiceCard = memo(({ service, index }: { service: any; index: number }) =
 });
 
 // Service category with better layout
-const ServiceCategory = memo(({ 
+const ServiceCategoryComponent = memo(({ 
   id, 
   category, 
   description, 
@@ -111,9 +130,9 @@ const ServiceCategory = memo(({
   id: string; 
   category: string; 
   description: string; 
-  items: any[]; 
+  items: ServiceItem[]; 
   index: number;
-  stats?: any;
+  stats?: ServiceStat[];
 }) => {
   return (
     <section 
@@ -147,7 +166,7 @@ const ServiceCategory = memo(({
           {/* Stats if provided */}
           {stats && (
             <div className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto">
-              {stats.map((stat: any, i: number) => (
+              {stats.map((stat: ServiceStat, i: number) => (
                 <div key={i} className="text-center">
                   <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
@@ -217,7 +236,7 @@ const Services = () => {
     };
   }, []);
   
-  const services = [
+  const services: ServiceCategory[] = [
     {
       id: 'development',
       category: 'Development & Engineering',
@@ -507,15 +526,7 @@ const Services = () => {
         keywords="web development, digital marketing, IT support, software development, SEO, cloud solutions"
       />
       
-      {/* Spiral Background - spans entire page */}
-      <SpiralBackground 
-        totalDots={350}
-        dotRadius={1}
-        duration={15}
-        dotColor="hsl(217, 91%, 60%)"
-        opacity={0.06}
-        className="fixed inset-0"
-      />
+      {/* Temporarily disabled for performance testing */}
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-background/80 backdrop-blur-sm text-foreground relative overflow-hidden">
@@ -561,7 +572,7 @@ const Services = () => {
       <div ref={servicesRef}>
         {/* Services Sections */}
         {services.map((serviceCategory, index) => (
-          <ServiceCategory 
+          <ServiceCategoryComponent 
             key={serviceCategory.id}
             id={serviceCategory.id}
             category={serviceCategory.category}
@@ -615,15 +626,7 @@ const Services = () => {
           <div className="max-w-4xl mx-auto">
             <div className="relative">
               <div className="relative h-full rounded-xl border border-border/30 p-2">
-                <GlowingEffect
-                  spread={40}
-                  glow={true}
-                  disabled={false}
-                  proximity={100}
-                  inactiveZone={0.05}
-                  borderWidth={2}
-                  movementDuration={2}
-                />
+                {/* Temporarily disabled for performance testing */}
                 
                 <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/40 backdrop-blur-md p-12 shadow-sm text-center">
                   <h2 className="text-4xl md:text-5xl font-bold mb-6">

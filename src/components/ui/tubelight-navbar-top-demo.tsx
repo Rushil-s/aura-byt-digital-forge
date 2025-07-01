@@ -1,5 +1,5 @@
 import { Home, User, Briefcase, FileText, Phone } from 'lucide-react'
-import { TubelightTopNavBar } from "@/components/ui/tubelight-navbar-top"
+import { LightweightNavBar } from "@/components/ui/lightweight-navbar"
 
 export function TubelightTopNavBarDemo() {
   const navItems = [
@@ -10,5 +10,5 @@ export function TubelightTopNavBarDemo() {
     { name: 'Contact', url: '/contact', icon: Phone }
   ]
 
-  return <TubelightTopNavBar items={navItems} />
+  return <LightweightNavBar items={navItems} />
 }

@@ -43,7 +43,7 @@ const ThankYou = () => {
       setCurrentMessageIndex((prev) => (prev + 1) % rotatingMessages.length);
     }, 2500);
     return () => clearInterval(interval);
-  }, []);
+  }, [rotatingMessages.length]);
 
   return (
     <div className="min-h-screen flex items-center justify-center relative text-center px-4 overflow-hidden bg-background">

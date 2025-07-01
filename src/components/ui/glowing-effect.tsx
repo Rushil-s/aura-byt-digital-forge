@@ -33,10 +33,21 @@ const GlowingEffect = memo(
     const containerRef = useRef<HTMLDivElement>(null);
     const lastPosition = useRef({ x: 0, y: 0 });
     const animationFrameRef = useRef<number>(0);
+    const lastUpdateTime = useRef<number>(0);
+    const isAnimating = useRef<boolean>(false);
 
     const handleMove = useCallback(
       (e?: MouseEvent | { x: number; y: number }) => {
-        if (!containerRef.current) return;
+        if (!containerRef.current || disabled) return;
+
+        // Heavy throttling - limit to 20fps max for better performance
+        const now = performance.now();
+        if (now - lastUpdateTime.current < 50) return;
+        
+        // Skip if already animating to prevent queue buildup
+        if (isAnimating.current) return;
+
+        lastUpdateTime.current = now;
 
         if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current);
@@ -45,6 +56,8 @@ const GlowingEffect = memo(
         animationFrameRef.current = requestAnimationFrame(() => {
           const element = containerRef.current;
           if (!element) return;
+
+          isAnimating.current = true;
 
           const { left, top, width, height } = element.getBoundingClientRect();
           const mouseX = e?.x ?? lastPosition.current.x;
@@ -63,6 +76,7 @@ const GlowingEffect = memo(
 
           if (distanceFromCenter < inactiveRadius) {
             element.style.setProperty("--active", "0");
+            isAnimating.current = false;
             return;
           }
 
@@ -74,11 +88,14 @@ const GlowingEffect = memo(
 
           element.style.setProperty("--active", isActive ? "1" : "0");
 
-          if (!isActive) return;
+          if (!isActive) {
+            isAnimating.current = false;
+            return;
+          }
 
           const currentAngle =
             parseFloat(element.style.getPropertyValue("--start")) || 0;
-          let targetAngle =
+          const targetAngle =
             (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) /
               Math.PI +
             90;
@@ -86,30 +103,50 @@ const GlowingEffect = memo(
           const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
           const newAngle = currentAngle + angleDiff;
 
+          // Use reduced duration for snappier performance
           animate(currentAngle, newAngle, {
-            duration: movementDuration,
+            duration: Math.min(movementDuration, 1), // Cap duration at 1s
             ease: [0.16, 1, 0.3, 1],
             onUpdate: (value) => {
-              element.style.setProperty("--start", String(value));
+              if (element) {
+                element.style.setProperty("--start", String(value));
+              }
+            },
+            onComplete: () => {
+              isAnimating.current = false;
             },
           });
         });
       },
-      [inactiveZone, proximity, movementDuration]
+      [inactiveZone, proximity, movementDuration, disabled]
     );
 
     useEffect(() => {
       if (disabled) return;
 
-      const handleScroll = () => handleMove();
-      const handlePointerMove = (e: PointerEvent) => handleMove(e);
+      // Debounced handlers for better performance
+      let scrollTimeout: NodeJS.Timeout;
+      let moveTimeout: NodeJS.Timeout;
 
+      const handleScroll = () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => handleMove(), 100); // Heavy debounce for scroll
+      };
+
+      const handlePointerMove = (e: PointerEvent) => {
+        clearTimeout(moveTimeout);
+        moveTimeout = setTimeout(() => handleMove(e), 25); // Debounce pointer events
+      };
+
+      // Use passive listeners for better scroll performance
       window.addEventListener("scroll", handleScroll, { passive: true });
       document.body.addEventListener("pointermove", handlePointerMove, {
         passive: true,
       });
 
       return () => {
+        clearTimeout(scrollTimeout);
+        clearTimeout(moveTimeout);
         if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current);
         }
