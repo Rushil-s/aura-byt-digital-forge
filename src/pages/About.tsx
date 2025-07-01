@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { CheckCircle, Users, Target, Lightbulb, Heart, MapPin, Calendar, Award, Zap, Globe, Code, BarChart3, Shield, Rocket, Star, TrendingUp, Sparkles } from 'lucide-react';
+import { CheckCircle, Users, Target, Lightbulb, MapPin, Award, Globe, Code, Shield, Rocket, Star, TrendingUp } from 'lucide-react';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
 import { HoverButton } from '@/components/ui/hover-glow-button';
-import { SpiralBackground } from '@/components/ui/spiral-background';
 import SEO from '@/components/SEO';
 
 const About = () => {
@@ -48,12 +47,7 @@ const About = () => {
     };
   }, [attributes.length, createObserver]);
 
-  const stats = [
-    { number: "100+", label: "Projects Delivered", icon: <Award size={24} /> },
-    { number: "99%", label: "Client Satisfaction", icon: <Heart size={24} /> },
-    { number: "5+", label: "Years Experience", icon: <Calendar size={24} /> },
-    { number: "24/7", label: "Support Available", icon: <Zap size={24} /> }
-  ];
+
 
   const values = [
     {
@@ -159,15 +153,10 @@ const About = () => {
         keywords="IT consultancy, Toronto tech company, web development, digital marketing, IT support, business growth"
       />
       
-      {/* Spiral Background - spans entire page */}
-      <SpiralBackground 
-        totalDots={400}
-        dotRadius={1.5}
-        duration={12}
-        dotColor="hsl(217, 91%, 60%)"
-        opacity={0.08}
-        className="fixed inset-0"
-      />
+      {/* Optimized Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-blue-500/3" />
+      </div>
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-background/80 backdrop-blur-sm text-foreground relative overflow-hidden">
@@ -199,36 +188,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-background/60 backdrop-blur-sm">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="relative animate-on-scroll">
-                <div className="relative h-full rounded-xl border border-border/30 p-2">
-                  <GlowingEffect
-                    spread={25}
-                    glow={true}
-                    disabled={false}
-                    proximity={60}
-                    inactiveZone={0.1}
-                    borderWidth={1}
-                    movementDuration={1.2}
-                  />
-                  
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-border/30 bg-background/40 backdrop-blur-sm p-6 shadow-sm text-center">
-                    <div className="text-primary mb-3 flex justify-center">
-                      {stat.icon}
-                    </div>
-                    <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Enhanced Who We Are Section */}
       <section className="py-20 bg-background/60 backdrop-blur-sm">

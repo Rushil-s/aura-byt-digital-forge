@@ -64,9 +64,16 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary bg-[length:200%_auto];
-    animation: gradient 8s ease infinite;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Enhanced gradient text with animation for non-reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    .gradient-text {
+      background-size: 200% auto;
+      animation: gradient 8s ease infinite;
+    }
   }
 
   .container {
@@ -193,7 +200,7 @@
   @apply bg-primary/30 rounded-full hover:bg-primary/50;
 }
 
-/* Enhanced responsive design */
+/* Enhanced responsive design and performance optimizations */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -201,6 +208,42 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  
+  .gradient-text {
+    background-size: 100% auto !important;
+    animation: none !important;
+  }
+}
+
+/* Optimize expensive effects on slow connections */
+@media (max-width: 768px) {
+  .enhanced-card,
+  .service-card,
+  .testimonial-card {
+    backdrop-filter: none;
+    background: rgba(var(--card), 0.9);
+  }
+  
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-shimmer {
+    animation: none;
+  }
+}
+
+/* Reduce effects for users with data saver enabled */
+@media (prefers-reduced-data: reduce) {
+  .enhanced-card,
+  .service-card,
+  .testimonial-card {
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+  
+  .gradient-text {
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary)));
+    animation: none;
   }
 }
 
