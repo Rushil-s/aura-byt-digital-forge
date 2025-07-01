@@ -64,9 +64,16 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary bg-[length:200%_auto];
-    animation: gradient 8s ease infinite;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Enhanced gradient text with animation for non-reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    .gradient-text {
+      background-size: 200% auto;
+      animation: gradient 8s ease infinite;
+    }
   }
 
   .container {
@@ -80,14 +87,105 @@
            transition-all duration-300 relative overflow-hidden;
   }
 
+  .enhanced-card {
+    @apply bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-lg border border-border/50 rounded-2xl p-8
+           hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/15 hover:-translate-y-1
+           transition-all duration-500 relative overflow-hidden;
+  }
+
+  .service-card {
+    @apply relative bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-lg 
+           border border-border/50 rounded-2xl p-8 hover:border-primary/30 
+           transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2
+           overflow-hidden;
+  }
+
+  .tech-card {
+    @apply bg-card/50 backdrop-blur-sm border border-border rounded-2xl p-6 text-center 
+           hover:shadow-xl hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 
+           hover:bg-card/80 cursor-pointer;
+  }
+
+  .testimonial-card {
+    @apply bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-lg 
+           border border-border/50 rounded-2xl p-8 hover:border-primary/30 
+           transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 
+           relative overflow-hidden;
+  }
+
+  .cta-button {
+    @apply inline-flex items-center justify-center px-10 py-5 bg-primary 
+           text-primary-foreground font-bold rounded-xl hover:bg-primary/90 
+           transition-all duration-300 shadow-2xl hover:shadow-primary/25 
+           transform hover:-translate-y-1;
+  }
+
+  .cta-button-secondary {
+    @apply inline-flex items-center justify-center px-10 py-5 border-2 border-border 
+           text-foreground font-bold rounded-xl hover:border-primary/30 hover:bg-card/50 
+           transition-all duration-300 backdrop-blur-sm;
+  }
+
+  .floating-badge {
+    @apply inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary/10 to-blue-500/10 
+           text-primary rounded-full text-sm font-medium border border-primary/20 backdrop-blur-sm;
+  }
+
+  .gradient-background {
+    @apply bg-gradient-to-br from-primary/5 via-background to-blue-500/5;
+  }
+
   .section-padding {
     @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .glow-effect {
+    @apply relative;
+  }
+
+  .glow-effect::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-500/20 rounded-full blur-xl opacity-0 
+           transition-opacity duration-500;
+  }
+
+  .glow-effect:hover::before {
+    @apply opacity-100;
   }
 }
 
 @keyframes gradient {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.2); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
 
 ::-webkit-scrollbar {
@@ -102,6 +200,7 @@
   @apply bg-primary/30 rounded-full hover:bg-primary/50;
 }
 
+/* Enhanced responsive design and performance optimizations */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -109,6 +208,42 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  
+  .gradient-text {
+    background-size: 100% auto !important;
+    animation: none !important;
+  }
+}
+
+/* Optimize expensive effects on slow connections */
+@media (max-width: 768px) {
+  .enhanced-card,
+  .service-card,
+  .testimonial-card {
+    backdrop-filter: none;
+    background: rgba(var(--card), 0.9);
+  }
+  
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-shimmer {
+    animation: none;
+  }
+}
+
+/* Reduce effects for users with data saver enabled */
+@media (prefers-reduced-data: reduce) {
+  .enhanced-card,
+  .service-card,
+  .testimonial-card {
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+  
+  .gradient-text {
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary)));
+    animation: none;
   }
 }
 
@@ -129,5 +264,51 @@
 
   .section-padding {
     @apply py-12;
+  }
+
+  .enhanced-card {
+    @apply p-6;
+  }
+
+  .service-card {
+    @apply p-6;
+  }
+
+  .testimonial-card {
+    @apply p-6;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .gradient-text {
+    @apply text-primary;
+    background: none;
+    -webkit-text-fill-color: initial;
+  }
+  
+  .professional-card,
+  .enhanced-card,
+  .service-card,
+  .tech-card,
+  .testimonial-card {
+    @apply border-2;
+  }
+}
+
+/* Print styles */
+@media print {
+  .gradient-text {
+    @apply text-foreground;
+    background: none;
+    -webkit-text-fill-color: initial;
+  }
+  
+  .professional-card,
+  .enhanced-card,
+  .service-card,
+  .tech-card,
+  .testimonial-card {
+    @apply border border-gray-300 shadow-none;
   }
 }
